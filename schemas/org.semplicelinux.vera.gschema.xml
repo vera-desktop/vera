@@ -1,0 +1,60 @@
+<!-- vera (core) -->
+<!--
+ vera - a simple, lightweight, GTK3 based desktop environment
+ Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ 
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+ Authors:
+    Eugenio "g7" Paolantonio <me@medesimo.eu>
+-->
+
+<schemalist>
+	
+	<schema path="/org/semplicelinux/vera/" id="org.semplicelinux.vera" gettext-domain="vera">
+		
+		<key name="enable-xsettings" type="b">
+			<default>true</default>
+			<summary>XSETTINGS manager</summary>
+			<description>Enables the XSETTINGS manager for toolkit settings sharing among the applications. Do not disable if you don't know what an XSETTINGS manager is.</description>
+		</key>
+		
+		<key name="enable-plugins" type="b">
+			<default>true</default>
+			<summary>Plugin support</summary>
+			<description>vera would be pretty useless if you disable this setting.</description>
+		</key>
+		
+		<key name="plugin-search-path" type="as">
+			<default>["/usr/lib/vera/plugins"]</default>
+			<summary>Plugin search path</summary>
+			<description>The plugin search path. Touch this only if you know what you're doing.</description>
+		</key>
+		
+		<key name="ignore-plugins" type="as">
+			<default>[]</default>
+			<summary>Plugins to ignore</summary>
+			<description>The plugin to ignore (they will not be started)</description>
+		</key>
+		
+		<key name="reverse-ignore-plugins" type="b">
+			<default>false</default>
+			<summary>Reverse the ignore-plugin setting</summary>
+			<description>If enabled, the ignore-plugins array will be used to whitelist plugins. Every plugin not listed there will not be started. Do not enable unless you know what you're doing.</description>
+		</key>
+		
+	</schema>
+
+</schemalist>

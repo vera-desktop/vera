@@ -1,0 +1,204 @@
+<!--
+ vera - a simple, lightweight, GTK3 based desktop environment
+ Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ 
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+ Authors:
+    Eugenio "g7" Paolantonio <me@medesimo.eu>
+-->
+
+<!-- vera (settings) -->
+
+<schemalist>
+	
+	<schema path="/org/semplicelinux/vera/settings/" id="org.semplicelinux.vera.settings" gettext-domain="vera">
+		
+		<key name="theme-name" type="s">
+			<default>"SempliceNight"</default>
+			<summary>Theme name</summary>
+			<description>Theme to use.</description>
+		</key>
+		
+		<key name="icon-theme-name" type="s">
+			<default>"Faenza-Semplice"</default>
+			<summary>Icon theme name</summary>
+			<description>Icon theme to use.</description>
+		</key>
+		
+		<key name="sound-theme-name" type="s">
+			<default>""</default>
+			<summary>Sound theme name</summary>
+			<description>Sound theme to use.</description>
+		</key>
+		
+		<key name="enable-event-sounds" type="b">
+			<default>false</default>
+			<summary>Event sounds</summary>
+			<description>If enabled, the system will play event sound if a sound theme is specified.</description>
+		</key>
+		
+		<key name="enable-input-feedback-sounds" type="b">
+			<default>false</default>
+			<summary>Event sounds in response to input</summary>
+			<description>If enabled, the system will play sounds in response input (if event-sounds are enabled too).</description>
+		</key>
+		
+		<key name="xft-antialias" type="i">
+			<range min="-1" max="1"/>
+			<default>1</default>
+			<summary>Text antialiasing</summary>
+			<description>Manages the text antialiasing. 0 is no, 1 is yes, and -1 is default (takes the value from the server).</description>
+		</key>
+		
+		<key name="xft-dpi" type="i">
+			<range min="-1" max="1"/>
+			<default>-1</default>
+			<summary>Text DPI</summary>
+			<description>Manages the text DPI. The value must be 1024*dots/inch of your monitor, or -1 (takes the value from the server).</description>
+		</key>
+		
+		<key name="xft-hintstyle" type="s">
+			<choices>
+				<choice value="hintnone"/>
+				<choice value="hintslight"/>
+				<choice value="hintmedium"/>
+				<choice value="hintfull"/>
+			</choices>
+			<default>"hintfull"</default>
+			<summary>Text hinting style</summary>
+			<description>Specifies the text hinting style. The possible values are: hintnone, hintslight, hintmedium and hintfull.</description>
+		</key>
+		
+		<key name="xft-hinting" type="i">
+			<range min="-1" max="1"/>
+			<default>1</default>
+			<summary>Text hinting</summary>
+			<description>Manages the text hinting. 0 is no, 1 is yes and -1 is default (takes the value from the server).</description>
+		</key>
+		
+		<key name="xft-rgba" type="s">
+			<choices>
+				<choice value="none"/>
+				<choice value="rgb"/>
+				<choice value="bgr"/>
+				<choice value="vrgb"/>
+				<choice value="vbgr"/>
+			</choices>
+			<default>"rgb"</default>
+			<summary>Text subpixel rendering</summary>
+			<description>Specifies the text subpixel rendering. The possible values are: none, rgb, bgr, vrgb and vbgr.</description>
+		</key>
+		
+		<key name="double-click-time" type="i">
+			<default>250</default>
+			<summary>Double click time</summary>
+			<description>Time allowed for two clicks to be registered as 'double click', in milliseconds.</description>
+		</key>
+		
+		<key name="double-click-distance" type="i">
+			<default>5</default>
+			<summary>Double click distance</summary>
+			<description>Maximum distance allowed between two clicks for them to be considered a double click (in pixels).</description>
+		</key>
+		
+		<key name="button-images" type="b">
+			<default>false</default>
+			<summary>Images in buttons</summary>
+			<description>If enabled, the buttons will show an icon alongside the text.</description>
+		</key>
+		
+		<key name="cursor-theme-name" type="s">
+			<default>""</default>
+			<summary>Cursor theme name</summary>
+			<description>The cursor theme to use. If blank, it will use the default.</description>
+		</key>
+		
+		<key name="cursor-theme-size" type="i">
+			<range min="0" max="128"/>
+			<default>0</default>
+			<summary>Cursor size</summary>
+			<description>The size to use for cursors. If 0, it will use the default size.</description>
+		</key>
+		
+		<key name="decoration-layout" type="s">
+			<default>"menu:minimize,maximize,close"</default>
+			<summary>Decoration for client-side decorations</summary>
+			<description>The decoration to use for client-size decorations.</description>
+		</key>
+		
+		<key name="dialogs-use-header" type="b">
+			<default>false</default>
+			<summary>Client-side decorations for builtin GTK+ dialogs</summary>
+			<description>If enabled, the builtin GTK+ dialogs will use client-side decorations.</description>
+		</key>
+		
+		<key name="enable-animations" type="b">
+			<default>true</default>
+			<summary>Animations</summary>
+			<description>Enables the animations.</description>
+		</key>
+		
+		<key name="error-bell" type="b">
+			<default>true</default>
+			<summary>Error bell</summary>
+			<description>If enabled, keyboard navigation and other input-related errors will (may) cause a beep.</description>
+		</key>
+		
+		<key name="font-name" type="s">
+			<default>"Open Sans 10"</default>
+			<summary>Font name</summary>
+			<description>The font to use.</description>
+		</key>
+		
+		<key name="im-module" type="s">
+			<default>""</default>
+			<summary>Input method</summary>
+			<description>The input method to use.</description>
+		</key>
+		
+		<key name="key-theme-name" type="s">
+			<default>""</default>
+			<summary>Key theme name</summary>
+			<description>Name of the key theme to load.</description>
+		</key>
+		
+		<key name="menu-images" type="b">
+			<default>false</default>
+			<summary>Images in menus</summary>
+			<description>If enabled, the menus will show an icon alongside the text.</description>
+		</key>
+		
+		<key name="modules" type="s">
+			<default>""</default>
+			<summary>GTK+ modules</summary>
+			<description>List of currently active GTK+ modules.</description>
+		</key>
+		
+		<key name="print-backends" type="s">
+			<default>"file,cups,cloudprint"</default>
+			<summary>Print backends</summary>
+			<description>A comma-separated list of print backends to use in the print dialog</description>
+		</key>
+		
+		<key name="print-preview-command" type="s">
+			<default>"evince --unlink-tempfile --preview --print-settings %s %f"</default>
+			<summary>Print preview command</summary>
+			<description>Command to execute when the 'Preview' button has been clicked in the print dialog.</description>
+		</key>
+		
+	</schema>
+
+</schemalist>

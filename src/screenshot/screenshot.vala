@@ -1,0 +1,139 @@
+/*
+ * vera - a simple, lightweight, GTK3 based desktop environment
+ * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ * 
+ * Authors:
+ *    Eugenio "g7" Paolantonio <me@medesimo.eu>
+*/
+
+namespace Vera {
+	
+	[DBus (name = "org.semplicelinux.vera.Screenshot")]
+	public class Screenshot : Object {
+		
+		/**
+		 * This class exposes logind's methods to shutdown/reboot/suspend/hibernate
+		 * the system.
+		 * 
+		 * When calling the method, a dialog is shown requiring the user
+		 * to confirm its decision and - eventually - the Locks that prevent
+		 * the system to properly execute the specified action.
+		*/
+		
+		private logindInterface logind;
+		
+		public Screenshot() {
+
+
+		}
+		
+		[DBus (visible = false)]
+		public static void start_handler() {
+			/**
+			 * Starts the ExitHandler.
+			 * To be used internally.
+			*/
+			
+			Screenshot handler = new Screenshot();
+			
+			Bus.own_name(
+				BusType.SESSION,
+				"org.semplicelinux.vera.Screenshot",
+				BusNameOwnerFlags.NONE,
+				(connection) => {
+					// Register the object
+					try {
+						connection.register_object("/org/semplicelinux/vera/Screenshot", handler);
+					} catch (IOError e) {
+						warning("Couldn't register Screenshot: %s", e.message);
+					}
+				},
+				() => {},
+				(connection, name) => warning("Unable to acquire bus %s", name)
+			);
+		}
+		
+		private void take_screenshot(Gdk.Window window) {
+			/**
+			 * Internally used to actually take the screenshot.
+			*/
+			
+			int width = window.get_width();
+			int height = window.get_height();
+			
+			Cairo.ImageSurface surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
+			Gdk.Pixbuf pixbuf = Gdk.pixbuf_get_from_window(window, 0, 0, width, height);
+			
+			Cairo.Context cx = new Cairo.Context(surface);
+			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
+			cx.paint();
+			
+			surface.write_to_png("/tmp/prova.png");
+		}
+
+		
+		public void Full(int delay) {
+			/**
+			 * Takes a screenshot of the entire desktop.
+			*/
+			
+			if (delay > 0) {
+				// Delay
+				Thread.usleep(delay * 1000 * 1000);
+			}
+			
+			this.take_screenshot(Gdk.get_default_root_window());
+		
+		}
+
+		public void CurrentWindow(int delay) {
+			/**
+			 * Takes a screenshot of the current window.
+			*/
+			
+			if (delay > 0) {
+				// Delay
+				Thread.usleep(delay * 1000 * 1000);
+			}
+			
+			/*
+			 * We need to get the active window.
+			 * Gdk provides a nice way to do this, but unfortunately
+			 * is a window in Gdk's terms, without the window manager
+			 * border.
+			 * 
+			*/
+			
+			Gdk.Window window;
+			
+			window = Gdk.Screen.get_default().get_active_window();
+			
+			if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
+				// No active window? (or destroyed)
+				window = Gdk.get_default_root_window();
+			} else {
+				// Destoyed?
+				window = window.get_toplevel();
+			}
+			
+			this.take_screenshot(window);
+		
+		}
+		
+	}
+
+}

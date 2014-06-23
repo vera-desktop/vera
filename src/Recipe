@@ -39,6 +39,7 @@ programs.vera {
 	sources = \
 		PluginManager.vala \
 		settings/xsettings-manager.vala \
+		screenshot/screenshot.vala \
 		exit/ExitHandler.vala \
 		exit/ExitDialog.vala \
 		vera.vala

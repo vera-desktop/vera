@@ -45,6 +45,9 @@ namespace Vera {
 			// Start ExitHandler
 			ExitHandler.start_handler();
 			
+			// Start screenshooter
+			Screenshot.start_handler();
+			
 			// Should we start the XsettingsManager?
 			if (this.settings.get_boolean("enable-xsettings")) {
 				this.xsettingsmanager = new XsettingsManager((XlibDisplay)this.display);

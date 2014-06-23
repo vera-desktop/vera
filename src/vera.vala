@@ -45,8 +45,12 @@ namespace Vera {
 			// Start ExitHandler
 			ExitHandler.start_handler();
 			
-			// Start screenshooter
-			Screenshot.start_handler();
+			// Should we start the screenshooter?
+			if (this.settings.get_boolean("enable-screenshot")) {
+				Screenshot.start_handler();
+			} else {
+				message("Internal screenshooter not started, as requested.");
+			}
 			
 			// Should we start the XsettingsManager?
 			if (this.settings.get_boolean("enable-xsettings")) {

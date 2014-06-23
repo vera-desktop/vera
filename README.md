@@ -14,6 +14,7 @@ In detail, the vera core (i.e. this repository) contains:
 * A PluginManager, needed to load plugins
 * An XSETTINGS manager, based on [vera-xsettings](https://github.com/vera-desktop/vera-xsettings)
 * A DBus interface to shutdown/reboot/suspend/hibernate/logout using logind with native dialogs
+* A DBus interface to take screenshoots
 
 In addition, the library (libvera), also contained here, features:
 

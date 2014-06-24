@@ -22,13 +22,37 @@
 
 namespace Vera {
 	
-	public class Main : GLib.Object {
+	public class Main : Object {
 		
+		// Display
 		public Display display = new XlibDisplay();
 		
-		private XsettingsManager xsettingsmanager;
+		// XSETTINGS manager
+		private XsettingsManager xsettings_manager = null;
 		
+		// Plugin manager
+		private PluginManager plugin_manager = null;
+		
+		// Autostart manager
+		private AutostartManager autostart_manager = null;
+	
+		// Settings
 		private Settings settings;
+		
+		private void do_startup(StartupPhase phase) {
+			/**
+			 * Convenience method to get plugins and internal vera core
+			 * sections (e.g. autostart) doing the same thing with
+			 * only a call.
+			*/
+			
+			if (this.plugin_manager != null)
+				this.plugin_manager.startup_all_plugins(phase);
+			
+			if (this.autostart_manager != null)
+				this.autostart_manager.startup(phase);
+			
+		}
 				
 		public Main() {
 			/**
@@ -54,35 +78,42 @@ namespace Vera {
 			
 			// Should we start the XsettingsManager?
 			if (this.settings.get_boolean("enable-xsettings")) {
-				this.xsettingsmanager = new XsettingsManager((XlibDisplay)this.display);
+				this.xsettings_manager = new XsettingsManager((XlibDisplay)this.display);
 			} else {
 				warning("xsettings manager is disabled, you need to configure toolkit settings yourself.");
 			}
 			
+			// Should we handle autostart?
+			if (this.settings.get_boolean("enable-autostart")) {
+				this.autostart_manager = new AutostartManager();
+			} else {
+				warning("Autostart manager not started, as requested.");
+			}
+			
 			// Should we enable plugins?
 			if (this.settings.get_boolean("enable-plugins")) {
-				
-				PluginManager manager = new PluginManager(this.display, this.settings);
-				manager.load_all_plugins();
-				
-				// INIT
-				manager.startup_all_plugins(StartupPhase.INIT);
-				
-				// WM
-				manager.startup_all_plugins(StartupPhase.WM);
-				
-				// DESKTOP
-				manager.startup_all_plugins(StartupPhase.DESKTOP);
-				
-				// PANEL
-				manager.startup_all_plugins(StartupPhase.PANEL);
-				
-				// OTHER
-				manager.startup_all_plugins(StartupPhase.OTHER);
+				// Yes!
+				this.plugin_manager = new PluginManager(this.display, this.settings);
+				this.plugin_manager.load_all_plugins();
 			} else {
 				warning("plugins are disabled, vera will be a bit useless.");
 			}
+
+				
+			// INIT
+			this.do_startup(StartupPhase.INIT);
 			
+			// WM
+			this.do_startup(StartupPhase.WM);
+			
+			// DESKTOP
+			this.do_startup(StartupPhase.DESKTOP);
+			
+			// PANEL
+			this.do_startup(StartupPhase.PANEL);
+			
+			// OTHER
+			this.do_startup(StartupPhase.OTHER);
 			
 			message("Vera initialized.");
 		}

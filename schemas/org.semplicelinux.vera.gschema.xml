@@ -37,6 +37,12 @@
 			<description>If enabled, vera will automatically expose via DBus some methods to make screenshots.</description>
 		</key>
 		
+		<key name="enable-autostart" type="b">
+			<default>true</default>
+			<summary>Autostart</summary>
+			<description>Enables the application autostart.</description>
+		</key>
+		
 		<key name="enable-plugins" type="b">
 			<default>true</default>
 			<summary>Plugin support</summary>

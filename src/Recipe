@@ -24,6 +24,7 @@ libraries.vera {
 	sources = \
 		displays/DisplayInterface.vala \
 		displays/XlibDisplay.vala \
+		autostart/Application.vala \
 		logindInterface.vala \
 		PluginInterface.vala
 	so-version = 0
@@ -42,6 +43,7 @@ programs.vera {
 		screenshot/screenshot.vala \
 		exit/ExitHandler.vala \
 		exit/ExitDialog.vala \
+		autostart/AutostartManager.vala \
 		vera.vala
 	libraries = vera (local) vera-xsettings
 	link-flags = -lX11

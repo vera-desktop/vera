@@ -28,6 +28,7 @@ libraries.vera {
 		logindInterface.vala \
 		PluginInterface.vala
 	so-version = 0
+	header-install-directory = $(options.include-directory)/vera
 	compile-flags = -fPIC
 	vala-compile-flags = --vapidir=./vapis
 

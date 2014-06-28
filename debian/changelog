@@ -1,3 +1,9 @@
+vera (0.20-2) unstable; urgency=medium
+
+  * debian/control: added libgee-dev to Build-Depends.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 19:14:21 +0200
+
 vera (0.20-1) unstable; urgency=low
 
   * Initial release 

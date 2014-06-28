@@ -20,7 +20,7 @@
 #    Eugenio "g7" Paolantonio <me@medesimo.eu>
 #
 
-data.xsession {
-	files = vera.desktop
-	install-directory = /usr/share/xsessions
+data.pkg-config {
+	files = vera.pc
+	install-directory = /usr/share/pkgconfig
 }

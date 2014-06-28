@@ -1,4 +1,4 @@
-Source: vera
+Source: vera-desktop
 Section: x11
 Priority: optional
 Maintainer: Eugenio Paolantonio (g7) <me@medesimo.eu>
@@ -10,9 +10,9 @@ Homepage: https://semplice-linux.org/
 Vcs-Git: https://github.com/vera-desktop/vera.git
 Vcs-Browser: https://github.com/vera-desktop/vera
 
-Package: vera
+Package: vera-desktop
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libvera0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libvera-xsettings0, libvera0 (= ${binary:Version})
 Description: Next-generation GTK+3 Desktop Environment - main binaries
  vera is a next generation GTK+3 desktop environment built for Semplice
  Linux.

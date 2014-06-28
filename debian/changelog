@@ -1,3 +1,9 @@
+vera (0.21-1) unstable; urgency=medium
+
+  * src/Recipe: ensure we install library headers to (include-directory)/vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 20:30:56 +0200
+
 vera (0.20-3) unstable; urgency=medium
 
   * debian/control: also build-depend on libvera-xsettings-vapi.

@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ 
+
+override_dh_auto_configure:
+	bake --configure install-directory=debian/tmp
+
+override_dh_auto_build:
+	bake
+
+override_dh_auto_install:
+	bake install
+
+override_dh_auto_clean:
+	bake clean
+	-rm Recipe.conf
+	dh_auto_clean

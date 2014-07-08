@@ -53,7 +53,7 @@ namespace Vera {
 		// FIXME: It seems we can't cleanly pass it on ExtensionSet.foreach()
 		private StartupPhase phase;
 		
-		public PluginManager(Display display, Settings settings) {
+		public PluginManager(Display display, Settings settings, string[] cmdline) {
 			
 			this.display = display;
 			this.settings = settings;
@@ -68,9 +68,28 @@ namespace Vera {
 				this.engine.add_search_path(path, null);
 			}
 			
-			// Populate the blacklist
-			this.blacklisted_plugins = this.settings.get_strv("ignore-plugins");
-			this.reverse_blacklist = this.settings.get_boolean("reverse-ignore-plugins");
+			/*
+			 * By default we load every plugin found in the search directories.
+			 * The user has a "blacklist" though where he/she can specify
+			 * which plugins to ignore.
+			 * 
+			 * For special needs it's also available the 'reverse-ignore-plugins'
+			 * option that transforms the said blacklist in a whitelist.
+			 * 
+			 * Finally, the user can also specify the plugins via command line.
+			 * If this is the case (cmdline != null), we assume that
+			 * reverse-ignore-plugins is true and use the cmdline array as
+			 * our whitelist.
+			 * 
+			 * This of course does not change the settings in dconf.
+			*/
+			if (cmdline == null) {
+				this.blacklisted_plugins = this.settings.get_strv("ignore-plugins");
+				this.reverse_blacklist = this.settings.get_boolean("reverse-ignore-plugins");
+			} else {
+				this.blacklisted_plugins = cmdline;
+				this.reverse_blacklist = true;
+			}
 			
 			// Create the extension set
 			this.extension_set = new ExtensionSet(this.engine, typeof(VeraPlugin));

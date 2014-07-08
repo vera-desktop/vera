@@ -85,7 +85,7 @@ namespace Vera {
 			
 			// Should we handle autostart?
 			if (this.settings.get_boolean("enable-autostart")) {
-				this.autostart_manager = new AutostartManager();
+				this.autostart_manager = new AutostartManager(this.settings);
 			} else {
 				warning("Autostart manager not started, as requested.");
 			}

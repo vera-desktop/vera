@@ -103,14 +103,14 @@ namespace Vera {
 			if (this.settings.get_boolean("enable-xsettings")) {
 				this.xsettings_manager = new XsettingsManager((XlibDisplay)this.display);
 			} else {
-				warning("xsettings manager is disabled, you need to configure toolkit settings yourself.");
+				message("xsettings manager is disabled, you need to configure toolkit settings yourself.");
 			}
 			
 			// Should we handle autostart?
 			if (enable_autostart || (this.settings.get_boolean("enable-autostart") && !disable_autostart)) {
 				this.autostart_manager = new AutostartManager(this.settings);
 			} else {
-				warning("Autostart manager not started, as requested.");
+				message("Autostart manager not started, as requested.");
 			}
 			
 			// Should we enable plugins?
@@ -122,7 +122,7 @@ namespace Vera {
 				this.plugin_manager = new PluginManager(this.display, this.settings, plugins);
 				this.plugin_manager.load_all_plugins();
 			} else {
-				warning("plugins are disabled, vera will be a bit useless.");
+				message("plugins are disabled, vera will be a bit useless.");
 			}
 
 				
@@ -158,6 +158,7 @@ namespace Vera {
 				optcontext.set_help_enabled(true);
 				optcontext.set_ignore_unknown_options(false);
 				optcontext.add_main_entries(options, null);
+				optcontext.add_group(Gtk.get_option_group(true));
 				
 				optcontext.parse(ref args);
 			} catch (OptionError e) {

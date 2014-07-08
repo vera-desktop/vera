@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Vera
 Comment=Log in using the Vera Desktop Environment
-Exec=/usr/bin/vera
-TryExec=/usr/bin/vera
+Exec=/usr/bin/vera-session
+TryExec=/usr/bin/vera-session
 Icon=vera
 Type=Application

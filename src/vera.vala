@@ -167,6 +167,16 @@ namespace Vera {
 				return 1;
 			}
 			
+			/*
+			 * If both enable_autostart and disable_autostart are true,
+			 * prefer disable_autostart.
+			 * We need to do this so vera-session can be sure to not
+			 * autostart again applications if we crash.
+			*/
+			
+			if (enable_autostart && disable_autostart)
+				enable_autostart = false;
+			
 			Main vera = new Main();
 			
 			Gtk.main();

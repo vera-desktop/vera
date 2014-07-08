@@ -20,6 +20,8 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
+const uint MAX_TRIES = 10;
+
 string[] concatenate(string[] array1, string[] array2) {
 	/**
 	 * Concatenates the two given string arrays.
@@ -30,21 +32,19 @@ string[] concatenate(string[] array1, string[] array2) {
 	string[] result = new string[0];
 	
 	foreach (string item in array1) {
-		message(item);
 		result += item;
 	}
 	
 	foreach (string item in array2) {
-		message(item);
 		result += item;
 	}
 	
 	return result;
 }
 
-int main(string[] args) {
+int start(string[] args, uint count) {
 	/**
-	 * dbus-launch vera.
+	 * Actually do the startup.
 	*/
 	
 	string HOME = Environment.get_home_dir();
@@ -53,7 +53,7 @@ int main(string[] args) {
 	try {
 		Process.spawn_sync(
 			HOME,
-			concatenate({ "dbus-launch", "--exit-with-session", "vera" }, args[1:-1]),
+			concatenate({ "dbus-launch", "--exit-with-session", "vera" }, args[1:args.length]),
 			Environ.get(),
 			SpawnFlags.SEARCH_PATH,
 			null,
@@ -68,10 +68,49 @@ int main(string[] args) {
 	
 	if (status > 1) {
 		/* Something wrong... */
-		return main(args);
+		
+		/*
+		 * We will only restart vera a limited number of times.
+		 * This is to avoid infinite loops when e.g. a plugin is buggy
+		 * and will crash vera everytime it's loaded.
+		*/
+		
+		if (count == MAX_TRIES) {
+			/*
+			 * We should probably insert a nice crash dialog like
+			 * the one present in linstaller.
+			*/
+			
+			warning("vera has been restarted %u times, which is the maximum. Exiting...", MAX_TRIES);
+			return status;
+		}
+		
+		string[] new_args = args;
+		
+		if (!("--disable-autostart" in args)) {
+			
+			/* 
+			 * We have probably already autostarted the applications,
+			 * so we append --disable-autostart now so that they
+			 * will not be started another time.
+			*/
+			
+			new_args += "--disable-autostart";
+		}
+		
+		message("vera crashed, restarting...");
+		return start(new_args, count+1);
 	} else {
 		return status;
 	}
 	
+}
+
+int main(string[] args) {
+	/**
+	 * Hey!
+	*/
+	
+	return start(args, 0);
 
 }

@@ -24,6 +24,29 @@ namespace Vera {
 	
 	public class Main : Object {
 		
+		/*
+		 * Command-line arguments
+		*/
+		
+		private static bool enable_autostart = false;
+		private static bool disable_autostart = false;
+		[CCode (array_length = false, array_null_terminated = true)]
+		private static string[] plugins = null;
+		
+		private const OptionEntry[] options = {
+			/* Enable autostart */
+			{ "enable-autostart", 0, 0, OptionArg.NONE, ref enable_autostart, "Autostart applications", null },
+			
+			/* Disable autostart */
+			{ "disable-autostart", 0, 0, OptionArg.NONE, ref disable_autostart, "Do not autostart applications", null },
+			
+			/* Plugins */
+			{ "plugins", 'p', 0, OptionArg.STRING_ARRAY, ref plugins, "Plugins to launch (will override dconf)", "PLUGINS" },
+			
+			/* The end */
+			{ null }
+		};
+		
 		// Display
 		public Display display = new XlibDisplay();
 		
@@ -80,23 +103,26 @@ namespace Vera {
 			if (this.settings.get_boolean("enable-xsettings")) {
 				this.xsettings_manager = new XsettingsManager((XlibDisplay)this.display);
 			} else {
-				warning("xsettings manager is disabled, you need to configure toolkit settings yourself.");
+				message("xsettings manager is disabled, you need to configure toolkit settings yourself.");
 			}
 			
 			// Should we handle autostart?
-			if (this.settings.get_boolean("enable-autostart")) {
-				this.autostart_manager = new AutostartManager();
+			if (enable_autostart || (this.settings.get_boolean("enable-autostart") && !disable_autostart)) {
+				this.autostart_manager = new AutostartManager(this.settings);
 			} else {
-				warning("Autostart manager not started, as requested.");
+				message("Autostart manager not started, as requested.");
 			}
 			
 			// Should we enable plugins?
 			if (this.settings.get_boolean("enable-plugins")) {
 				// Yes!
-				this.plugin_manager = new PluginManager(this.display, this.settings);
+				foreach (string plug in plugins) {
+					message(plug);
+				}
+				this.plugin_manager = new PluginManager(this.display, this.settings, plugins);
 				this.plugin_manager.load_all_plugins();
 			} else {
-				warning("plugins are disabled, vera will be a bit useless.");
+				message("plugins are disabled, vera will be a bit useless.");
 			}
 
 				
@@ -118,20 +144,36 @@ namespace Vera {
 			message("Vera initialized.");
 		}
 		
-	}
+		
+		public static int main(string[] args) {
+			/**
+			 * This is the main entrypoint for Vera.
+			*/
+			
+			Gtk.init(ref args);
 
-	int main(string[] args) {
-		/**
-		 * This is the main entrypoint for Vera.
-		*/
-		
-		Gtk.init(ref args);
-		
-		Main vera = new Main();
-		
-		Gtk.main();
-		return 0;
+			/* Parse arguments */
+			try {
+				OptionContext optcontext = new OptionContext("- Next generation DE written for Semplice Linux.");
+				optcontext.set_help_enabled(true);
+				optcontext.set_ignore_unknown_options(false);
+				optcontext.add_main_entries(options, null);
+				optcontext.add_group(Gtk.get_option_group(true));
+				
+				optcontext.parse(ref args);
+			} catch (OptionError e) {
+				stdout.printf("error: %s\n", e.message);
+				stdout.puts("Use the -h switch to see the full list of available command line arguments.\n");
+				return 1;
+			}
+			
+			Main vera = new Main();
+			
+			Gtk.main();
+			return 0;
 
+		}
+		
 	}
 
 }

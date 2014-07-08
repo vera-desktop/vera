@@ -43,6 +43,12 @@
 			<description>Enables the application autostart.</description>
 		</key>
 		
+		<key name="autostart-ignore" type="as">
+			<default>[]</default>
+			<summary>Autostart files to ignore</summary>
+			<description>The autostart files to ignore (they will not be started automatically).</description>
+		</key>
+		
 		<key name="enable-plugins" type="b">
 			<default>true</default>
 			<summary>Plugin support</summary>
@@ -58,7 +64,7 @@
 		<key name="ignore-plugins" type="as">
 			<default>[]</default>
 			<summary>Plugins to ignore</summary>
-			<description>The plugin to ignore (they will not be started)</description>
+			<description>The plugins to ignore (they will not be started)</description>
 		</key>
 		
 		<key name="reverse-ignore-plugins" type="b">

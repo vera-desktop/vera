@@ -30,6 +30,8 @@ namespace Vera {
 		private Application[] applications = new Application[0];
 		private HashMap<Pid, Application> pid_associations = new HashMap<Pid, Application>();
 		
+		private string[] ignored_files;
+		
 		private void on_process_terminated(Pid pid, int status) {
 			/**
 			 * Fired when the process pid has been terminated.
@@ -102,8 +104,9 @@ namespace Vera {
 					enumerator = directory.enumerate_children(FileAttribute.STANDARD_NAME, 0);
 					
 					while ((file_info = enumerator.next_file()) != null) {
-										
-						this.applications += new Application(Path.build_filename(dir, file_info.get_name()));
+						
+						if (!(file_info.get_name() in this.ignored_files))
+							this.applications += new Application(Path.build_filename(dir, file_info.get_name()));
 						
 					}
 				} catch (Error e) {
@@ -114,7 +117,7 @@ namespace Vera {
 
 				
 
-		public AutostartManager() {
+		public AutostartManager(Settings settings) {
 			/**
 			 * Initializes the plugin.
 			 */
@@ -132,6 +135,9 @@ namespace Vera {
 			 *    X-Vera-Autostart-Phase
 			 * and everything will be fine.
 			*/
+			
+			/* Get application files to ignore */
+			this.ignored_files = settings.get_strv("autostart-ignore");
 			
 			// Cache applications
 			this.cache_applications(

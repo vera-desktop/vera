@@ -1,3 +1,9 @@
+vera-desktop (0.23-1) unstable; urgency=medium
+
+  * Added vera-session, a not-so-beautiful wrapper to launch vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 08 Jul 2014 20:46:28 +0200
+
 vera-desktop (0.22-1) unstable; urgency=medium
 
   * autostart: added new setting autostart-ignore.

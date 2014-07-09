@@ -89,9 +89,6 @@ namespace Vera {
 			// Settings
 			this.settings = new Settings("org.semplicelinux.vera");
 			
-			// Start DBus service
-			DBusService.start_handler();
-			
 			// Should we start the screenshooter?
 			if (this.settings.get_boolean("enable-screenshot")) {
 				Screenshot.start_handler();
@@ -124,7 +121,9 @@ namespace Vera {
 			} else {
 				message("plugins are disabled, vera will be a bit useless.");
 			}
-
+			
+			// Start DBus service
+			DBusService.start_handler(this.plugin_manager);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);

@@ -45,9 +45,10 @@ namespace Vera {
 		 * the system to properly execute the specified action.
 		*/
 		
+		private PluginManager plugin_manager = null;
 		private logindInterface logind;
 		
-		public DBusService() {
+		public DBusService(PluginManager plugin_manager) {
 			/**
 			 * Constructs the Service.
 			 * 
@@ -55,7 +56,9 @@ namespace Vera {
 			 * so that we will be able to actually execute the logind-bound
 			 * actions.
 			*/
-						
+			
+			this.plugin_manager = plugin_manager;
+			
 			this.logind = Bus.get_proxy_sync(
 				BusType.SYSTEM,
 				"org.freedesktop.login1",
@@ -65,13 +68,13 @@ namespace Vera {
 		}
 		
 		[DBus (visible = false)]
-		public static void start_handler() {
+		public static void start_handler(PluginManager plugin_manager) {
 			/**
 			 * Starts the service.
 			 * To be used internally.
 			*/
 			
-			DBusService handler = new DBusService();
+			DBusService handler = new DBusService(plugin_manager);
 			
 			Bus.own_name(
 				BusType.SESSION,
@@ -88,6 +91,24 @@ namespace Vera {
 				() => {},
 				(connection, name) => warning("Unable to acquire bus %s", name)
 			);
+		}
+		
+		public void UnloadPlugin(string name) {
+			/**
+			 * Unloads a plugin.
+			*/
+			
+			if (this.plugin_manager != null)
+				this.plugin_manager.unload_plugin(name);
+		}
+		
+		public void LoadPlugin(string name) {
+			/**
+			 * Loads a plugin.
+			*/
+						
+			if (this.plugin_manager != null)
+				this.plugin_manager.load_plugin(name);
 		}
 		
 		public void PowerOff() {

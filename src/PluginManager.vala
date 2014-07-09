@@ -43,6 +43,12 @@ namespace Vera {
 		private Engine engine;
 		private ExtensionSet extension_set;
 		
+		/*
+		 * Peas stores the loaded plugins using their library names, and
+		 * we do not want that.
+		*/
+		private Gee.ArrayList<string> loaded_plugins = new Gee.ArrayList<string>();
+		
 		private string[] blacklisted_plugins;
 		private bool reverse_blacklist;
 		
@@ -183,6 +189,7 @@ namespace Vera {
 			
 			/* Try loading */
 			if (this.engine.try_load_plugin(plugin)) {
+				this.loaded_plugins.add(name);
 				message("Plugin %s loaded.", name);
 			} else {
 				warning("Unable to load plugin %s.", name);
@@ -222,7 +229,7 @@ namespace Vera {
 			 * Unloads the given plugin.
 			*/
 			
-			if (!(name in this.engine.get_loaded_plugins())) {
+			if (!(name in this.loaded_plugins)) {
 				/* Not loaded */
 				warning("Plugin %s has not been loaded.", name);
 				return;
@@ -230,6 +237,7 @@ namespace Vera {
 			
 			/* Try unloading */
 			if (this.engine.try_unload_plugin(this.get_plugin_info(name))) {
+				this.loaded_plugins.remove(name);
 				message("Plugin %s unloaded.", name);
 			} else {
 				warning("Unable to unload plugin %s", name);

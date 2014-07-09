@@ -113,9 +113,6 @@ namespace Vera {
 			// Should we enable plugins?
 			if (this.settings.get_boolean("enable-plugins")) {
 				// Yes!
-				foreach (string plug in plugins) {
-					message(plug);
-				}
 				this.plugin_manager = new PluginManager(this.display, this.settings, plugins);
 				this.plugin_manager.load_all_plugins();
 			} else {

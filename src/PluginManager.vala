@@ -120,8 +120,16 @@ namespace Vera {
 			}
 		}
 		
-		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, GLib.Object plugin) {
-			// No way!
+		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, GLib.Object object) {
+			/**
+			 * This callback is fired when a plugin has been unloaded.
+			*/
+			
+			try {
+				((VeraPlugin) object).shutdown();
+			} catch (GLib.Error e) {
+				warning(e.message);
+			}
 		}
 		
 		private void startup_plugin(ExtensionSet extension_set, PluginInfo info, Extension object) {

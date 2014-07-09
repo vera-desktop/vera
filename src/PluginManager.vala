@@ -144,13 +144,60 @@ namespace Vera {
 			this.extension_set.foreach(this.startup_plugin);
 		}
 		
+		private PluginInfo? get_plugin_info(string name) {
+			/**
+			 * An alternative to PeasEngine.get_plugin_info(), because
+			 * at least here it doesn't work correctly.
+			*/
+			
+			foreach (PluginInfo plugin in this.engine.get_plugin_list()) {
+				if (plugin.get_name() == name) {
+					return plugin;
+				}
+			}
+			
+			return null;
+		}
+		
+		public void load_plugin(string name) {
+			/**
+			 * Loads a plugin given its name.
+			*/
+			
+			this.load_plugin_from_plugin_info(this.get_plugin_info(name));
+			
+		}
+		
+		public void load_plugin_from_plugin_info(PluginInfo plugin) {
+			/**
+			 * Loads a plugin given its PluginInfo.
+			*/
+			
+			string name = plugin.get_name();
+			
+			if (plugin == null) {
+				/* Not found */
+				warning("Plugin %s not found!", name);
+				return;
+			}
+			
+			/* Try loading */
+			if (this.engine.try_load_plugin(plugin)) {
+				message("Plugin %s loaded.", name);
+			} else {
+				warning("Unable to load plugin %s.", name);
+			}
+			
+		}
+		
+		
 		public void load_all_plugins() {
 			/**
 			 * This method loads all available plugins.
 			*/
 			 
 			string name;
-			 			
+									 			
 			foreach (PluginInfo plugin in this.engine.get_plugin_list()) {
 				
 				name = plugin.get_name();
@@ -166,13 +213,36 @@ namespace Vera {
 					continue;
 				}
 					
-				
-				// Try loading...
-				if (this.engine.try_load_plugin(plugin)) {
-					message("VeraPlugin loaded: " + name);
-				} else {
-					warning("Unable to load plugin " + name);
-				}
+				this.load_plugin_from_plugin_info(plugin);
+			}
+		}
+		
+		public void unload_plugin(string name) {
+			/**
+			 * Unloads the given plugin.
+			*/
+			
+			if (!(name in this.engine.get_loaded_plugins())) {
+				/* Not loaded */
+				warning("Plugin %s has not been loaded.", name);
+				return;
+			}
+			
+			/* Try unloading */
+			if (this.engine.try_unload_plugin(this.get_plugin_info(name))) {
+				message("Plugin %s unloaded.", name);
+			} else {
+				warning("Unable to unload plugin %s", name);
+			}
+		}
+		
+		public void unload_all_plugins() {
+			/**
+			 * Unloads all loaded plugins.
+			*/
+			
+			foreach (string name in this.engine.get_loaded_plugins()) {
+				this.unload_plugin(name);
 			}
 		}
 	

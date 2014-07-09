@@ -89,8 +89,8 @@ namespace Vera {
 			// Settings
 			this.settings = new Settings("org.semplicelinux.vera");
 			
-			// Start ExitHandler
-			ExitHandler.start_handler();
+			// Start DBus service
+			DBusService.start_handler();
 			
 			// Should we start the screenshooter?
 			if (this.settings.get_boolean("enable-screenshot")) {

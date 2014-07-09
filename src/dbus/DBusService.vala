@@ -30,27 +30,30 @@ namespace Vera {
 		
 	}
 	
-	[DBus (name = "org.semplicelinux.vera.ExitHandler")]
-	public class ExitHandler : Object {
+	[DBus (name = "org.semplicelinux.vera")]
+	public class DBusService : Object {
 		
 		/**
-		 * This class exposes logind's methods to shutdown/reboot/suspend/hibernate
+		 * This class is the main vera DBus interface, published at
+		 * org.semplicelinux.vera.
+		 * 
+		 * It exposes also logind's methods to shutdown/reboot/suspend/hibernate
 		 * the system.
 		 * 
-		 * When calling the method, a dialog is shown requiring the user
+		 * When calling a logind-bound method, a dialog is shown requiring the user
 		 * to confirm its decision and - eventually - the Locks that prevent
 		 * the system to properly execute the specified action.
 		*/
 		
 		private logindInterface logind;
 		
-		public ExitHandler() {
+		public DBusService() {
 			/**
-			 * Constructs the ExitHandler.
+			 * Constructs the Service.
 			 * 
 			 * This constructor connects to logind (via the logindInterface)
-			 * so that we will be able to actually execute the requested
-			 * action.
+			 * so that we will be able to actually execute the logind-bound
+			 * actions.
 			*/
 						
 			this.logind = Bus.get_proxy_sync(
@@ -64,20 +67,20 @@ namespace Vera {
 		[DBus (visible = false)]
 		public static void start_handler() {
 			/**
-			 * Starts the ExitHandler.
+			 * Starts the service.
 			 * To be used internally.
 			*/
 			
-			ExitHandler handler = new ExitHandler();
+			DBusService handler = new DBusService();
 			
 			Bus.own_name(
 				BusType.SESSION,
-				"org.semplicelinux.vera.ExitHandler",
+				"org.semplicelinux.vera",
 				BusNameOwnerFlags.NONE,
 				(connection) => {
 					// Register the object
 					try {
-						connection.register_object("/org/semplicelinux/vera/ExitHandler", handler);
+						connection.register_object("/org/semplicelinux/vera", handler);
 					} catch (IOError e) {
 						warning("Couldn't register ExitHandler: %s", e.message);
 					}

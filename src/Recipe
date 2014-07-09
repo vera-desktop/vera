@@ -42,7 +42,7 @@ programs.vera {
 		PluginManager.vala \
 		settings/xsettings-manager.vala \
 		screenshot/screenshot.vala \
-		exit/ExitHandler.vala \
+		dbus/DBusService.vala \
 		exit/ExitDialog.vala \
 		autostart/AutostartManager.vala \
 		vera.vala

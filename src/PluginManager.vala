@@ -101,34 +101,59 @@ namespace Vera {
 			this.extension_set = new ExtensionSet(this.engine, typeof(VeraPlugin));
 			
 			// Connect the extension_set events
-			this.extension_set.extension_added.connect(this.on_plugin_added);
+			this.extension_set.extension_added.connect_after(this.on_plugin_added);
 			this.extension_set.extension_removed.connect(this.on_plugin_removed);
+			this.extension_set.extension_removed.connect_after(
+				(extension_set, info, object) => {
+					this.engine.garbage_collect();
+					
+					//free(object);
+				}
+			);
 			
 		}
 		
-		private void on_plugin_added(ExtensionSet extension_set, PluginInfo info, GLib.Object object) {
+		private void on_plugin_added(ExtensionSet extension_set, PluginInfo info, Object object) {
 			/**
 			 * This callback is fired when a new plugin has been loaded.
 			 * This method will handle its first initalization.
 			*/
+			
+			VeraPlugin plugin = (VeraPlugin)object;
 						
 			try {
-				((VeraPlugin) object).init(this.display);
+				plugin.init(this.display);
 			} catch (GLib.Error e) {
 				warning(e.message);
 				// also unload?
 			}
 		}
 		
-		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, GLib.Object object) {
+		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, Object object) {
 			/**
 			 * This callback is fired when a plugin has been unloaded.
 			*/
 			
+			VeraPlugin plugin = (VeraPlugin)object;
+			
 			try {
-				((VeraPlugin) object).shutdown();
+				plugin.shutdown();
 			} catch (GLib.Error e) {
 				warning(e.message);
+			}
+						
+			this.engine.garbage_collect();
+		}
+		
+		public void startup_plugin_from_name(string name, StartupPhase phase) {
+			/**
+			 * Startups the given plugin with the given StartupPhase.
+			*/
+			
+			PluginInfo plugin = this.get_plugin_info(name);
+			
+			if (plugin != null && name in this.loaded_plugins) {
+				((VeraPlugin)this.extension_set.get_extension(plugin)).startup(phase);
 			}
 		}
 		
@@ -173,16 +198,16 @@ namespace Vera {
 			return null;
 		}
 		
-		public void load_plugin(string name) {
+		public bool load_plugin(string name) {
 			/**
 			 * Loads a plugin given its name.
 			*/
 			
-			this.load_plugin_from_plugin_info(this.get_plugin_info(name));
+			return this.load_plugin_from_plugin_info(this.get_plugin_info(name));
 			
 		}
 		
-		public void load_plugin_from_plugin_info(PluginInfo plugin) {
+		public bool load_plugin_from_plugin_info(PluginInfo plugin) {
 			/**
 			 * Loads a plugin given its PluginInfo.
 			*/
@@ -192,15 +217,21 @@ namespace Vera {
 			if (plugin == null) {
 				/* Not found */
 				warning("Plugin %s not found!", name);
-				return;
+				return false;
+			} else if (name in this.loaded_plugins) {
+				/* Alrady loaded */
+				warning("Plugin %s already loaded.", name);
+				return false;
 			}
-			
+						
 			/* Try loading */
 			if (this.engine.try_load_plugin(plugin)) {
 				this.loaded_plugins.add(name);
 				message("Plugin %s loaded.", name);
+				return true;
 			} else {
 				warning("Unable to load plugin %s.", name);
+				return false;
 			}
 			
 		}
@@ -232,7 +263,7 @@ namespace Vera {
 			}
 		}
 		
-		public void unload_plugin(string name) {
+		public bool unload_plugin(string name) {
 			/**
 			 * Unloads the given plugin.
 			*/
@@ -240,15 +271,17 @@ namespace Vera {
 			if (!(name in this.loaded_plugins)) {
 				/* Not loaded */
 				warning("Plugin %s has not been loaded.", name);
-				return;
+				return false;
 			}
 			
 			/* Try unloading */
 			if (this.engine.try_unload_plugin(this.get_plugin_info(name))) {
 				this.loaded_plugins.remove(name);
 				message("Plugin %s unloaded.", name);
+				return true;
 			} else {
 				warning("Unable to unload plugin %s", name);
+				return false;
 			}
 		}
 		

@@ -107,8 +107,13 @@ namespace Vera {
 			 * Loads a plugin.
 			*/
 						
-			if (this.plugin_manager != null)
-				this.plugin_manager.load_plugin(name);
+			if (this.plugin_manager != null && this.plugin_manager.load_plugin(name)) {				
+				/*
+				 * We also need to startup the plugin.
+				 * We will send the SESSION phase.
+				*/
+				this.plugin_manager.startup_plugin_from_name(name, StartupPhase.SESSION);
+			}
 		}
 		
 		public void PowerOff() {

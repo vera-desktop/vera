@@ -30,29 +30,38 @@ namespace Vera {
 		
 	}
 	
-	[DBus (name = "org.semplicelinux.vera.ExitHandler")]
-	public class ExitHandler : Object {
+	[DBus (name = "org.semplicelinux.vera")]
+	public class DBusService : Object {
 		
 		/**
-		 * This class exposes logind's methods to shutdown/reboot/suspend/hibernate
+		 * This class is the main vera DBus interface, published at
+		 * org.semplicelinux.vera.
+		 * 
+		 * It exposes also logind's methods to shutdown/reboot/suspend/hibernate
 		 * the system.
 		 * 
-		 * When calling the method, a dialog is shown requiring the user
+		 * When calling a logind-bound method, a dialog is shown requiring the user
 		 * to confirm its decision and - eventually - the Locks that prevent
 		 * the system to properly execute the specified action.
 		*/
 		
+		public DBusConnection connection = null;
+		public uint? identifier = null;
+		
+		private PluginManager plugin_manager = null;
 		private logindInterface logind;
 		
-		public ExitHandler() {
+		public DBusService(PluginManager plugin_manager) {
 			/**
-			 * Constructs the ExitHandler.
+			 * Constructs the Service.
 			 * 
 			 * This constructor connects to logind (via the logindInterface)
-			 * so that we will be able to actually execute the requested
-			 * action.
+			 * so that we will be able to actually execute the logind-bound
+			 * actions.
 			*/
-						
+			
+			this.plugin_manager = plugin_manager;
+			
 			this.logind = Bus.get_proxy_sync(
 				BusType.SYSTEM,
 				"org.freedesktop.login1",
@@ -62,22 +71,23 @@ namespace Vera {
 		}
 		
 		[DBus (visible = false)]
-		public static void start_handler() {
+		public static DBusService start_handler(PluginManager plugin_manager) {
 			/**
-			 * Starts the ExitHandler.
+			 * Starts the service.
 			 * To be used internally.
 			*/
 			
-			ExitHandler handler = new ExitHandler();
+			DBusService handler = new DBusService(plugin_manager);
 			
-			Bus.own_name(
+			uint identifier = Bus.own_name(
 				BusType.SESSION,
-				"org.semplicelinux.vera.ExitHandler",
+				"org.semplicelinux.vera",
 				BusNameOwnerFlags.NONE,
 				(connection) => {
 					// Register the object
 					try {
-						connection.register_object("/org/semplicelinux/vera/ExitHandler", handler);
+						handler.connection = connection;
+						connection.register_object("/org/semplicelinux/vera", handler);
 					} catch (IOError e) {
 						warning("Couldn't register ExitHandler: %s", e.message);
 					}
@@ -85,6 +95,48 @@ namespace Vera {
 				() => {},
 				(connection, name) => warning("Unable to acquire bus %s", name)
 			);
+			
+			handler.identifier = identifier;
+			
+			return handler;
+		}
+		
+		[DBus (visible = false)]
+		public void quit() {
+			/**
+			 * Quits the service.
+			*/
+						
+			if (this.connection == null && this.identifier == null) {
+				warning("connection or identifier not specified. Please use start_handler() to start the service.");
+				return;
+			}
+			
+			this.connection.close_sync();
+			Bus.unown_name(this.identifier);
+		}
+		
+		public void UnloadPlugin(string name) {
+			/**
+			 * Unloads a plugin.
+			*/
+			
+			if (this.plugin_manager != null)
+				this.plugin_manager.unload_plugin(name);
+		}
+		
+		public void LoadPlugin(string name) {
+			/**
+			 * Loads a plugin.
+			*/
+						
+			if (this.plugin_manager != null && this.plugin_manager.load_plugin(name)) {				
+				/*
+				 * We also need to startup the plugin.
+				 * We will send the SESSION phase.
+				*/
+				this.plugin_manager.startup_plugin_from_name(name, StartupPhase.SESSION);
+			}
 		}
 		
 		public void PowerOff() {

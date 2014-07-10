@@ -23,7 +23,7 @@
 using Peas;
 
 namespace Vera {
-	
+		
 	public enum StartupPhase {
 		/**
 		 * StartupPhase enum.
@@ -40,11 +40,13 @@ namespace Vera {
 		 * init() that will be called as soon as the plugin has been loaded.
 		*/
 		
-		INIT, // Initialization stuff
-		WM, // WindowManager stuff (+ compositing managers, if any)
-		PANEL, // Panel and other applications which permanently take desktop space
-		DESKTOP, // Anything that draws on the desktop
-		OTHER // Other autostart applications
+		INIT, /* Initialization stuff */
+		WM, /* WindowManager stuff (+ compositing managers, if any) */
+		PANEL, /* Panel and other applications which permanently take desktop space */
+		DESKTOP, /* Anything that draws on the desktop */
+		OTHER, /* Other autostart applications */
+		SESSION /* Hot load (plugin loaded via DBus) */
+		
 	}
 	
 	public interface VeraPlugin : ExtensionBase {
@@ -60,10 +62,14 @@ namespace Vera {
 		 * startup(StartupPhase phase) instead will be called directly
 		 * by vera during the various startup phases.
 		 * See the doc of the StartupPhase enum for more informations.
+		 * 
+		 * shutdown() will be called as soon as the plugin gets unloaded
+		 * from vera.
 		*/
 		
 		public abstract void init(Display display) throws Error;
 		public abstract void startup(StartupPhase phase);	
+		public abstract void shutdown() throws Error;
 	}
 
 }

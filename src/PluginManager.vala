@@ -43,6 +43,12 @@ namespace Vera {
 		private Engine engine;
 		private ExtensionSet extension_set;
 		
+		/*
+		 * Peas stores the loaded plugins using their library names, and
+		 * we do not want that.
+		*/
+		private Gee.ArrayList<string> loaded_plugins = new Gee.ArrayList<string>();
+		
 		private string[] blacklisted_plugins;
 		private bool reverse_blacklist;
 		
@@ -95,27 +101,60 @@ namespace Vera {
 			this.extension_set = new ExtensionSet(this.engine, typeof(VeraPlugin));
 			
 			// Connect the extension_set events
-			this.extension_set.extension_added.connect(this.on_plugin_added);
+			this.extension_set.extension_added.connect_after(this.on_plugin_added);
 			this.extension_set.extension_removed.connect(this.on_plugin_removed);
+			this.extension_set.extension_removed.connect_after(
+				(extension_set, info, object) => {
+					this.engine.garbage_collect();
+					
+					//free(object);
+				}
+			);
 			
 		}
 		
-		private void on_plugin_added(ExtensionSet extension_set, PluginInfo info, GLib.Object object) {
+		private void on_plugin_added(ExtensionSet extension_set, PluginInfo info, Object object) {
 			/**
 			 * This callback is fired when a new plugin has been loaded.
 			 * This method will handle its first initalization.
 			*/
+			
+			VeraPlugin plugin = (VeraPlugin)object;
 						
 			try {
-				((VeraPlugin) object).init(this.display);
+				plugin.init(this.display);
 			} catch (GLib.Error e) {
 				warning(e.message);
 				// also unload?
 			}
 		}
 		
-		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, GLib.Object plugin) {
-			// No way!
+		private void on_plugin_removed(ExtensionSet extension_set, PluginInfo info, Object object) {
+			/**
+			 * This callback is fired when a plugin has been unloaded.
+			*/
+			
+			VeraPlugin plugin = (VeraPlugin)object;
+			
+			try {
+				plugin.shutdown();
+			} catch (GLib.Error e) {
+				warning(e.message);
+			}
+						
+			this.engine.garbage_collect();
+		}
+		
+		public void startup_plugin_from_name(string name, StartupPhase phase) {
+			/**
+			 * Startups the given plugin with the given StartupPhase.
+			*/
+			
+			PluginInfo plugin = this.get_plugin_info(name);
+			
+			if (plugin != null && name in this.loaded_plugins) {
+				((VeraPlugin)this.extension_set.get_extension(plugin)).startup(phase);
+			}
 		}
 		
 		private void startup_plugin(ExtensionSet extension_set, PluginInfo info, Extension object) {
@@ -144,13 +183,67 @@ namespace Vera {
 			this.extension_set.foreach(this.startup_plugin);
 		}
 		
+		private PluginInfo? get_plugin_info(string name) {
+			/**
+			 * An alternative to PeasEngine.get_plugin_info(), because
+			 * at least here it doesn't work correctly.
+			*/
+			
+			foreach (PluginInfo plugin in this.engine.get_plugin_list()) {
+				if (plugin.get_name() == name) {
+					return plugin;
+				}
+			}
+			
+			return null;
+		}
+		
+		public bool load_plugin(string name) {
+			/**
+			 * Loads a plugin given its name.
+			*/
+			
+			return this.load_plugin_from_plugin_info(this.get_plugin_info(name));
+			
+		}
+		
+		public bool load_plugin_from_plugin_info(PluginInfo plugin) {
+			/**
+			 * Loads a plugin given its PluginInfo.
+			*/
+			
+			string name = plugin.get_name();
+			
+			if (plugin == null) {
+				/* Not found */
+				warning("Plugin %s not found!", name);
+				return false;
+			} else if (name in this.loaded_plugins) {
+				/* Alrady loaded */
+				warning("Plugin %s already loaded.", name);
+				return false;
+			}
+						
+			/* Try loading */
+			if (this.engine.try_load_plugin(plugin)) {
+				this.loaded_plugins.add(name);
+				message("Plugin %s loaded.", name);
+				return true;
+			} else {
+				warning("Unable to load plugin %s.", name);
+				return false;
+			}
+			
+		}
+		
+		
 		public void load_all_plugins() {
 			/**
 			 * This method loads all available plugins.
 			*/
 			 
 			string name;
-			 			
+									 			
 			foreach (PluginInfo plugin in this.engine.get_plugin_list()) {
 				
 				name = plugin.get_name();
@@ -166,13 +259,39 @@ namespace Vera {
 					continue;
 				}
 					
-				
-				// Try loading...
-				if (this.engine.try_load_plugin(plugin)) {
-					message("VeraPlugin loaded: " + name);
-				} else {
-					warning("Unable to load plugin " + name);
-				}
+				this.load_plugin_from_plugin_info(plugin);
+			}
+		}
+		
+		public bool unload_plugin(string name) {
+			/**
+			 * Unloads the given plugin.
+			*/
+			
+			if (!(name in this.loaded_plugins)) {
+				/* Not loaded */
+				warning("Plugin %s has not been loaded.", name);
+				return false;
+			}
+			
+			/* Try unloading */
+			if (this.engine.try_unload_plugin(this.get_plugin_info(name))) {
+				this.loaded_plugins.remove(name);
+				message("Plugin %s unloaded.", name);
+				return true;
+			} else {
+				warning("Unable to unload plugin %s", name);
+				return false;
+			}
+		}
+		
+		public void unload_all_plugins() {
+			/**
+			 * Unloads all loaded plugins.
+			*/
+			
+			foreach (string name in this.engine.get_loaded_plugins()) {
+				this.unload_plugin(name);
 			}
 		}
 	

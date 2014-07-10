@@ -1,3 +1,19 @@
+vera-desktop (0.24-1) unstable; urgency=medium
+
+  * vera-session: exit after a maximum number of restarts, to avoid infinite loops.
+    Also ensure we start vera with --disable-autostart in case of a crash.
+  * Moved the ExitHandler to dbus/, and rename it using a more generic name.
+  * PluginManager: support plugin unloading.
+    Also implemented new methods to load a plugin singularly.
+  * DBusService: export methods to dynamically load and unload plugins.
+  * PluginInterface: API change -- added shutdown() method,
+    that will be called when the plugin has been unloaded.
+  * DbusService and PluginManager: ensure we invoke startup() on the loaded plugin.
+  * Catch SIGQUIT, SIGTERM and SIGINT, and use them to end the main loop,
+    because after it vera will now do some cleanup.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 10 Jul 2014 12:24:43 +0200
+
 vera-desktop (0.23-1) unstable; urgency=medium
 
   * Added vera-session, a not-so-beautiful wrapper to launch vera.

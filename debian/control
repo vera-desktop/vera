@@ -29,7 +29,7 @@ Description: Next-generation GTK+3 Desktop Environment - library development hea
  This package contains the development headers.
 
 Package: libvera-vapi
-Architecture: any
+Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libvera-dev (= ${binary:Version})
 Description: Next-generation GTK+3 Desktop Environment - library vapi files
  vera is a next generation GTK+3 desktop environment built for Semplice

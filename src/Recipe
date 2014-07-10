@@ -29,7 +29,8 @@ libraries.vera {
 		PluginInterface.vala
 	so-version = 0
 	header-install-directory = $(options.include-directory)/vera
-	link-flags = -Wl,--as-needed,-soname,libvera.so.$(libraries.vera.so-version)
+	compile-flags = -O2 -flto
+	link-flags = -flto -Wl,--as-needed,-soname,libvera.so.$(libraries.vera.so-version)
 	vala-compile-flags = --vapidir=./vapis
 
 	vala-packages = gio-2.0 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11		
@@ -46,8 +47,9 @@ programs.vera {
 		exit/ExitDialog.vala \
 		autostart/AutostartManager.vala \
 		vera.vala
+	compile-flags = -O2 -flto
 	libraries = vera (local)
-	link-flags = -lX11
+	link-flags = -lX11 -flto -Wl,--as-needed
 	
 	vala-packages = gio-2.0 gee-1.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 posix vera-xsettings
 	packages = gee-1.0 gio-2.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 vera-xsettings

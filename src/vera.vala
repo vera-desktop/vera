@@ -62,6 +62,12 @@ namespace Vera {
 		// Settings
 		private Settings settings;
 		
+		/* Screenshot DBus service */
+		private Screenshot screenshot = null;
+		
+		/* DBus service */
+		private DBusService service;
+		
 		private void do_startup(StartupPhase phase) {
 			/**
 			 * Convenience method to get plugins and internal vera core
@@ -91,7 +97,7 @@ namespace Vera {
 			
 			// Should we start the screenshooter?
 			if (this.settings.get_boolean("enable-screenshot")) {
-				Screenshot.start_handler();
+				this.screenshot = Screenshot.start_handler();
 			} else {
 				message("Internal screenshooter not started, as requested.");
 			}
@@ -119,8 +125,13 @@ namespace Vera {
 				message("plugins are disabled, vera will be a bit useless.");
 			}
 			
-			// Start DBus service
-			DBusService.start_handler(this.plugin_manager);
+			/* Start DBus service */
+			this.service = DBusService.start_handler(this.plugin_manager);
+			
+			/* Handle posix signals */
+			Posix.signal(Posix.SIGQUIT, Gtk.main_quit);
+			Posix.signal(Posix.SIGTERM, Gtk.main_quit);
+			Posix.signal(Posix.SIGINT, Gtk.main_quit);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);
@@ -138,6 +149,24 @@ namespace Vera {
 			this.do_startup(StartupPhase.OTHER);
 			
 			message("Vera initialized.");
+		}
+		
+		public void quit() {
+			/**
+			 * Cleanup
+			*/
+			
+			message("Cleanup...");
+			
+			try {
+				/* Quit the org.semplicelinux.vera DBus service */
+				this.service.quit();
+				
+				/* Quit the org.semplicelinux.vera.Screenshot DBus service */
+				if (this.screenshot != null)
+					this.screenshot.quit();
+			} catch (Error e) {
+			}
 		}
 		
 		
@@ -176,6 +205,10 @@ namespace Vera {
 			Main vera = new Main();
 			
 			Gtk.main();
+			
+			/* When we are here, we need to do some cleanup... */
+			vera.quit();
+			
 			return 0;
 
 		}

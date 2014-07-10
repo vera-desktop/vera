@@ -45,6 +45,9 @@ namespace Vera {
 		 * the system to properly execute the specified action.
 		*/
 		
+		public DBusConnection connection = null;
+		public uint? identifier = null;
+		
 		private PluginManager plugin_manager = null;
 		private logindInterface logind;
 		
@@ -68,7 +71,7 @@ namespace Vera {
 		}
 		
 		[DBus (visible = false)]
-		public static void start_handler(PluginManager plugin_manager) {
+		public static DBusService start_handler(PluginManager plugin_manager) {
 			/**
 			 * Starts the service.
 			 * To be used internally.
@@ -76,13 +79,14 @@ namespace Vera {
 			
 			DBusService handler = new DBusService(plugin_manager);
 			
-			Bus.own_name(
+			uint identifier = Bus.own_name(
 				BusType.SESSION,
 				"org.semplicelinux.vera",
 				BusNameOwnerFlags.NONE,
 				(connection) => {
 					// Register the object
 					try {
+						handler.connection = connection;
 						connection.register_object("/org/semplicelinux/vera", handler);
 					} catch (IOError e) {
 						warning("Couldn't register ExitHandler: %s", e.message);
@@ -91,6 +95,25 @@ namespace Vera {
 				() => {},
 				(connection, name) => warning("Unable to acquire bus %s", name)
 			);
+			
+			handler.identifier = identifier;
+			
+			return handler;
+		}
+		
+		[DBus (visible = false)]
+		public void quit() {
+			/**
+			 * Quits the service.
+			*/
+						
+			if (this.connection == null && this.identifier == null) {
+				warning("connection or identifier not specified. Please use start_handler() to start the service.");
+				return;
+			}
+			
+			this.connection.close_sync();
+			Bus.unown_name(this.identifier);
 		}
 		
 		public void UnloadPlugin(string name) {

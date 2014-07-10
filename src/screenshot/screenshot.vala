@@ -33,16 +33,17 @@ namespace Vera {
 		 * to confirm its decision and - eventually - the Locks that prevent
 		 * the system to properly execute the specified action.
 		*/
-		
-		private logindInterface logind;
-		
+
+		public DBusConnection connection = null;
+		public uint? identifier = null;
+
 		public Screenshot() {
 
 
 		}
 		
 		[DBus (visible = false)]
-		public static void start_handler() {
+		public static Screenshot start_handler() {
 			/**
 			 * Starts the ExitHandler.
 			 * To be used internally.
@@ -50,13 +51,14 @@ namespace Vera {
 			
 			Screenshot handler = new Screenshot();
 			
-			Bus.own_name(
+			uint identifier = Bus.own_name(
 				BusType.SESSION,
 				"org.semplicelinux.vera.Screenshot",
 				BusNameOwnerFlags.NONE,
 				(connection) => {
 					// Register the object
 					try {
+						handler.connection = connection;
 						connection.register_object("/org/semplicelinux/vera/Screenshot", handler);
 					} catch (IOError e) {
 						warning("Couldn't register Screenshot: %s", e.message);
@@ -65,8 +67,27 @@ namespace Vera {
 				() => {},
 				(connection, name) => warning("Unable to acquire bus %s", name)
 			);
+			
+			handler.identifier = identifier;
+			
+			return handler;
 		}
-		
+
+		[DBus (visible = false)]
+		public void quit() {
+			/**
+			 * Quits the service.
+			*/
+						
+			if (this.connection == null && this.identifier == null) {
+				warning("connection or identifier not specified. Please use start_handler() to start the service.");
+				return;
+			}
+			
+			this.connection.close_sync();
+			Bus.unown_name(this.identifier);
+		}
+
 		private void take_screenshot(Gdk.Window window) {
 			/**
 			 * Internally used to actually take the screenshot.

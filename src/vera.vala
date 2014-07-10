@@ -24,6 +24,9 @@ namespace Vera {
 	
 	public class Main : Object {
 		
+		/* Final exit code */
+		static int exit_code = 0;
+		
 		/*
 		 * Command-line arguments
 		*/
@@ -127,11 +130,6 @@ namespace Vera {
 			
 			/* Start DBus service */
 			this.service = DBusService.start_handler(this.plugin_manager);
-			
-			/* Handle posix signals */
-			Posix.signal(Posix.SIGQUIT, Gtk.main_quit);
-			Posix.signal(Posix.SIGTERM, Gtk.main_quit);
-			Posix.signal(Posix.SIGINT, Gtk.main_quit);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);
@@ -168,7 +166,17 @@ namespace Vera {
 			} catch (Error e) {
 			}
 		}
-		
+
+		private static void pre_quit(int exit) {
+			/**
+			 * Stops the main loop, and stores the exit_code so that
+			 * we are able to properly return it after cleanup.
+			*/
+			
+			exit_code = exit;
+			
+			Gtk.main_quit();
+		}
 		
 		public static int main(string[] args) {
 			/**
@@ -201,7 +209,12 @@ namespace Vera {
 			
 			if (enable_autostart && disable_autostart)
 				enable_autostart = false;
-			
+
+			/* Handle posix signals */
+			Posix.signal(Posix.SIGQUIT, pre_quit);
+			Posix.signal(Posix.SIGTERM, pre_quit);
+			Posix.signal(Posix.SIGINT, pre_quit);
+
 			Main vera = new Main();
 			
 			Gtk.main();
@@ -209,7 +222,7 @@ namespace Vera {
 			/* When we are here, we need to do some cleanup... */
 			vera.quit();
 			
-			return 0;
+			return vera.exit_code;
 
 		}
 		

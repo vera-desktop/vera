@@ -31,6 +31,8 @@ namespace Vera {
 	private XSettings.Manager manager;
 	private XlibDisplay xlibdisplay;
 	
+	private string[] ignore_settings = new string[0];
+	
 	public XsettingsManager(XlibDisplay xlibdisplay) {
 	    /**
 	     * This is the XSETTINGS manager. It uses the vera-xsettings
@@ -48,6 +50,15 @@ namespace Vera {
 	    // Create Settings object
 	    this.settings = new Settings("org.semplicelinux.vera.settings");
 	    this.settings.changed.connect(this.on_setting_changed);
+	    
+	    /*
+	     * If window-scaling-factor is > 1, we need to ignore
+	     * xft-dpi and cursor-theme-size as we'll override them.
+	    */
+	    if (this.settings.get_int("window-scaling-factor") > 1) {
+		this.ignore_settings += "dpi";
+		this.ignore_settings += "cursor-theme-size";
+	    }
 	    
 	    this.reload_settings();
 	    	    
@@ -105,6 +116,12 @@ namespace Vera {
 		    rest = rest.up();
 		    break;
 		
+		case "window-scaling-factor":
+		    /* Gdk */
+		    
+		    prefix = "Gdk/";
+		    break;
+		
 		default:
 		    // Gtk+ settings
 		    
@@ -127,12 +144,46 @@ namespace Vera {
 	     * Stores the setting 'key' in the XSETTINGS manager.
 	    */
 	    
+	    if (key in this.ignore_settings)
+		/* Should ignore this setting */
+		return;
+	    
 	    string name = this.get_xsettings_name(key);
 	    Variant val;
 	    
 	    val = this.settings.get_value(key);
 	    
 	    message("%s is %s", name, val.get_type_string());
+	    
+	    if (key == "window-scaling-factor" && this.settings.get_int("window-scaling-factor") > 1) {
+
+		/*
+		 * If the key is window-scaling-factor, and it is > 1,
+		 * we need to override DPI settings in xft, and make
+		 * Gdk aware of the unscaled DPI value.
+		 * That's why we ignore user-specified DPIs.
+		*/
+
+		int dpi = this.settings.get_int("dpi") * 1024;
+		int scaling_factor = val.get_int32();
+		
+		/* Set Xft/DPI */
+		this.manager.set_int("Xft/DPI", dpi * scaling_factor);
+		
+		/* Set Gdk/UnscaledDPI */
+		this.manager.set_int("Gdk/UnscaledDPI", dpi);
+		
+		/* Set Gtk/CursorThemeSize */
+		this.manager.set_int("Gtk/CursorThemeSize", this.settings.get_int("cursor-theme-size") * scaling_factor);
+	    
+	    } else if (key == "dpi") {
+		/*
+		 * window-scaling-factor is not set, so manually set DPI ourselves
+		*/
+		 
+		this.manager.set_int("Xft/DPI", val.get_int32() * 1024);
+		return;
+	    }
 	    
 	    switch (val.get_type_string()) {
 		

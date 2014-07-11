@@ -56,6 +56,18 @@
 			<description>If enabled, the system will play sounds in response input (if event-sounds are enabled too).</description>
 		</key>
 		
+		<key name="window-scaling-factor" type="i">
+			<default>1</default>
+			<summary>Window scaling factor</summary>
+			<description>The scaling factor for the windows. Increase this if you have high definition ('Retina', HiDPI) monitors.</description>
+		</key>
+		
+		<key name="dpi" type="i">
+			<default>96</default>
+			<summary>DPI</summary>
+			<description>The Dots-per-inch of your monitor. Note that when the Window scaling factor is > 1, the DPI setting is adjusted accordingly.</description>
+		</key>
+		
 		<key name="xft-antialias" type="i">
 			<range min="-1" max="1"/>
 			<default>1</default>
@@ -63,12 +75,16 @@
 			<description>Manages the text antialiasing. 0 is no, 1 is yes, and -1 is default (takes the value from the server).</description>
 		</key>
 		
+		<!--
+		
 		<key name="xft-dpi" type="i">
 			<range min="-1" max="1"/>
 			<default>-1</default>
 			<summary>Text DPI</summary>
 			<description>Manages the text DPI. The value must be 1024*dots/inch of your monitor, or -1 (takes the value from the server).</description>
 		</key>
+		
+		-->
 		
 		<key name="xft-hintstyle" type="s">
 			<choices>
@@ -128,7 +144,7 @@
 		
 		<key name="cursor-theme-size" type="i">
 			<range min="0" max="128"/>
-			<default>0</default>
+			<default>16</default>
 			<summary>Cursor size</summary>
 			<description>The size to use for cursors. If 0, it will use the default size.</description>
 		</key>

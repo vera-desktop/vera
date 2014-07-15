@@ -1,3 +1,14 @@
+vera-desktop (0.27-1) unstable; urgency=medium
+
+  * debian/: added vera-desktop's postinst and prerm, that install the vera-session
+    alternative for x-session-manager.
+  * autostart: assume that every Phase outside the specified ones are OTHER.
+  * data/autostart: added opensnap, volumeicon and xscreensaver autostarting.
+  * autostart/: parse OnlyShowIn and skip KDE autostart applications.
+  * vera-desktop: install /usr/share/vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 16 Jul 2014 01:18:30 +0200
+
 vera-desktop (0.26-1) unstable; urgency=medium
 
   * xsettings-manager: added tentative HiDPI support.

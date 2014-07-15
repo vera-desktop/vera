@@ -20,8 +20,10 @@
 #    Eugenio "g7" Paolantonio <me@medesimo.eu>
 #
 
-project {
-	name = vera
-	version = 0.27
-	minimum-bake-version = 0.1
+data.autostart {
+	files = \
+		xscreensaver.desktop \
+		volumeicon.desktop \
+		opensnap.desktop
+	install-directory = /usr/share/vera/autostart
 }

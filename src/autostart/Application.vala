@@ -27,6 +27,7 @@ namespace Vera {
 		private KeyFile file = new KeyFile();
 		public string name { get; private set; }
 		public string executable { get; private set; }
+		public string[] only_show_in { get; private set; }
 		public StartupPhase phase { get; private set; }
 		
 		public Application(string path) {
@@ -35,9 +36,17 @@ namespace Vera {
 			 * file specified in path.
 			 */
 			
+			this.file.set_list_separator(';');
+			
 			try {
 				// load desktop file
 				this.file.load_from_file(path, KeyFileFlags.NONE);
+				
+				if (this.file.has_key("Desktop Entry", "OnlyShowIn")) {
+					this.only_show_in = this.file.get_string_list("Desktop Entry", "OnlyShowIn");
+				} else {
+					this.only_show_in = new string[0];
+				}
 				
 				this.name = this.file.get_string("Desktop Entry", "Name");
 				this.executable = this.file.get_string("Desktop Entry", "Exec");
@@ -56,7 +65,7 @@ namespace Vera {
 						case "Desktop":
 							this.phase = StartupPhase.DESKTOP;
 							break;
-						case "Applications":
+						default:
 							this.phase = StartupPhase.OTHER;
 							break;
 					}

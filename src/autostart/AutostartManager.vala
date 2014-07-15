@@ -55,7 +55,20 @@ namespace Vera {
 			
 			foreach (Application app in this.applications) {
 				
-				if (app.phase != phase)
+				if (app.phase != phase || "KDE" in app.only_show_in)
+					/*
+					 * Vera does not have its own key to put in the
+					 * OnlyShowIn, so we need to launch applications
+					 * that are 'meant' to another environments.
+					 * 
+					 * As the only (so far) working and in upstream
+					 * Qt-based desktop environment is KDE, we check
+					 * for it.
+					 * 
+					 * We should probably implement a whitelist so
+					 * that the user could override this setting.
+					 * (FIXME)
+					*/
 					continue;
 				
 				debug("Loading %s", app.name);

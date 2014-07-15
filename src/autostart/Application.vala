@@ -56,7 +56,7 @@ namespace Vera {
 						case "Desktop":
 							this.phase = StartupPhase.DESKTOP;
 							break;
-						case "Applications":
+						default:
 							this.phase = StartupPhase.OTHER;
 							break;
 					}

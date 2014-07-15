@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Name=opensnap
+Comment=Snapping
+Exec=/usr/bin/opensnap -c /etc/opensnap
+X-Vera-Autostart-Phase=Other

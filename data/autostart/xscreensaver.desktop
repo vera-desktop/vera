@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Name=xscreensaver
+Comment=Default screensaver for vera 1
+Exec=xscreensaver
+X-Vera-Autostart-Phase=Other

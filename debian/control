@@ -21,6 +21,7 @@ Description: Next-generation GTK+3 Desktop Environment - main binaries
 
 Package: libvera-dev
 Architecture: any
+Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libvera0 (= ${binary:Version})
 Description: Next-generation GTK+3 Desktop Environment - library development headers
  vera is a next generation GTK+3 desktop environment built for Semplice
@@ -30,6 +31,7 @@ Description: Next-generation GTK+3 Desktop Environment - library development hea
 
 Package: libvera-vapi
 Architecture: all
+Section: devel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libvera-dev (= ${binary:Version})
 Description: Next-generation GTK+3 Desktop Environment - library vapi files
  vera is a next generation GTK+3 desktop environment built for Semplice
@@ -39,6 +41,7 @@ Description: Next-generation GTK+3 Desktop Environment - library vapi files
 
 Package: libvera0
 Architecture: any
+Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Next-generation GTK+3 Desktop Environment - library
  vera is a next generation GTK+3 desktop environment built for Semplice

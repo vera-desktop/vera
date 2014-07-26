@@ -192,7 +192,7 @@
 		</key>
 		
 		<key name="menu-images" type="b">
-			<default>false</default>
+			<default>true</default>
 			<summary>Images in menus</summary>
 			<description>If enabled, the menus will show an icon alongside the text.</description>
 		</key>

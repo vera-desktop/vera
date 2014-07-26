@@ -54,6 +54,11 @@ namespace Vera {
 					text = "Do you really want to suspend?";
 					secondary_text = "Your active applications will not be closed.";
 					break;
+				case ExitAction.LOGOUT:
+					title = "Logout";
+					text = "Do you really want to logout?";
+					secondary_text = "This will close every active application.";
+					break;
 			}
 			
 			this.set_title(title);

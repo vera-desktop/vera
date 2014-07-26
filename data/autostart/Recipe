@@ -24,6 +24,7 @@ data.autostart {
 	files = \
 		xscreensaver.desktop \
 		volumeicon.desktop \
-		opensnap.desktop
+		opensnap.desktop \
+		pcmanfm.desktop
 	install-directory = /usr/share/vera/autostart
 }

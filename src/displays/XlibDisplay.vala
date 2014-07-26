@@ -42,7 +42,7 @@ namespace Vera {
 	
 	private weak Gdk.Display gdk_display;
 	private weak Gdk.Screen screen;
-	private Gdk.Window root_window;
+	public Gdk.Window root_window;
 	private Gdk.X11.Window x11_root_window;
 	public weak X.Display display;
 	public weak X.Window xrootwindow;

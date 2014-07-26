@@ -25,6 +25,7 @@ libraries.vera {
 		displays/DisplayInterface.vala \
 		displays/XlibDisplay.vala \
 		autostart/Application.vala \
+		launcher.vala \
 		logindInterface.vala \
 		PluginInterface.vala
 	so-version = 0
@@ -50,6 +51,7 @@ programs.vera {
 	compile-flags = -O2 -flto
 	libraries = vera (local)
 	link-flags = -lX11 -flto -Wl,--as-needed
+	vala-compile-flags = --vapidir=./vapis
 	
 	vala-packages = gio-2.0 gee-1.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 posix vera-xsettings
 	packages = gee-1.0 gio-2.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 vera-xsettings

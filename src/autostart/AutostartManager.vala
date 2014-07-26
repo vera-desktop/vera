@@ -36,13 +36,9 @@ namespace Vera {
 			/**
 			 * Fired when the process pid has been terminated.
 			*/
-			
-			debug("Pid %s terminated.", pid.to_string());
-			
+						
 			// Remove pid from associations
 			this.pid_associations.unset(pid);
-			
-			Process.close_pid(pid);
 		}
 		
 		private void launch_from_list(StartupPhase phase) {
@@ -52,7 +48,9 @@ namespace Vera {
 			*/
 						
 			Pid pid;
+			Launcher launcher;
 			
+			bool sync, respawn;
 			foreach (Application app in this.applications) {
 				
 				if (app.phase != phase || "KDE" in app.only_show_in)
@@ -72,21 +70,29 @@ namespace Vera {
 					continue;
 				
 				debug("Loading %s", app.name);
+				
+				/* sync? */
+				if (app.mode == LaunchMode.SYNC)
+					sync = true;
+				else
+					sync = false;
+				
+				/* Always respawn, if phase != OTHER */
+				if (app.phase == StartupPhase.OTHER)
+					respawn = false;
+				else
+					respawn = true;
 					
 				try {
-					Process.spawn_async(
-						this.HOME,
-						app.executable.split(" "),
-						Environ.get(),
-						SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
-						null,
-						out pid
-					);
+					launcher = new Launcher(app.executable.split(" "), sync, respawn);
+					pid = launcher.launch();
 					
 					// Add pid to pid_associations
 					this.pid_associations[pid] = app;
 					
-					ChildWatch.add(pid, this.on_process_terminated);
+					launcher.terminated.connect(this.on_process_terminated);
+					
+					
 				} catch (SpawnError e) {
 					warning(e.message);
 				}

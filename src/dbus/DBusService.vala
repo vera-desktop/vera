@@ -24,9 +24,12 @@ namespace Vera {
 	
 	public enum ExitAction {
 		
+		NONE = 0,
 		POWEROFF = 1,
 		REBOOT = 2,
-		SUSPEND = 3;
+		SUSPEND = 3,
+		LOGOUT = 4,
+		LOCK = 5
 		
 	}
 	
@@ -48,10 +51,11 @@ namespace Vera {
 		public DBusConnection connection = null;
 		public uint? identifier = null;
 		
+		private Settings settings;
 		private PluginManager plugin_manager = null;
 		private logindInterface logind;
 		
-		public DBusService(PluginManager plugin_manager) {
+		public DBusService(PluginManager plugin_manager, Settings settings) {
 			/**
 			 * Constructs the Service.
 			 * 
@@ -61,6 +65,7 @@ namespace Vera {
 			*/
 			
 			this.plugin_manager = plugin_manager;
+			this.settings = settings;
 			
 			this.logind = Bus.get_proxy_sync(
 				BusType.SYSTEM,
@@ -71,13 +76,13 @@ namespace Vera {
 		}
 		
 		[DBus (visible = false)]
-		public static DBusService start_handler(PluginManager plugin_manager) {
+		public static DBusService start_handler(PluginManager plugin_manager, Settings settings) {
 			/**
 			 * Starts the service.
 			 * To be used internally.
 			*/
 			
-			DBusService handler = new DBusService(plugin_manager);
+			DBusService handler = new DBusService(plugin_manager, settings);
 			
 			uint identifier = Bus.own_name(
 				BusType.SESSION,
@@ -116,6 +121,19 @@ namespace Vera {
 			Bus.unown_name(this.identifier);
 		}
 		
+		private void store_exit_action(ExitAction action) {
+			/**
+			 * Stores the specified exit action as the last one.
+			*/
+			
+			if (this.settings.get_boolean("lock-last-exit-action"))
+				/* Locked */
+				return;
+			
+			this.settings.set_enum("last-exit-action", (int)action);
+			
+		}
+		
 		public void UnloadPlugin(string name) {
 			/**
 			 * Unloads a plugin.
@@ -139,21 +157,76 @@ namespace Vera {
 			}
 		}
 		
+		public void NinjaShortcut() {
+			/**
+			 * Executes the last stored exit action.
+			*/
+			
+			if (!this.settings.get_boolean("ninja-shortcut"))
+				/* Disabled */
+				return;
+			
+			switch ((ExitAction)this.settings.get_enum("last-exit-action")) {
+				
+				case ExitAction.POWEROFF:
+					this.PowerOff();
+					break;
+				
+				case ExitAction.REBOOT:
+					this.Reboot();
+					break;
+				
+				case ExitAction.SUSPEND:
+					this.Suspend();
+					break;
+				
+				case ExitAction.LOGOUT:
+					this.Logout();
+					break;
+				
+				case ExitAction.LOCK:
+					this.Lock();
+					break;
+					
+			}
+			
+		}
+		
+		private int show_dialog(ExitAction action) {
+			/**
+			 * Shows a dialog, and returns its ResponseType.
+			*/
+			
+			int result;
+			
+			if (!this.settings.get_boolean("hide-exit-window")) {
+				ExitDialog dialog = new ExitDialog(action);
+				result = dialog.run();
+				dialog.destroy();
+			} else {
+				/* Should hide, set result to ResponseType.YES */
+				result = Gtk.ResponseType.YES;
+			}
+			
+			return result;
+			
+		}
+			
+		
 		public void PowerOff() {
 			/**
 			 * Shutdowns the system.
 			*/
 			
-			ExitDialog dialog = new ExitDialog(ExitAction.POWEROFF);
+			int result = this.show_dialog(ExitAction.POWEROFF);
 			
-			int result = dialog.run();
 			if (result == Gtk.ResponseType.YES) {
-				// Yes! We should poweroff!
-				this.logind.PowerOff(true);
+				/* Hand-off to vera */
+				Main.exit_action = ExitAction.POWEROFF;
+				this.store_exit_action(ExitAction.POWEROFF);
+				Gtk.main_quit();
 			}
 			
-			dialog.destroy();
-		
 		}
 		
 		public void Reboot() {
@@ -161,15 +234,14 @@ namespace Vera {
 			 * Reboots the system.
 			*/
 
-			ExitDialog dialog = new ExitDialog(ExitAction.REBOOT);
-			
-			int result = dialog.run();
+			int result = this.show_dialog(ExitAction.REBOOT);
+
 			if (result == Gtk.ResponseType.YES) {
-				// Yes! We should suspend!
-				this.logind.Reboot(true);
+				/* Hand-off to vera */
+				Main.exit_action = ExitAction.REBOOT;
+				this.store_exit_action(ExitAction.REBOOT);
+				Gtk.main_quit();
 			}
-			
-			dialog.destroy();
 			
 		}
 		
@@ -178,15 +250,69 @@ namespace Vera {
 			 * Suspends the system.
 			*/
 			
-			ExitDialog dialog = new ExitDialog(ExitAction.SUSPEND);
-			
-			int result = dialog.run();
+			int result = this.show_dialog(ExitAction.SUSPEND);
+
 			if (result == Gtk.ResponseType.YES) {
 				// Yes! We should suspend!
+				this.store_exit_action(ExitAction.SUSPEND);
 				this.logind.Suspend(true);
 			}
 			
-			dialog.destroy();
+		}
+		
+		public void Logout() {
+			/**
+			 * Logouts the user.
+			*/
+
+			int result = this.show_dialog(ExitAction.LOGOUT);
+
+			if (result == Gtk.ResponseType.YES) {
+				/*
+				 * If we exit with status 0, we will automatically
+				 * logout (vera-session will not restart us).
+				 * So, we actually need to quit only the main loop,
+				 * the quit() method in vera's main class will
+				 * do the job.
+				*/
+				this.store_exit_action(ExitAction.LOGOUT);
+				Gtk.main_quit();
+			}
+			
+		}
+		
+		public void Lock() {
+			/**
+			 * Locks the user.
+			*/
+			
+			message("Lock: nothing here, for now...");
+			this.store_exit_action(ExitAction.LOCK);
+			
+		}
+
+		
+		[DBus (visible = false)]
+		public void execute_action(ExitAction action) {
+			/**
+			 * Executes the specified action.
+			*/
+			
+			switch (action) {
+				
+				case ExitAction.POWEROFF:
+					this.logind.PowerOff(true);
+					break;
+				
+				case ExitAction.REBOOT:
+					this.logind.Reboot(true);
+					break;
+				
+				case ExitAction.SUSPEND:
+					this.logind.Suspend(true);
+					break;
+					
+			}
 			
 		}
 		

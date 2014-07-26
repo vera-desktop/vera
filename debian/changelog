@@ -1,3 +1,17 @@
+vera-desktop (0.28-1) unstable; urgency=medium
+
+  * Some changes, and added a Launcher class, with respawn support.
+  * Enable images in menus by default.
+  * Automatically autostart pcmanfm.
+    Also, added the option to launch an application and wait until it exits.
+  * Set DMZ-White as the default cursor theme.
+  * dbus: added "ninja-shortcut" capabilities
+    (--> the CTRL+ALT+SPACE shortcut found in Semplice 2.0+).
+  * Added hide-exit-window setting.
+    If enabled, vera will not ask for confirmation when executing an exit action.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 26 Jul 2014 20:05:54 +0200
+
 vera-desktop (0.27-1) unstable; urgency=medium
 
   * debian/: added vera-desktop's postinst and prerm, that install the vera-session

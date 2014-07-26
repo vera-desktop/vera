@@ -192,14 +192,34 @@ namespace Vera {
 			
 		}
 		
+		private int show_dialog(ExitAction action) {
+			/**
+			 * Shows a dialog, and returns its ResponseType.
+			*/
+			
+			int result;
+			
+			if (!this.settings.get_boolean("hide-exit-window")) {
+				ExitDialog dialog = new ExitDialog(action);
+				result = dialog.run();
+				dialog.destroy();
+			} else {
+				/* Should hide, set result to ResponseType.YES */
+				result = Gtk.ResponseType.YES;
+			}
+			
+			return result;
+			
+		}
+			
+		
 		public void PowerOff() {
 			/**
 			 * Shutdowns the system.
 			*/
 			
-			ExitDialog dialog = new ExitDialog(ExitAction.POWEROFF);
+			int result = this.show_dialog(ExitAction.POWEROFF);
 			
-			int result = dialog.run();
 			if (result == Gtk.ResponseType.YES) {
 				/* Hand-off to vera */
 				Main.exit_action = ExitAction.POWEROFF;
@@ -207,8 +227,6 @@ namespace Vera {
 				Gtk.main_quit();
 			}
 			
-			dialog.destroy();
-		
 		}
 		
 		public void Reboot() {
@@ -216,17 +234,14 @@ namespace Vera {
 			 * Reboots the system.
 			*/
 
-			ExitDialog dialog = new ExitDialog(ExitAction.REBOOT);
-			
-			int result = dialog.run();
+			int result = this.show_dialog(ExitAction.REBOOT);
+
 			if (result == Gtk.ResponseType.YES) {
 				/* Hand-off to vera */
 				Main.exit_action = ExitAction.REBOOT;
 				this.store_exit_action(ExitAction.REBOOT);
 				Gtk.main_quit();
 			}
-			
-			dialog.destroy();
 			
 		}
 		
@@ -235,16 +250,13 @@ namespace Vera {
 			 * Suspends the system.
 			*/
 			
-			ExitDialog dialog = new ExitDialog(ExitAction.SUSPEND);
-			
-			int result = dialog.run();
+			int result = this.show_dialog(ExitAction.SUSPEND);
+
 			if (result == Gtk.ResponseType.YES) {
 				// Yes! We should suspend!
 				this.store_exit_action(ExitAction.SUSPEND);
 				this.logind.Suspend(true);
 			}
-			
-			dialog.destroy();
 			
 		}
 		
@@ -253,9 +265,8 @@ namespace Vera {
 			 * Logouts the user.
 			*/
 
-			ExitDialog dialog = new ExitDialog(ExitAction.LOGOUT);
-			
-			int result = dialog.run();
+			int result = this.show_dialog(ExitAction.LOGOUT);
+
 			if (result == Gtk.ResponseType.YES) {
 				/*
 				 * If we exit with status 0, we will automatically
@@ -267,8 +278,6 @@ namespace Vera {
 				this.store_exit_action(ExitAction.LOGOUT);
 				Gtk.main_quit();
 			}
-			
-			dialog.destroy();
 			
 		}
 		

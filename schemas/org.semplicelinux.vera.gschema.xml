@@ -51,6 +51,12 @@
 			<summary>CTRL+ALT+SPACE shortcut</summary>
 			<description>If enabled, the user can press CTRL+ALT+SPACE to execute the last exit action.</description>
 		</key>
+		
+		<key name="hide-exit-window" type="b">
+			<default>false</default>
+			<summary>Hide exit window</summary>
+			<description>If true, the exit window will not be shown (the exit action will be executed ASAP).</description>
+		</key>
 
 		<key name="enable-xsettings" type="b">
 			<default>true</default>

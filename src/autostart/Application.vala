@@ -22,6 +22,11 @@
 
 namespace Vera {
 
+	public enum LaunchMode {
+		SYNC,
+		ASYNC
+	}
+
 	public class Application : Object {
 		
 		private KeyFile file = new KeyFile();
@@ -29,6 +34,7 @@ namespace Vera {
 		public string executable { get; private set; }
 		public string[] only_show_in { get; private set; }
 		public StartupPhase phase { get; private set; }
+		public LaunchMode mode { get; private set; }
 		
 		public Application(string path) {
 			/**
@@ -49,7 +55,16 @@ namespace Vera {
 				}
 				
 				this.name = this.file.get_string("Desktop Entry", "Name");
+				
 				this.executable = this.file.get_string("Desktop Entry", "Exec");
+				
+				if (this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync")) {
+					if (this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
+						this.mode = LaunchMode.SYNC;
+					else
+						this.mode = LaunchMode.ASYNC;
+				}
+				
 				if (this.file.has_key("Desktop Entry", "X-Vera-Autostart-Phase")) {
 					switch (this.file.get_string("Desktop Entry", "X-Vera-Autostart-Phase")) {
 						

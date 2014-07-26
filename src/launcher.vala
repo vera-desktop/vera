@@ -36,16 +36,18 @@ namespace Vera {
 		public signal void terminated (Pid pid, int status);
 
 		private static string HOME = Environment.get_home_dir();
-						
+		
+		private bool sync;
 		private bool respawn;
 		private string[] application;
 		
-		public Launcher(string[] application, bool respawn) {
+		public Launcher(string[] application, bool sync = false, bool respawn = false) {
 			/**
 			 * Constructs the object.
 			*/
 			
 			this.application = application;
+			this.sync = sync;
 			this.respawn = respawn;
 						
 		}
@@ -74,7 +76,7 @@ namespace Vera {
 		}
 
 		
-		public Pid launch() throws Error, LauncherError {
+		public Pid? launch() throws Error, LauncherError {
 			/**
 			 * Launches the given application.
 			*/
@@ -85,19 +87,33 @@ namespace Vera {
 			if (this.application.length == 0)
 				throw new LauncherError.ARRAY_ERROR("The application array shouldn't be zero!");
 			
-			Process.spawn_async(
-				HOME,
-				this.application,
-				env,
-				SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
-				null,
-				out pid
-			);
+			if (this.sync) {
+				Process.spawn_sync(
+					HOME,
+					this.application,
+					env,
+					SpawnFlags.SEARCH_PATH,
+					null,
+					null,
+					null,
+					null
+				);
+				
+				return null;
+			} else {
+				Process.spawn_async(
+					HOME,
+					this.application,
+					env,
+					SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
+					null,
+					out pid
+				);
+				
+				ChildWatch.add(pid, this.on_process_terminated);
 			
-			ChildWatch.add(pid, this.on_process_terminated);
-			
-			return pid;
-			
+				return pid;
+			}
 		}
 		
 	}

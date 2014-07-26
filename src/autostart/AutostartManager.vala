@@ -50,7 +50,7 @@ namespace Vera {
 			Pid pid;
 			Launcher launcher;
 			
-			bool respawn;
+			bool sync, respawn;
 			foreach (Application app in this.applications) {
 				
 				if (app.phase != phase || "KDE" in app.only_show_in)
@@ -71,6 +71,12 @@ namespace Vera {
 				
 				debug("Loading %s", app.name);
 				
+				/* sync? */
+				if (app.mode == LaunchMode.SYNC)
+					sync = true;
+				else
+					sync = false;
+				
 				/* Always respawn, if phase != OTHER */
 				if (app.phase == StartupPhase.OTHER)
 					respawn = false;
@@ -78,7 +84,7 @@ namespace Vera {
 					respawn = true;
 					
 				try {
-					launcher = new Launcher(app.executable.split(" "), respawn);
+					launcher = new Launcher(app.executable.split(" "), sync, respawn);
 					pid = launcher.launch();
 					
 					// Add pid to pid_associations

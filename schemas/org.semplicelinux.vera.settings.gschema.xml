@@ -137,7 +137,7 @@
 		</key>
 		
 		<key name="cursor-theme-name" type="s">
-			<default>""</default>
+			<default>"DMZ-White"</default>
 			<summary>Cursor theme name</summary>
 			<description>The cursor theme to use. If blank, it will use the default.</description>
 		</key>

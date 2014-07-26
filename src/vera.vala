@@ -21,11 +21,14 @@
 */
 
 namespace Vera {
-	
+		
 	public class Main : Object {
 		
 		/* Final exit code */
-		static int exit_code = 0;
+		public static int exit_code = 0;
+		
+		/* Final exit action */
+		public static ExitAction exit_action = ExitAction.NONE;
 		
 		/*
 		 * Command-line arguments
@@ -91,10 +94,17 @@ namespace Vera {
 			 * Main() is the main class of the Vera desktop enviroment.
 			 * From here everything will start.
 			*/
+
+			/* Set XDG_CURRENT_DESKTOP, if it's not already set */
+			if (Environment.get_variable("XDG_CURRENT_DESKTOP") == null)
+				Environment.set_variable("XDG_CURRENT_DESKTOP", "Vera", true);
 			
+			/* Set XDG menu prefix */
+			Environment.set_variable("XDG_MENU_PREFIX", "vera-", true);
+
 			// Connect to server
 			this.display.open();
-			
+						
 			// Settings
 			this.settings = new Settings("org.semplicelinux.vera");
 			
@@ -165,6 +175,9 @@ namespace Vera {
 					this.screenshot.quit();
 			} catch (Error e) {
 			}
+			
+			/* Execute the shutdown operation (PowerOff, Reboot, Terminate) */
+			this.service.execute_action(exit_action);
 		}
 
 		private static void pre_quit(int exit) {
@@ -222,7 +235,7 @@ namespace Vera {
 			/* When we are here, we need to do some cleanup... */
 			vera.quit();
 			
-			return vera.exit_code;
+			return exit_code;
 
 		}
 		

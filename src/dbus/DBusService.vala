@@ -24,9 +24,11 @@ namespace Vera {
 	
 	public enum ExitAction {
 		
+		NONE = 0,
 		POWEROFF = 1,
 		REBOOT = 2,
-		SUSPEND = 3;
+		SUSPEND = 3,
+		LOGOUT = 4
 		
 	}
 	
@@ -148,8 +150,9 @@ namespace Vera {
 			
 			int result = dialog.run();
 			if (result == Gtk.ResponseType.YES) {
-				// Yes! We should poweroff!
-				this.logind.PowerOff(true);
+				/* Hand-off to vera */
+				Main.exit_action = ExitAction.POWEROFF;
+				Gtk.main_quit();
 			}
 			
 			dialog.destroy();
@@ -165,8 +168,9 @@ namespace Vera {
 			
 			int result = dialog.run();
 			if (result == Gtk.ResponseType.YES) {
-				// Yes! We should suspend!
-				this.logind.Reboot(true);
+				/* Hand-off to vera */
+				Main.exit_action = ExitAction.REBOOT;
+				Gtk.main_quit();
 			}
 			
 			dialog.destroy();
@@ -187,6 +191,54 @@ namespace Vera {
 			}
 			
 			dialog.destroy();
+			
+		}
+		
+		public void Logout() {
+			/**
+			 * Logouts the user.
+			*/
+
+			ExitDialog dialog = new ExitDialog(ExitAction.LOGOUT);
+			
+			int result = dialog.run();
+			if (result == Gtk.ResponseType.YES) {
+				/*
+				 * If we exit with status 0, we will automatically
+				 * logout (vera-session will not restart us).
+				 * So, we actually need to quit only the main loop,
+				 * the quit() method in vera's main class will
+				 * do the job.
+				*/
+				Gtk.main_quit();
+			}
+			
+			dialog.destroy();
+			
+		}
+
+		
+		[DBus (visible = false)]
+		public void execute_action(ExitAction action) {
+			/**
+			 * Executes the specified action.
+			*/
+			
+			switch (action) {
+				
+				case ExitAction.POWEROFF:
+					this.logind.PowerOff(true);
+					break;
+				
+				case ExitAction.REBOOT:
+					this.logind.Reboot(true);
+					break;
+				
+				case ExitAction.SUSPEND:
+					this.logind.Suspend(true);
+					break;
+					
+			}
 			
 		}
 		

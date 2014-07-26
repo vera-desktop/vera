@@ -139,7 +139,7 @@ namespace Vera {
 			}
 			
 			/* Start DBus service */
-			this.service = DBusService.start_handler(this.plugin_manager);
+			this.service = DBusService.start_handler(this.plugin_manager, this.settings);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);

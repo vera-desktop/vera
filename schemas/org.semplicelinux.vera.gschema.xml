@@ -22,9 +22,36 @@
 -->
 
 <schemalist>
-	
+
+	<!-- Vera.LastExitAction enum -->
+	<enum id="org.semplicelinux.vera.LastExitAction">
+		<value nick="PowerOff" value="1" />
+		<value nick="Reboot" value="2" />
+		<value nick="Suspend" value="3" />
+		<value nick="Logout" value="4" />
+		<value nick="Lock" value="5" />
+	</enum>
+
 	<schema path="/org/semplicelinux/vera/" id="org.semplicelinux.vera" gettext-domain="vera">
+
+		<key name="last-exit-action" enum="org.semplicelinux.vera.LastExitAction">
+			<default>"Lock"</default>
+			<summary>Last exit action</summary>
+			<description>This setting stores the last exit action used. It can be locked by setting 'lock-last-exit-action' to true.</description>
+		</key>
 		
+		<key name="lock-last-exit-action" type="b">
+			<default>false</default>
+			<summary>Lock the last exit action</summary>
+			<description>If true, locks the last exit action, so that it will not be overwritten.</description>
+		</key>
+		
+		<key name="ninja-shortcut" type="b">
+			<default>true</default>
+			<summary>CTRL+ALT+SPACE shortcut</summary>
+			<description>If enabled, the user can press CTRL+ALT+SPACE to execute the last exit action.</description>
+		</key>
+
 		<key name="enable-xsettings" type="b">
 			<default>true</default>
 			<summary>XSETTINGS manager</summary>

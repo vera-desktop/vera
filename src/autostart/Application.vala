@@ -58,12 +58,10 @@ namespace Vera {
 				
 				this.executable = this.file.get_string("Desktop Entry", "Exec");
 				
-				if (this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync")) {
-					if (this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
-						this.mode = LaunchMode.SYNC;
-					else
-						this.mode = LaunchMode.ASYNC;
-				}
+				if (this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync") && this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
+					this.mode = LaunchMode.SYNC;
+				else
+					this.mode = LaunchMode.ASYNC;
 				
 				if (this.file.has_key("Desktop Entry", "X-Vera-Autostart-Phase")) {
 					switch (this.file.get_string("Desktop Entry", "X-Vera-Autostart-Phase")) {

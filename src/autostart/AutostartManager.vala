@@ -47,7 +47,7 @@ namespace Vera {
 			 * the StartupPhase.
 			*/
 						
-			Pid pid;
+			Pid? pid;
 			Launcher launcher;
 			
 			bool sync, respawn;
@@ -87,10 +87,12 @@ namespace Vera {
 					launcher = new Launcher(app.executable.split(" "), sync, respawn);
 					pid = launcher.launch();
 					
-					// Add pid to pid_associations
-					this.pid_associations[pid] = app;
-					
-					launcher.terminated.connect(this.on_process_terminated);
+					if (pid != null) {
+						// Add pid to pid_associations
+						this.pid_associations[pid] = app;
+						
+						launcher.terminated.connect(this.on_process_terminated);
+					}
 					
 					
 				} catch (SpawnError e) {

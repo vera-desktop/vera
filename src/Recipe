@@ -60,3 +60,12 @@ programs.vera {
 programs.vera-session {
 	sources = vera-session.vala
 }
+
+programs.vera-command {
+	sources = \
+		command/vera-command.vala \
+		command/VeraInterface.vala
+	
+	vala-packages = gio-2.0
+	packages = gio-2.0
+}

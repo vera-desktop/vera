@@ -1,0 +1,190 @@
+/*
+ * vera-command - simple wrapper to vera's DBus interface
+ * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ * 
+ * Authors:
+ *    Eugenio "g7" Paolantonio <me@medesimo.eu>
+*/
+
+namespace Vera.Command {
+
+	public class Main : Object {
+		/**
+		 * Main class.
+		*/
+		
+		private static VeraInterface vera_interface = null;
+		private static ScreenshotInterface screenshot_interface = null;
+		
+		private static string? load_plugin = null;
+		private static string? unload_plugin = null;
+		private static bool ninja_shortcut = false;
+		private static bool poweroff = false;
+		private static bool reboot = false;
+		private static bool suspend = false;
+		private static bool hibernate = false;
+		private static bool logout = false;
+		private static bool lock = false;
+		
+		private static bool screenshot = false;
+		private static bool window_screenshot = false;
+		
+		private static int screenshot_with_delay = 0;
+		private static int window_screenshot_with_delay = 0;
+		
+		/* Vera Interface */
+		private const OptionEntry[] vera_options = {
+			/* LoadPlugin */
+			{ "load-plugin", 'l', 0, OptionArg.STRING, ref load_plugin, "Loads a plugin", "PLUGIN" },
+			
+			/* UnloadPlugin */
+			{ "unload-plugin", 'u', 0, OptionArg.STRING, ref unload_plugin, "Unloads a plugin", "PLUGIN" },
+			
+			/* Ninja Shortcut */
+			{ "ninja-shortcut", 'n', 0, OptionArg.NONE, ref ninja_shortcut, "Ninja shortcut (last executed exit action)", null },
+			
+			/* PowerOff */
+			{ "poweroff", 'p', 0, OptionArg.NONE, ref poweroff, "Power offs the system", null },
+			
+			/* Reboot */
+			{ "reboot", 'r', 0, OptionArg.NONE, ref reboot, "Reboots the system", null },
+			
+			/* Suspend */
+			{ "suspend", 's', 0, OptionArg.NONE, ref suspend, "Suspends the system", null },
+			
+			/* Hibernate */
+			{ "hibernate", 'i', 0, OptionArg.NONE, ref hibernate, "Hibernates the system", null },
+			
+			/* Logout */
+			{ "logout", 'o', 0, OptionArg.NONE, ref logout, "Logouts the user", null },
+			
+			/* Lock */
+			{ "lock", 'k', 0, OptionArg.NONE, ref lock, "Locks the session", null },
+			
+			/* Screenshot */
+			{ "screenshot", 'c', 0, OptionArg.NONE, ref screenshot, "Takes a screenshot", null },
+			
+			/* Window screenshot */
+			{ "window-screenshot", 'w', 0, OptionArg.NONE, ref window_screenshot, "Takes a screenshot of the current active window", null },
+			
+			/* Screenshot (with delay) */
+			{ "screenshot-with-delay", 0, 0, OptionArg.INT, ref screenshot_with_delay, "Takes a screenshot, with delay", "DELAY" },
+			
+			/* Window screenshot (with delay) */
+			{ "window-screenshot-with-delay", 0, 0, OptionArg.INT, ref window_screenshot_with_delay, "Takes a screenshot of the current active window, with delay", "DELAY" },
+			
+			// The end
+			{ null }
+		};
+		
+		public static int main(string[] args) {
+			/**
+			 * Hello!
+			*/
+			
+			if (args.length == 1) {
+				stdout.puts("You need to specify at least an argument! See -h for more details.\n");
+				return 1;
+			}
+			
+			/*
+			 * We support only one option at a time, so we need to check
+			 * if this is the case.
+			 * It seems that the OptionContext doesn't have an option for
+			 * this, so we need to manually do the check.
+			 * This is a bit tricky because there are some arguments with
+			 * require an argument, so we can't do a simple 'args.length > 2'.
+			*/
+			bool found_one = false;
+			foreach (string arg in args) {
+				if (arg.has_prefix("-")) {
+					if (found_one)
+						error("Only an argument is permitted!");
+					else
+						found_one = true;
+				}
+			}
+			
+			// Parse arguments
+			try {
+				OptionContext optcontext = new OptionContext("");
+				optcontext.set_help_enabled(true);
+				optcontext.set_ignore_unknown_options(false);
+				optcontext.add_main_entries(vera_options, null);
+				
+				optcontext.parse(ref args);
+			} catch (OptionError e) {
+				stdout.printf("error: %s\n", e.message);
+				stdout.puts("Use the -h switch to see the full list of available command line arguments.\n");
+				return 1;
+			}
+			
+			try {
+			
+				/* Connect to DBus */
+				if (screenshot || window_screenshot || screenshot_with_delay > 0 || window_screenshot_with_delay > 0) {
+					/* Connect to org.semplicelinux.vera.Screenshot */
+					screenshot_interface = Bus.get_proxy_sync(
+						BusType.SESSION,
+						"org.semplicelinux.vera.Screenshot",
+						"/org/semplicelinux/vera/Screenshot"
+					);
+				} else {
+					vera_interface = Bus.get_proxy_sync(
+						BusType.SESSION,
+						"org.semplicelinux.vera",
+						"/org/semplicelinux/vera"
+					);
+				}
+								
+				/* Execute action! */
+				if (load_plugin != null)
+					vera_interface.LoadPlugin(load_plugin);
+				else if (unload_plugin != null)
+					vera_interface.UnloadPlugin(unload_plugin);
+				else if (ninja_shortcut)
+					vera_interface.NinjaShortcut();
+				else if (poweroff)
+					vera_interface.PowerOff();
+				else if (reboot)
+					vera_interface.Reboot();
+				else if (suspend)
+					vera_interface.Suspend();
+				else if (hibernate)
+					vera_interface.Hibernate();
+				else if (logout)
+					vera_interface.Logout();
+				else if (lock)
+					vera_interface.Lock();
+				else if (screenshot)
+					screenshot_interface.Full(0);
+				else if (window_screenshot)
+					screenshot_interface.CurrentWindow(0);
+				else if (screenshot_with_delay > 0)
+					screenshot_interface.Full(screenshot_with_delay);
+				else if (window_screenshot_with_delay > 0)
+					screenshot_interface.CurrentWindow(window_screenshot_with_delay);
+			} catch (IOError e) {
+				error(e.message);
+			}
+			
+			return 0;
+		}
+	
+	}
+
+}

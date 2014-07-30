@@ -29,7 +29,8 @@ namespace Vera {
 		REBOOT = 2,
 		SUSPEND = 3,
 		LOGOUT = 4,
-		LOCK = 5
+		LOCK = 5,
+		HIBERNATE = 6
 		
 	}
 	
@@ -180,6 +181,10 @@ namespace Vera {
 					this.Suspend();
 					break;
 				
+				case ExitAction.HIBERNATE:
+					this.Hibernate();
+					break;
+				
 				case ExitAction.LOGOUT:
 					this.Logout();
 					break;
@@ -260,6 +265,21 @@ namespace Vera {
 			
 		}
 		
+		public void Hibernate() {
+			/**
+			 * Hibernates the system.
+			*/
+			
+			int result = this.show_dialog(ExitAction.HIBERNATE);
+			
+			if (result == Gtk.ResponseType.YES) {
+				/* Yeah! */
+				this.store_exit_action(ExitAction.HIBERNATE);
+				this.logind.Hibernate(true);
+			}
+			
+		}
+		
 		public void Logout() {
 			/**
 			 * Logouts the user.
@@ -311,7 +331,10 @@ namespace Vera {
 				case ExitAction.SUSPEND:
 					this.logind.Suspend(true);
 					break;
-					
+				
+				case ExitAction.HIBERNATE:
+					this.logind.Hibernate(true);
+					break;
 			}
 			
 		}

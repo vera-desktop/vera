@@ -1,3 +1,10 @@
+vera-desktop (0.31-1) unstable; urgency=medium
+
+  * Added hibernation support.
+  * Added vera-command utility.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 30 Jul 2014 22:23:50 +0200
+
 vera-desktop (0.30-1) unstable; urgency=medium
 
   * AutostartManager: do not store pid if it is null.

@@ -102,6 +102,9 @@ namespace Vera {
 			/* Set XDG menu prefix */
 			Environment.set_variable("XDG_MENU_PREFIX", "vera-", true);
 
+			/* Cursor (before the WM kicks in) */
+			Gdk.get_default_root_window().set_cursor(new Gdk.Cursor(Gdk.CursorType.LEFT_PTR));
+
 			// Connect to server
 			this.display.open();
 						
@@ -137,7 +140,11 @@ namespace Vera {
 			} else {
 				message("plugins are disabled, vera will be a bit useless.");
 			}
-			
+
+			/* XCURSOR_THEME env variable */
+			if (this.xsettings_manager != null)
+				Environment.set_variable("XCURSOR_THEME", this.xsettings_manager.get_cursor_theme(), true);
+
 			/* Start DBus service */
 			this.service = DBusService.start_handler(this.plugin_manager, this.settings);
 				

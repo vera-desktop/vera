@@ -64,6 +64,14 @@ namespace Vera {
 	    	    
 	}
 	
+	public string get_cursor_theme() {
+	    /**
+	     * Returns the current cursor theme.
+	    */
+	    
+	    return this.settings.get_string("cursor-theme-name");
+	}
+	
 	private void on_setting_changed(string key) {
 	    /**
 	     * Fired when a setting in the dconf database has been

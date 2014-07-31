@@ -64,6 +64,11 @@ namespace Vera {
 					text = "Do you really want to logout?";
 					secondary_text = "This will close every active application.";
 					break;
+				case ExitAction.LOCK:
+					title = "Lock";
+					text = "Do you really want to lock the screen?";
+					secondary_text = "The password for this temporary user is <b>live</b>.";
+					break;
 			}
 			
 			this.set_title(title);

@@ -344,6 +344,15 @@ namespace Vera {
 			 * [1] https://www.mail-archive.com/systemd-devel@lists.freedesktop.org/msg20351.html
 			*/
 			
+			/* Check for live, and if so, display the confirmation dialog */
+			if (FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS)) {
+				int result = this.show_dialog(ExitAction.LOCK);
+				
+				if (result != Gtk.ResponseType.YES)
+					return;
+					
+			}
+			
 			this.on_lock_request();
 			this.store_exit_action(ExitAction.LOCK);
 			

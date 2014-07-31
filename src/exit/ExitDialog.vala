@@ -80,13 +80,16 @@ namespace Vera {
 			 * execute.
 			*/
 			
-			// Initial things
+			/* Initial things */
 			Object(buttons: Gtk.ButtonsType.YES_NO);
 			
 			this.modal = true;
 			
-			// Set details
+			/* Set details */
 			this.set_details(action);
+			
+			/* Keep above */
+			this.set_keep_above(true);
 						
 		}
 		

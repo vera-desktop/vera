@@ -115,11 +115,11 @@ namespace Vera {
 						handler.connection = connection;
 						connection.register_object("/org/semplicelinux/vera", handler);
 					} catch (IOError e) {
-						warning("Couldn't register ExitHandler: %s", e.message);
+						warning("Couldn't register DBus service: %s", e.message);
 					}
 				},
 				() => {},
-				(connection, name) => warning("Unable to acquire bus %s", name)
+				(connection, name) => error("Unable to acquire bus %s, another instance running?", name)
 			);
 			
 			handler.identifier = identifier;

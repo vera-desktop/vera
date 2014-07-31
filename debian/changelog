@@ -1,3 +1,15 @@
+vera-desktop (0.32-1) unstable; urgency=medium
+
+  * vera: export XCURSOR_THEME environment variable.
+  * DBusService: Lock support.
+  * DBusService: fail if we are unable to acquire the bus.
+  * ExitDialog: added hibernate ExitAction description.
+  * ExitDialog: ensure the dialog is above everything.
+  * ExitDialog and DBusService: show the confirmation dialog if in live mode.
+  * User switching support.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 31 Jul 2014 19:23:12 +0200
+
 vera-desktop (0.31-1) unstable; urgency=medium
 
   * Added hibernation support.

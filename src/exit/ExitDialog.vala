@@ -54,10 +54,20 @@ namespace Vera {
 					text = "Do you really want to suspend?";
 					secondary_text = "Your active applications will not be closed.";
 					break;
+				case ExitAction.HIBERNATE:
+					title = "Hibernate";
+					text = "Do you really want to hibernate?";
+					secondary_text = "Your active applications will not be closed.";
+					break;
 				case ExitAction.LOGOUT:
 					title = "Logout";
 					text = "Do you really want to logout?";
 					secondary_text = "This will close every active application.";
+					break;
+				case ExitAction.LOCK:
+					title = "Lock";
+					text = "Do you really want to lock the screen?";
+					secondary_text = "The password for this temporary user is <b>live</b>.";
 					break;
 			}
 			
@@ -75,13 +85,16 @@ namespace Vera {
 			 * execute.
 			*/
 			
-			// Initial things
+			/* Initial things */
 			Object(buttons: Gtk.ButtonsType.YES_NO);
 			
 			this.modal = true;
 			
-			// Set details
+			/* Set details */
 			this.set_details(action);
+			
+			/* Keep above */
+			this.set_keep_above(true);
 						
 		}
 		

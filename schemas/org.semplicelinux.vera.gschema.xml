@@ -31,6 +31,7 @@
 		<value nick="Logout" value="4" />
 		<value nick="Lock" value="5" />
 		<value nick="Hibernate" value="6" />
+		<value nick="Switch User" value="7" />
 	</enum>
 
 	<schema path="/org/semplicelinux/vera/" id="org.semplicelinux.vera" gettext-domain="vera">

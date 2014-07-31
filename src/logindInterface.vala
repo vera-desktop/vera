@@ -34,6 +34,18 @@ namespace Vera {
 		public abstract void PowerOff(bool interactive) throws IOError;
 		public abstract void Reboot(bool interactive) throws IOError;
 		public abstract void Suspend(bool interactive) throws IOError;
+		public abstract string GetSession(string id) throws IOError;
+	}
+	
+	[DBus (name = "org.freedesktop.login1.Session")]
+	public interface Session : Object {
+		/**
+		 * logind session.
+		*/
+		
+		public abstract signal void Lock();
+		public abstract signal void Unlock();
+		
 	}
 
 }

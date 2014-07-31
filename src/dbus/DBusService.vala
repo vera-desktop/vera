@@ -30,7 +30,8 @@ namespace Vera {
 		SUSPEND = 3,
 		LOGOUT = 4,
 		LOCK = 5,
-		HIBERNATE = 6
+		HIBERNATE = 6,
+		SWITCH_USER = 7
 		
 	}
 	
@@ -54,6 +55,8 @@ namespace Vera {
 		
 		private Settings settings;
 		private PluginManager plugin_manager = null;
+		
+		private Session session;
 		private logindInterface logind;
 		
 		public DBusService(PluginManager plugin_manager, Settings settings) {
@@ -73,6 +76,24 @@ namespace Vera {
 				"org.freedesktop.login1",
 				"/org/freedesktop/login1"
 			);
+			
+			this.session = Bus.get_proxy_sync(
+				BusType.SYSTEM,
+				"org.freedesktop.login1",
+				this.logind.GetSession(Environment.get_variable("XDG_SESSION_ID"))
+			);
+			
+			/* Connect Lock signal, unlock currently not supported */
+			this.session.Lock.connect(this.on_lock_request);
+		}
+		
+		private void on_lock_request() {
+			/**
+			 * Fired when the user (or logind) requested to activate the
+			 * screen lock.
+			*/
+			
+			new Launcher({"xscreensaver-command", "-lock"}).launch();
 			
 		}
 		
@@ -95,11 +116,11 @@ namespace Vera {
 						handler.connection = connection;
 						connection.register_object("/org/semplicelinux/vera", handler);
 					} catch (IOError e) {
-						warning("Couldn't register ExitHandler: %s", e.message);
+						warning("Couldn't register DBus service: %s", e.message);
 					}
 				},
 				() => {},
-				(connection, name) => warning("Unable to acquire bus %s", name)
+				(connection, name) => error("Unable to acquire bus %s, another instance running?", name)
 			);
 			
 			handler.identifier = identifier;
@@ -306,8 +327,68 @@ namespace Vera {
 			 * Locks the user.
 			*/
 			
-			message("Lock: nothing here, for now...");
+			/*
+			 * A word about logind's Lock() and Unlock() methods (on the
+			 * session object):
+			 * They need to be executed by a privileged user (--> root),
+			 * so it's not possible for the normal user lock their own
+			 * session via logind.
+			 * 
+			 * It seems it's a missing functionality ([1]), so hopefully
+			 * one day we will only call logind's method to Lock the
+			 * screen which will in turn fire the Lock signal and
+			 * makes vera actually lock the screen.
+			 * 
+			 * Currently we need to both listen to that signal and also
+			 * handle our (unprivileged) DBus call.
+			 * 
+			 * [1] https://www.mail-archive.com/systemd-devel@lists.freedesktop.org/msg20351.html
+			*/
+			
+			/* Check for live, and if so, display the confirmation dialog */
+			if (FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS)) {
+				int result = this.show_dialog(ExitAction.LOCK);
+				
+				if (result != Gtk.ResponseType.YES)
+					return;
+					
+			}
+			
+			this.on_lock_request();
 			this.store_exit_action(ExitAction.LOCK);
+			
+		}
+		
+		public void SwitchUser() {
+			/**
+			 * Switches to another user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-greeter" }).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
+			
+		}
+		
+		public void SwitchUserTo(string user) {
+			/**
+			 * Switches to a defined user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-user", user }).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
+			
+		}
+		
+		public void SwitchToGuest() {
+			/**
+			 * Switches to the guest user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-guest"}).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
 			
 		}
 

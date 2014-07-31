@@ -54,6 +54,11 @@ namespace Vera {
 					text = "Do you really want to suspend?";
 					secondary_text = "Your active applications will not be closed.";
 					break;
+				case ExitAction.HIBERNATE:
+					title = "Hibernate";
+					text = "Do you really want to hibernate?";
+					secondary_text = "Your active applications will not be closed.";
+					break;
 				case ExitAction.LOGOUT:
 					title = "Logout";
 					text = "Do you really want to logout?";

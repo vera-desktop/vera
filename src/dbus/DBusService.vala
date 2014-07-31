@@ -30,7 +30,8 @@ namespace Vera {
 		SUSPEND = 3,
 		LOGOUT = 4,
 		LOCK = 5,
-		HIBERNATE = 6
+		HIBERNATE = 6,
+		SWITCH_USER = 7
 		
 	}
 	
@@ -355,6 +356,39 @@ namespace Vera {
 			
 			this.on_lock_request();
 			this.store_exit_action(ExitAction.LOCK);
+			
+		}
+		
+		public void SwitchUser() {
+			/**
+			 * Switches to another user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-greeter" }).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
+			
+		}
+		
+		public void SwitchUserTo(string user) {
+			/**
+			 * Switches to a defined user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-user", user }).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
+			
+		}
+		
+		public void SwitchToGuest() {
+			/**
+			 * Switches to the guest user.
+			*/
+			
+			/* FIXME: Should check if the Lock signal is fired by dm-tool */
+			new Launcher({ "dm-tool", "switch-to-guest"}).launch();
+			this.store_exit_action(ExitAction.SWITCH_USER);
 			
 		}
 

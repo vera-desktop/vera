@@ -38,6 +38,9 @@ namespace Vera.Command {
 		public abstract void Hibernate() throws IOError;
 		public abstract void Logout() throws IOError;
 		public abstract void Lock() throws IOError;
+		public abstract void SwitchUser() throws IOError;
+		public abstract void SwitchUserTo(string user) throws IOError;
+		public abstract void SwitchToGuest() throws IOError;
 		
 	}
 	

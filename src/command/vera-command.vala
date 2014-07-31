@@ -39,6 +39,9 @@ namespace Vera.Command {
 		private static bool hibernate = false;
 		private static bool logout = false;
 		private static bool lock = false;
+		private static bool switch_user = false;
+		private static string? switch_user_to = null;
+		private static bool switch_to_guest = false;
 		
 		private static bool screenshot = false;
 		private static bool window_screenshot = false;
@@ -74,6 +77,15 @@ namespace Vera.Command {
 			
 			/* Lock */
 			{ "lock", 'k', 0, OptionArg.NONE, ref lock, "Locks the session", null },
+			
+			/* Switch user */
+			{ "switch-user", 't', 0, OptionArg.NONE, ref switch_user, "Opens the Login dialog", null },
+			
+			/* Switch to user */
+			{ "switch-to-user", 0, 0, OptionArg.STRING, ref switch_user_to, "Opens the Login dialog, hinting to the greeter the user to highlight", "USER" },
+			
+			/* Switch to guest */
+			{ "switch-to-guest", 0, 0, OptionArg.NONE, ref switch_to_guest, "Switches to the guest user.", null },
 			
 			/* Screenshot */
 			{ "screenshot", 'c', 0, OptionArg.NONE, ref screenshot, "Takes a screenshot", null },
@@ -170,6 +182,12 @@ namespace Vera.Command {
 					vera_interface.Logout();
 				else if (lock)
 					vera_interface.Lock();
+				else if (switch_user)
+					vera_interface.SwitchUser();
+				else if (switch_user_to != null)
+					vera_interface.SwitchUserTo(switch_user_to);
+				else if (switch_to_guest)
+					vera_interface.SwitchToGuest();
 				else if (screenshot)
 					screenshot_interface.Full(0);
 				else if (window_screenshot)

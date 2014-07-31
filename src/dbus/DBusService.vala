@@ -54,6 +54,8 @@ namespace Vera {
 		
 		private Settings settings;
 		private PluginManager plugin_manager = null;
+		
+		private Session session;
 		private logindInterface logind;
 		
 		public DBusService(PluginManager plugin_manager, Settings settings) {
@@ -73,6 +75,24 @@ namespace Vera {
 				"org.freedesktop.login1",
 				"/org/freedesktop/login1"
 			);
+			
+			this.session = Bus.get_proxy_sync(
+				BusType.SYSTEM,
+				"org.freedesktop.login1",
+				this.logind.GetSession(Environment.get_variable("XDG_SESSION_ID"))
+			);
+			
+			/* Connect Lock signal, unlock currently not supported */
+			this.session.Lock.connect(this.on_lock_request);
+		}
+		
+		private void on_lock_request() {
+			/**
+			 * Fired when the user (or logind) requested to activate the
+			 * screen lock.
+			*/
+			
+			new Launcher({"xscreensaver-command", "-lock"}).launch();
 			
 		}
 		
@@ -306,7 +326,25 @@ namespace Vera {
 			 * Locks the user.
 			*/
 			
-			message("Lock: nothing here, for now...");
+			/*
+			 * A word about logind's Lock() and Unlock() methods (on the
+			 * session object):
+			 * They need to be executed by a privileged user (--> root),
+			 * so it's not possible for the normal user lock their own
+			 * session via logind.
+			 * 
+			 * It seems it's a missing functionality ([1]), so hopefully
+			 * one day we will only call logind's method to Lock the
+			 * screen which will in turn fire the Lock signal and
+			 * makes vera actually lock the screen.
+			 * 
+			 * Currently we need to both listen to that signal and also
+			 * handle our (unprivileged) DBus call.
+			 * 
+			 * [1] https://www.mail-archive.com/systemd-devel@lists.freedesktop.org/msg20351.html
+			*/
+			
+			this.on_lock_request();
 			this.store_exit_action(ExitAction.LOCK);
 			
 		}

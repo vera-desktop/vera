@@ -88,6 +88,29 @@ namespace Vera {
 				this.autostart_manager.startup(phase);
 			
 		}
+		
+		private bool has_touchpad() {
+			/**
+			 * Returns true if the machine has a touchpad,
+			 * false otherwise.
+			*/
+			
+			try {
+				File file = File.new_for_path("/proc/bus/input/devices");
+				
+				DataInputStream dat = new DataInputStream(file.read());
+				
+				string line;
+				while ((line = dat.read_line(null)) != null) {
+					if ("touchpad" in line.down())
+						return true;
+				}
+			} catch (Error e) {}
+			
+			return false;
+			
+		}
+				
 				
 		public Main() {
 			/**
@@ -104,6 +127,24 @@ namespace Vera {
 
 			/* Cursor (before the WM kicks in) */
 			Gdk.get_default_root_window().set_cursor(new Gdk.Cursor(Gdk.CursorType.LEFT_PTR));
+			
+			/* Check for touchpads and, if any, configure tap */
+			if (has_touchpad()) {
+				
+				new Launcher(
+					{
+						"synclient",
+						"TapButton1=1",
+						"TapButton2=2",
+						"TapButton3=3",
+						"VertTwoFingerScroll=1",
+						"HorizTwoFingerScroll=1",
+						"VertEdgeScroll=1"
+					},
+					true /* sync */
+				).launch();
+			
+			}
 
 			// Connect to server
 			this.display.open();

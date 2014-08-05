@@ -1,3 +1,11 @@
+vera-desktop (0.33-1) unstable; urgency=medium
+
+  * vera: added touchpad support.
+  * Ship the Applications menu.
+  * debian/vera-desktop.install: ship etc/.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 06 Aug 2014 00:31:16 +0200
+
 vera-desktop (0.32-1) unstable; urgency=medium
 
   * vera: export XCURSOR_THEME environment variable.

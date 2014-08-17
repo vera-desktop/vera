@@ -198,7 +198,7 @@
 		</key>
 		
 		<key name="modules" type="s">
-			<default>""</default>
+			<default>"vera-color"</default>
 			<summary>GTK+ modules</summary>
 			<description>List of currently active GTK+ modules.</description>
 		</key>

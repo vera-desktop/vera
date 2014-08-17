@@ -1,3 +1,11 @@
+vera-desktop (0.34-1) unstable; urgency=medium
+
+  * vera.settings: changed default theme to 'Orchis'
+  * vera.settings: gtk-modules: add vera-color to the list
+    of GTK+ modules to load.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 18 Aug 2014 00:01:20 +0200
+
 vera-desktop (0.33-1) unstable; urgency=medium
 
   * vera: added touchpad support.

@@ -27,7 +27,7 @@
 	<schema path="/org/semplicelinux/vera/settings/" id="org.semplicelinux.vera.settings" gettext-domain="vera">
 		
 		<key name="theme-name" type="s">
-			<default>"SempliceNight"</default>
+			<default>"Orchis"</default>
 			<summary>Theme name</summary>
 			<description>Theme to use.</description>
 		</key>

@@ -103,7 +103,18 @@ namespace Vera {
 			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
 			cx.paint();
 			
-			surface.write_to_png("/tmp/prova.png");
+			ScreenshotSaveDialog dialog = new ScreenshotSaveDialog();
+			dialog.response.connect(
+				(response_id) => {
+					if (response_id == Gtk.ResponseType.ACCEPT) {
+						surface.write_to_png(dialog.get_filename());
+					}
+					
+					dialog.destroy();
+				}
+			);
+			
+			dialog.show();
 		}
 
 		
@@ -112,12 +123,14 @@ namespace Vera {
 			 * Takes a screenshot of the entire desktop.
 			*/
 			
-			if (delay > 0) {
-				// Delay
-				Thread.usleep(delay * 1000 * 1000);
-			}
-			
-			this.take_screenshot(Gdk.get_default_root_window());
+			Timeout.add_seconds(
+				delay,
+				() => {
+					this.take_screenshot(Gdk.get_default_root_window());
+					
+					return false;
+				}
+			);
 		
 		}
 
@@ -126,32 +139,35 @@ namespace Vera {
 			 * Takes a screenshot of the current window.
 			*/
 			
-			if (delay > 0) {
-				// Delay
-				Thread.usleep(delay * 1000 * 1000);
-			}
+			Timeout.add_seconds(
+				delay,
+				() => {
 			
-			/*
-			 * We need to get the active window.
-			 * Gdk provides a nice way to do this, but unfortunately
-			 * is a window in Gdk's terms, without the window manager
-			 * border.
-			 * 
-			*/
-			
-			Gdk.Window window;
-			
-			window = Gdk.Screen.get_default().get_active_window();
-			
-			if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
-				// No active window? (or destroyed)
-				window = Gdk.get_default_root_window();
-			} else {
-				// Destoyed?
-				window = window.get_toplevel();
-			}
-			
-			this.take_screenshot(window);
+					/*
+					 * We need to get the active window.
+					 * Gdk provides a nice way to do this, but unfortunately
+					 * is a window in Gdk's terms, without the window manager
+					 * border.
+					 * 
+					*/
+					
+					Gdk.Window window;
+					
+					window = Gdk.Screen.get_default().get_active_window();
+					
+					if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
+						// No active window? (or destroyed)
+						window = Gdk.get_default_root_window();
+					} else {
+						// Destoyed?
+						window = window.get_toplevel();
+					}
+					
+					this.take_screenshot(window);
+					
+					return false;
+				}
+			);
 		
 		}
 		

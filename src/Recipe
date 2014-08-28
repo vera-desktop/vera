@@ -45,6 +45,7 @@ programs.vera {
 		settings/xsettings-manager.vala \
 		screenshot/screenshot.vala \
 		screenshot/ScreenshotSaveDialog.vala \
+		screenshot/ScreenshotSelectionWindow.vala \
 		dbus/DBusService.vala \
 		exit/ExitDialog.vala \
 		autostart/AutostartManager.vala \

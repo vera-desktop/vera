@@ -88,7 +88,13 @@ namespace Vera {
 			Bus.unown_name(this.identifier);
 		}
 
-		private void take_screenshot(Gdk.Window rootwindow, Gdk.Window? window = null) {
+		private void take_screenshot(
+			Gdk.Window rootwindow,
+			Gdk.Window? window = null,
+			Gdk.Point? selection_source = null,
+			int? selection_width = null,
+			int? selection_height = null
+		) {
 			/**
 			 * Internally used to actually take the screenshot.
 			*/
@@ -120,6 +126,14 @@ namespace Vera {
 				height += y+x;
 				
 				window.get_root_origin(out positionx, out positiony);
+			} else if (selection_source != null && selection_height != null && selection_width != null) {
+				/* Selection */
+				
+				positionx = selection_source.x;
+				positiony = selection_source.y;
+				width = selection_width;
+				height = selection_height;
+				
 			} else {
 				/* Whole screen */
 				
@@ -154,6 +168,43 @@ namespace Vera {
 			dialog.show();
 		}
 
+		public void Selection(int delay) {
+			/**
+			 * Takes a screenshot from a selection.
+			*/
+			
+			ScreenshotSelectionWindow win = new ScreenshotSelectionWindow();
+			
+			win.selection_area.selection_finished.connect(
+				() => {
+					
+					Timeout.add(
+						(delay == 0) ? 10 : delay * 1000,
+						() => {
+							this.take_screenshot(
+								Gdk.get_default_root_window(),
+								null,
+								win.selection_area.selection_source,
+								win.selection_area.selection_width,
+								win.selection_area.selection_height
+							);
+							
+							win.destroy();
+							
+							return false;
+						}
+					);
+				}
+			);
+			
+			win.selection_area.selection_aborted.connect(
+				() => {
+					win.destroy();
+				}
+			);
+			
+			win.show();
+		}
 		
 		public void Full(int delay) {
 			/**

@@ -88,16 +88,53 @@ namespace Vera {
 			Bus.unown_name(this.identifier);
 		}
 
-		private void take_screenshot(Gdk.Window window) {
+		private void take_screenshot(Gdk.Window rootwindow, Gdk.Window? window = null) {
 			/**
 			 * Internally used to actually take the screenshot.
 			*/
 			
-			int width = window.get_width();
-			int height = window.get_height();
+			int width, height;
+			int positionx = 0;
+			int positiony = 0;
+			
+			if (window != null) {
+				/* 
+				 * CurrentWindow
+				 *
+				 * Unfortunately we can't use the neat way (Gdk.pixbuf_get_from_window()
+				 * on the window directly) we use for the root window, as
+				 * it will get correctly the screenshot of the application,
+				 * but without window borders and with alpha fucked up.
+				 * 
+				 * Thus what we will do is simply to get the window region
+				 * from the entire root window.
+				 * Good pointers could be found at
+				 * http://faq.pygtk.org/index.py?req=show&file=faq23.039.htp
+				*/
+				
+				int x, y;
+				
+				window.get_geometry(out x, out y, out width, out height);
+				
+				width += x*2;
+				height += y+x;
+				
+				window.get_root_origin(out positionx, out positiony);
+			} else {
+				/* Whole screen */
+				
+				width = rootwindow.get_width();
+				height = rootwindow.get_height();
+			}
 			
 			Cairo.ImageSurface surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
-			Gdk.Pixbuf pixbuf = Gdk.pixbuf_get_from_window(window, 0, 0, width, height);
+			Gdk.Pixbuf pixbuf = Gdk.pixbuf_get_from_window(
+				rootwindow,
+				positionx,
+				positiony,
+				width,
+				height
+			);
 			
 			Cairo.Context cx = new Cairo.Context(surface);
 			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
@@ -157,13 +194,13 @@ namespace Vera {
 					
 					if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
 						// No active window? (or destroyed)
-						window = Gdk.get_default_root_window();
+						window = null;
 					} else {
 						// Destoyed?
 						window = window.get_toplevel();
 					}
 					
-					this.take_screenshot(window);
+					this.take_screenshot(Gdk.get_default_root_window(), window);
 					
 					return false;
 				}

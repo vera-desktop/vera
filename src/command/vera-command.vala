@@ -43,11 +43,14 @@ namespace Vera.Command {
 		private static string? switch_user_to = null;
 		private static bool switch_to_guest = false;
 		
+		private static bool interactive_screenshot = false;
 		private static bool screenshot = false;
 		private static bool window_screenshot = false;
+		private static bool selection_screenshot = false;
 		
 		private static int screenshot_with_delay = 0;
 		private static int window_screenshot_with_delay = 0;
+		private static int selection_screenshot_with_delay = 0;
 		
 		/* Vera Interface */
 		private const OptionEntry[] vera_options = {
@@ -87,17 +90,26 @@ namespace Vera.Command {
 			/* Switch to guest */
 			{ "switch-to-guest", 0, 0, OptionArg.NONE, ref switch_to_guest, "Switches to the guest user.", null },
 			
+			/* Interactive screenshot */
+			{ "interactive-screenshot", 0, 0, OptionArg.NONE, ref interactive_screenshot, "Displays the 'Take a screenshot' window.", null },
+			
 			/* Screenshot */
 			{ "screenshot", 'c', 0, OptionArg.NONE, ref screenshot, "Takes a screenshot", null },
 			
 			/* Window screenshot */
 			{ "window-screenshot", 'w', 0, OptionArg.NONE, ref window_screenshot, "Takes a screenshot of the current active window", null },
 			
+			/* Selection screenshot */
+			{ "selection-screenshot", 'e', 0, OptionArg.NONE, ref selection_screenshot, "Takes a screenshot of a selection.", null },
+			
 			/* Screenshot (with delay) */
 			{ "screenshot-with-delay", 0, 0, OptionArg.INT, ref screenshot_with_delay, "Takes a screenshot, with delay", "DELAY" },
 			
 			/* Window screenshot (with delay) */
 			{ "window-screenshot-with-delay", 0, 0, OptionArg.INT, ref window_screenshot_with_delay, "Takes a screenshot of the current active window, with delay", "DELAY" },
+			
+			/* Selection screenshot (with delay) */
+			{ "selection-screenshot-with-delay", 0, 0, OptionArg.INT, ref selection_screenshot_with_delay, "Takes a screenshot of a selection, with delay", "DELAY" },
 			
 			// The end
 			{ null }
@@ -188,15 +200,21 @@ namespace Vera.Command {
 					vera_interface.SwitchUserTo(switch_user_to);
 				else if (switch_to_guest)
 					vera_interface.SwitchToGuest();
+				else if (interactive_screenshot)
+					screenshot_interface.Interactive();
 				else if (screenshot)
 					screenshot_interface.Full(0);
 				else if (window_screenshot)
 					screenshot_interface.CurrentWindow(0);
+				else if (selection_screenshot)
+					screenshot_interface.Selection(0);
 				else if (screenshot_with_delay > 0)
 					screenshot_interface.Full(screenshot_with_delay);
 				else if (window_screenshot_with_delay > 0)
 					screenshot_interface.CurrentWindow(window_screenshot_with_delay);
-			} catch (IOError e) {
+				else if (selection_screenshot_with_delay > 0)
+					screenshot_interface.Selection(selection_screenshot_with_delay);
+			} catch (Error e) {
 				error(e.message);
 			}
 			

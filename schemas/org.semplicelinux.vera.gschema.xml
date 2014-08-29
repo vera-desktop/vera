@@ -36,6 +36,12 @@
 
 	<schema path="/org/semplicelinux/vera/" id="org.semplicelinux.vera" gettext-domain="vera">
 
+		<key name="last-screenshot-directory" type="s">
+			<default>""</default>
+			<summary>Last directory where a screenshot has been saved.</summary>
+			<description>This is used internally to remember the last directory where a screenshot has been saved.</description>
+		</key>
+
 		<key name="last-exit-action" enum="org.semplicelinux.vera.LastExitAction">
 			<default>"Lock"</default>
 			<summary>Last exit action</summary>

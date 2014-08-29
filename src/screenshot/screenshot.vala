@@ -36,10 +36,15 @@ namespace Vera {
 
 		public DBusConnection connection = null;
 		public uint? identifier = null;
+		
+		private Settings settings;
 
 		public Screenshot() {
-
-
+			/**
+			 * Constructor
+			*/
+			
+			this.settings = new Settings("org.semplicelinux.vera");
 		}
 		
 		[DBus (visible = false)]
@@ -88,36 +93,185 @@ namespace Vera {
 			Bus.unown_name(this.identifier);
 		}
 
-		private void take_screenshot(Gdk.Window window) {
+		private void take_screenshot(
+			Gdk.Window rootwindow,
+			Gdk.Window? window = null,
+			Gdk.Point? selection_source = null,
+			int? selection_width = null,
+			int? selection_height = null
+		) {
 			/**
 			 * Internally used to actually take the screenshot.
 			*/
 			
-			int width = window.get_width();
-			int height = window.get_height();
+			int width, height;
+			int positionx = 0;
+			int positiony = 0;
+			
+			if (window != null) {
+				/* 
+				 * CurrentWindow
+				 *
+				 * Unfortunately we can't use the neat way (Gdk.pixbuf_get_from_window()
+				 * on the window directly) we use for the root window, as
+				 * it will get correctly the screenshot of the application,
+				 * but without window borders and with alpha fucked up.
+				 * 
+				 * Thus what we will do is simply to get the window region
+				 * from the entire root window.
+				 * Good pointers could be found at
+				 * http://faq.pygtk.org/index.py?req=show&file=faq23.039.htp
+				*/
+				
+				int x, y;
+				
+				window.get_geometry(out x, out y, out width, out height);
+				
+				width += x*2;
+				height += y+x;
+				
+				window.get_root_origin(out positionx, out positiony);
+			} else if (selection_source != null && selection_height != null && selection_width != null) {
+				/* Selection */
+				
+				positionx = selection_source.x;
+				positiony = selection_source.y;
+				width = selection_width;
+				height = selection_height;
+				
+			} else {
+				/* Whole screen */
+				
+				width = rootwindow.get_width();
+				height = rootwindow.get_height();
+			}
 			
 			Cairo.ImageSurface surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
-			Gdk.Pixbuf pixbuf = Gdk.pixbuf_get_from_window(window, 0, 0, width, height);
+			Gdk.Pixbuf pixbuf = Gdk.pixbuf_get_from_window(
+				rootwindow,
+				positionx,
+				positiony,
+				width,
+				height
+			);
 			
 			Cairo.Context cx = new Cairo.Context(surface);
 			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
 			cx.paint();
 			
-			surface.write_to_png("/tmp/prova.png");
+			ScreenshotSaveDialog dialog = new ScreenshotSaveDialog(this.settings);
+			dialog.response.connect(
+				(response_id) => {
+					if (response_id == Gtk.ResponseType.ACCEPT) {
+						surface.write_to_png(dialog.get_filename());
+						this.settings.set_string(
+							"last-screenshot-directory",
+							dialog.get_current_folder()
+						);
+					}
+					
+					dialog.destroy();
+				}
+			);
+			
+			dialog.present();
+		}
+		
+		public void Interactive() {
+			/**
+			 * Displays the "Take a screenshot" window
+			*/
+			
+			ScreenshotTakeDialog dialog = new ScreenshotTakeDialog();
+			dialog.response.connect(
+				(response_id) => {
+					if (response_id == Gtk.ResponseType.ACCEPT) {
+						
+						Timeout.add(
+							200,
+							() => {
+								switch (dialog.selected_action) {
+									
+									case ScreenshotAction.FULL_SCREEN:
+										this.Full(dialog.selected_delay);
+										break;
+									
+									case ScreenshotAction.CURRENT_WINDOW:
+										this.CurrentWindow(dialog.selected_delay);
+										break;
+									
+									case ScreenshotAction.SELECTION:
+										this.Selection(dialog.selected_delay);
+										break;
+										
+								}
+								
+								return false;
+							}
+						);
+					}
+					
+					dialog.destroy();
+				}
+			);
+			
+			dialog.present();
 		}
 
+		public void Selection(int delay) {
+			/**
+			 * Takes a screenshot from a selection.
+			*/
+			
+			ScreenshotSelectionWindow win = new ScreenshotSelectionWindow();
+			
+			win.selection_area.selection_finished.connect(
+				() => {
+					
+					/* Ensure the window is hidden */
+					win.hide();
+					
+					Timeout.add(
+						(delay == 0) ? 200 : delay * 1000,
+						() => {
+							this.take_screenshot(
+								Gdk.get_default_root_window(),
+								null,
+								win.selection_area.selection_source,
+								win.selection_area.selection_width,
+								win.selection_area.selection_height
+							);
+							
+							win.destroy();
+							
+							return false;
+						}
+					);
+				}
+			);
+			
+			win.selection_area.selection_aborted.connect(
+				() => {
+					win.destroy();
+				}
+			);
+			
+			win.present();
+		}
 		
 		public void Full(int delay) {
 			/**
 			 * Takes a screenshot of the entire desktop.
 			*/
 			
-			if (delay > 0) {
-				// Delay
-				Thread.usleep(delay * 1000 * 1000);
-			}
-			
-			this.take_screenshot(Gdk.get_default_root_window());
+			Timeout.add_seconds(
+				delay,
+				() => {
+					this.take_screenshot(Gdk.get_default_root_window());
+					
+					return false;
+				}
+			);
 		
 		}
 
@@ -126,32 +280,35 @@ namespace Vera {
 			 * Takes a screenshot of the current window.
 			*/
 			
-			if (delay > 0) {
-				// Delay
-				Thread.usleep(delay * 1000 * 1000);
-			}
+			Timeout.add_seconds(
+				delay,
+				() => {
 			
-			/*
-			 * We need to get the active window.
-			 * Gdk provides a nice way to do this, but unfortunately
-			 * is a window in Gdk's terms, without the window manager
-			 * border.
-			 * 
-			*/
-			
-			Gdk.Window window;
-			
-			window = Gdk.Screen.get_default().get_active_window();
-			
-			if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
-				// No active window? (or destroyed)
-				window = Gdk.get_default_root_window();
-			} else {
-				// Destoyed?
-				window = window.get_toplevel();
-			}
-			
-			this.take_screenshot(window);
+					/*
+					 * We need to get the active window.
+					 * Gdk provides a nice way to do this, but unfortunately
+					 * is a window in Gdk's terms, without the window manager
+					 * border.
+					 * 
+					*/
+					
+					Gdk.Window window;
+					
+					window = Gdk.Screen.get_default().get_active_window();
+					
+					if (unlikely(window == null) || unlikely(window.is_destroyed()) || unlikely(window.get_type_hint() == Gdk.WindowTypeHint.DESKTOP)) {
+						// No active window? (or destroyed)
+						window = null;
+					} else {
+						// Destoyed?
+						window = window.get_toplevel();
+					}
+					
+					this.take_screenshot(Gdk.get_default_root_window(), window);
+					
+					return false;
+				}
+			);
 		
 		}
 		

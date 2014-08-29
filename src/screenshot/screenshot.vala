@@ -178,8 +178,11 @@ namespace Vera {
 			win.selection_area.selection_finished.connect(
 				() => {
 					
+					/* Ensure the window is hidden */
+					win.hide();
+					
 					Timeout.add(
-						(delay == 0) ? 100 : delay * 1000,
+						(delay == 0) ? 500 : delay * 1000,
 						() => {
 							this.take_screenshot(
 								Gdk.get_default_root_window(),

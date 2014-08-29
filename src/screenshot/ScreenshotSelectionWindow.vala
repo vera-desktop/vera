@@ -46,16 +46,20 @@ namespace Vera {
 
 		public Gdk.Point selection_source {
 			get {
-				/* selection_source is basically start/end, so it's
-				 * better not duplicate things */
+				/* selection_source is a new Gdk.Point containing the
+				 * source of the selection */
 				
-				if (start == null || end == null) {
+				if (this.start == null || this.end == null) {
 					return Gdk.Point() { x = 0, y = 0 };
 				}
 								
 				/* end may be now lower than start and we should
 				 * handle it to avoid catching the wrong area */
-				return (start.x < end.x && start.y < end.y) ? this.start : this.end;
+				Gdk.Point result = Gdk.Point();
+				result.x = (this.start.x < this.end.x) ? this.start.x : this.end.x;
+				result.y = (this.start.y < this.end.y) ? this.start.y : this.end.y;
+				
+				return result;
 			}
 		}
 		public int selection_width { get; private set; }
@@ -181,9 +185,7 @@ namespace Vera {
 			this.height = height;
 			
 			if ("org.semplicelinux.vera.desktop" in Settings.list_schemas()) {
-				message("vera.desktop found");
 				this.vera_color.parse(new Settings("org.semplicelinux.vera.desktop").get_string("vera-color"));
-				message(this.vera_color.to_string());
 			}
 			
 			/* Obtain background pixbuf */

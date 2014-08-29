@@ -1,3 +1,14 @@
+vera-desktop (0.35-1) unstable; urgency=medium
+
+  * Screenshot: added File Save dialog.
+  * Screenshot: do not take the screenshot directly from the Gdk.Window, but use instead a region from the entire root window.
+  * Screenshot: added screenshot via selection support.
+  * Added screenshot selection support in vera-command.
+  * Screenshot: added ScreenshotTakeDialog, an interactive frontend for vera's screenshot capabilities.
+  * debian/vera-desktop.install: ship /usr/share/applications.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Fri, 29 Aug 2014 20:35:51 +0200
+
 vera-desktop (0.34-1) unstable; urgency=medium
 
   * vera.settings: changed default theme to 'Orchis'

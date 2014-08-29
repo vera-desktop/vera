@@ -105,9 +105,7 @@ namespace Vera {
 			
 			this.selection_width = this.get_width_from_points().abs();
 			this.selection_height = this.get_height_from_points().abs();
-			
-			message(this.selection_source.x.to_string());
-			
+						
 			this.queue_draw();
 		}
 		
@@ -118,34 +116,28 @@ namespace Vera {
 			
 			Gdk.cairo_set_source_pixbuf(cx, this.background, 0, 0);
 			cx.paint();
-			
-			if (this.start != null && this.end != null) {
-				/* We have selection */
+							
+			Cairo.Surface mask = new Cairo.Surface.similar(
+				cx.get_target(),
+				Cairo.Content.ALPHA,
+				this.width,
+				this.height
+			);
 				
-				message("width: %d, height: %d", this.get_width_from_points(), this.get_height_from_points());
+			Cairo.Context mask_cx = new Cairo.Context(mask);
+			mask_cx.set_source_rgba(0, 0, 0, 0.6);
+			mask_cx.paint();
+			mask_cx.set_operator(Cairo.Operator.CLEAR);
+			mask_cx.rectangle(
+				(this.start != null) ? this.start.x : 0,
+				(this.start != null) ? this.start.y : 0,
+				this.get_width_from_points(),
+				this.get_height_from_points()
+			);
+			mask_cx.fill();
 				
-				Cairo.Surface mask = new Cairo.Surface.similar(
-					cx.get_target(),
-					Cairo.Content.ALPHA,
-					this.width,
-					this.height
-				);
-				
-				Cairo.Context mask_cx = new Cairo.Context(mask);
-				mask_cx.set_source_rgba(0, 0, 0, 0.6);
-				mask_cx.paint();
-				mask_cx.set_operator(Cairo.Operator.CLEAR);
-				mask_cx.rectangle(
-					this.start.x,
-					this.start.y,
-					this.get_width_from_points(),
-					this.get_height_from_points()
-				);
-				mask_cx.fill();
-				
-				cx.set_source_surface(mask, 0, 0);
-				cx.paint();
-			}
+			cx.set_source_surface(mask, 0, 0);
+			cx.paint();
 			
 			return true;
 		}

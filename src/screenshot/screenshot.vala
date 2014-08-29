@@ -179,7 +179,7 @@ namespace Vera {
 				() => {
 					
 					Timeout.add(
-						(delay == 0) ? 10 : delay * 1000,
+						(delay == 0) ? 100 : delay * 1000,
 						() => {
 							this.take_screenshot(
 								Gdk.get_default_root_window(),

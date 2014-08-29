@@ -206,7 +206,7 @@ namespace Vera {
 				}
 			);
 			
-			win.show();
+			win.present();
 		}
 		
 		public void Full(int delay) {

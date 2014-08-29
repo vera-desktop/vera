@@ -65,15 +65,28 @@ namespace Vera {
 		public int selection_width { get; private set; }
 		public int selection_height { get; private set; }
 		
+		private bool on_key_press_event(Gdk.EventKey event) {
+			/**
+			 * Fired when the user presses a key.
+			*/
+						
+			if (event.keyval == Gdk.Key.Escape) {
+				/* User pressed Escape, aborting... */
+				this.selection_aborted();
+			}
+			
+			return true;
+		}
+		
 		private bool on_button_press_event(Gdk.EventButton event) {
 			/**
 			 * Fired when the user clicks on the selection area.
 			*/
 			
-			start = Gdk.Point() { x = (int)event.x, y = (int)event.y };
-			end = start;
+			this.start = Gdk.Point() { x = (int)event.x, y = (int)event.y };
+			this.end = this.start;
 			
-			selection_changed();
+			this.selection_changed();
 			
 			return true;
 		}
@@ -83,9 +96,9 @@ namespace Vera {
 			 * Fired when the user moves the mouse.
 			*/
 			
-			end = Gdk.Point() { x = (int)event.x, y = (int)event.y };
+			this.end = Gdk.Point() { x = (int)event.x, y = (int)event.y };
 			
-			selection_changed();
+			this.selection_changed();
 			
 			return true;
 		}
@@ -96,9 +109,9 @@ namespace Vera {
 			*/
 			
 			if (this.selection_width == 0 || this.selection_height == 0) {
-				selection_aborted();
+				this.selection_aborted();
 			} else {
-				selection_finished();
+				this.selection_finished();
 			}
 			
 			return true;
@@ -198,10 +211,12 @@ namespace Vera {
 			);
 			
 			this.add_events(
+				Gdk.EventMask.KEY_PRESS_MASK |
 				Gdk.EventMask.BUTTON_PRESS_MASK |
 				Gdk.EventMask.BUTTON1_MOTION_MASK |
 				Gdk.EventMask.BUTTON_RELEASE_MASK
 			);
+			this.set_can_focus(true);
 			
 			this.realize.connect(
 				() => {
@@ -213,6 +228,7 @@ namespace Vera {
 			
 			this.draw.connect(this.on_draw);
 			this.selection_changed.connect(this.on_selection_changed);
+			this.key_press_event.connect(this.on_key_press_event);
 			this.button_press_event.connect(this.on_button_press_event);
 			this.motion_notify_event.connect(this.on_motion_notify_event);
 			this.button_release_event.connect(this.on_button_release_event);
@@ -248,6 +264,7 @@ namespace Vera {
 			this.height = this.root_window.get_height();
 
 			this.selection_area = new SelectionArea(this.root_window, this.width, this.height);
+			this.selection_area.grab_focus();
 			this.selection_area.selection_finished.connect(() => { this.hide(); });
 			this.selection_area.selection_aborted.connect(() => { this.hide(); });
 	

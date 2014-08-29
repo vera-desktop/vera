@@ -33,6 +33,8 @@ namespace Vera {
 		public signal void selection_finished();
 		public signal void selection_aborted();
 		
+		private Gdk.RGBA vera_color = Gdk.RGBA() { red = 0, green = 0, blue = 0 };
+		
 		private Gdk.Window root_window;
 		private int width;
 		private int height;
@@ -119,13 +121,13 @@ namespace Vera {
 							
 			Cairo.Surface mask = new Cairo.Surface.similar(
 				cx.get_target(),
-				Cairo.Content.ALPHA,
+				Cairo.Content.COLOR_ALPHA,
 				this.width,
 				this.height
 			);
-				
+			
 			Cairo.Context mask_cx = new Cairo.Context(mask);
-			mask_cx.set_source_rgba(0, 0, 0, 0.6);
+			mask_cx.set_source_rgba(this.vera_color.red, this.vera_color.green, this.vera_color.blue, 0.4);
 			mask_cx.paint();
 			mask_cx.set_operator(Cairo.Operator.CLEAR);
 			mask_cx.rectangle(
@@ -177,6 +179,12 @@ namespace Vera {
 			this.root_window = root_window;
 			this.width = width;
 			this.height = height;
+			
+			if ("org.semplicelinux.vera.desktop" in Settings.list_schemas()) {
+				message("vera.desktop found");
+				this.vera_color.parse(new Settings("org.semplicelinux.vera.desktop").get_string("vera-color"));
+				message(this.vera_color.to_string());
+			}
 			
 			/* Obtain background pixbuf */
 			this.background = Gdk.pixbuf_get_from_window(

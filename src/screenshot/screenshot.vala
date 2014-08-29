@@ -36,10 +36,15 @@ namespace Vera {
 
 		public DBusConnection connection = null;
 		public uint? identifier = null;
+		
+		private Settings settings;
 
 		public Screenshot() {
-
-
+			/**
+			 * Constructor
+			*/
+			
+			this.settings = new Settings("org.semplicelinux.vera");
 		}
 		
 		[DBus (visible = false)]
@@ -154,18 +159,22 @@ namespace Vera {
 			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
 			cx.paint();
 			
-			ScreenshotSaveDialog dialog = new ScreenshotSaveDialog();
+			ScreenshotSaveDialog dialog = new ScreenshotSaveDialog(this.settings);
 			dialog.response.connect(
 				(response_id) => {
 					if (response_id == Gtk.ResponseType.ACCEPT) {
 						surface.write_to_png(dialog.get_filename());
+						this.settings.set_string(
+							"last-screenshot-directory",
+							dialog.get_current_folder()
+						);
 					}
 					
 					dialog.destroy();
 				}
 			);
 			
-			dialog.show();
+			dialog.present();
 		}
 
 		public void Selection(int delay) {

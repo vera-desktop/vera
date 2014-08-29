@@ -29,19 +29,25 @@ namespace Vera {
 		 * to save the newly taken screenshot.
 		*/
 		
-		public ScreenshotSaveDialog() {
+		public ScreenshotSaveDialog(Settings settings) {
 			/**
 			 * Constructor.
 			*/
 			
 			Object(title: "Save screenshot...", parent: null, action: Gtk.FileChooserAction.SAVE);
-			
+						
 			/* Icon */
 			this.set_icon_name("applets-screenshooter");
-						
+			
 			/* Defaults */
 			DateTime dt = new DateTime.now_local();
 			this.set_current_name("screenshot_%s.png".printf(dt.format("%F-%T")));
+			this.set_do_overwrite_confirmation(true);
+			
+			/* Default folder */
+			string current_folder = settings.get_string("last-screenshot-directory");
+			if (current_folder != "")
+				this.set_current_folder(current_folder);
 			
 			/* Add filters */
 			Gtk.FileFilter png = new Gtk.FileFilter();

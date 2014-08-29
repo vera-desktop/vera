@@ -43,6 +43,7 @@ namespace Vera.Command {
 		private static string? switch_user_to = null;
 		private static bool switch_to_guest = false;
 		
+		private static bool interactive_screenshot = false;
 		private static bool screenshot = false;
 		private static bool window_screenshot = false;
 		private static bool selection_screenshot = false;
@@ -88,6 +89,9 @@ namespace Vera.Command {
 			
 			/* Switch to guest */
 			{ "switch-to-guest", 0, 0, OptionArg.NONE, ref switch_to_guest, "Switches to the guest user.", null },
+			
+			/* Interactive screenshot */
+			{ "interactive-screenshot", 0, 0, OptionArg.NONE, ref interactive_screenshot, "Displays the 'Take a screenshot' window.", null },
 			
 			/* Screenshot */
 			{ "screenshot", 'c', 0, OptionArg.NONE, ref screenshot, "Takes a screenshot", null },
@@ -196,6 +200,8 @@ namespace Vera.Command {
 					vera_interface.SwitchUserTo(switch_user_to);
 				else if (switch_to_guest)
 					vera_interface.SwitchToGuest();
+				else if (interactive_screenshot)
+					screenshot_interface.Interactive();
 				else if (screenshot)
 					screenshot_interface.Full(0);
 				else if (window_screenshot)

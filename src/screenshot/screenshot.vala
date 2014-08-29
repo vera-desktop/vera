@@ -176,6 +176,47 @@ namespace Vera {
 			
 			dialog.present();
 		}
+		
+		public void Interactive() {
+			/**
+			 * Displays the "Take a screenshot" window
+			*/
+			
+			ScreenshotTakeDialog dialog = new ScreenshotTakeDialog();
+			dialog.response.connect(
+				(response_id) => {
+					if (response_id == Gtk.ResponseType.ACCEPT) {
+						
+						Timeout.add(
+							200,
+							() => {
+								switch (dialog.selected_action) {
+									
+									case ScreenshotAction.FULL_SCREEN:
+										this.Full(dialog.selected_delay);
+										break;
+									
+									case ScreenshotAction.CURRENT_WINDOW:
+										this.CurrentWindow(dialog.selected_delay);
+										break;
+									
+									case ScreenshotAction.SELECTION:
+										this.Selection(dialog.selected_delay);
+										break;
+										
+								}
+								
+								return false;
+							}
+						);
+					}
+					
+					dialog.destroy();
+				}
+			);
+			
+			dialog.present();
+		}
 
 		public void Selection(int delay) {
 			/**
@@ -191,7 +232,7 @@ namespace Vera {
 					win.hide();
 					
 					Timeout.add(
-						(delay == 0) ? 500 : delay * 1000,
+						(delay == 0) ? 200 : delay * 1000,
 						() => {
 							this.take_screenshot(
 								Gdk.get_default_root_window(),

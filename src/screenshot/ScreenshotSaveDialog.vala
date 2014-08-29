@@ -43,6 +43,7 @@ namespace Vera {
 			DateTime dt = new DateTime.now_local();
 			this.set_current_name("screenshot_%s.png".printf(dt.format("%F-%T")));
 			this.set_do_overwrite_confirmation(true);
+			this.set_keep_above(true);
 			
 			/* Default folder */
 			string current_folder = settings.get_string("last-screenshot-directory");
@@ -68,6 +69,11 @@ namespace Vera {
 				Gtk.ResponseType.ACCEPT,
 				null
 			);
+
+			/* Set suggested action */
+			this.get_widget_for_response(Gtk.ResponseType.ACCEPT).get_style_context().add_class("suggested-action");
+
+
 		}
 		
 	}

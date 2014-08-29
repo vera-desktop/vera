@@ -144,7 +144,7 @@ namespace Vera {
 			);
 			
 			Cairo.Context mask_cx = new Cairo.Context(mask);
-			mask_cx.set_source_rgba(this.vera_color.red, this.vera_color.green, this.vera_color.blue, 0.4);
+			mask_cx.set_source_rgba(this.vera_color.red, this.vera_color.green, this.vera_color.blue, 0.5);
 			mask_cx.paint();
 			mask_cx.set_operator(Cairo.Operator.CLEAR);
 			mask_cx.rectangle(
@@ -273,6 +273,7 @@ namespace Vera {
 			
 			/* Some settings */
 			this.fullscreen();
+			this.set_keep_above(true);
 			this.set_app_paintable(true);
 			
 			/* Enforce width and height and position */

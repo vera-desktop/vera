@@ -20,8 +20,7 @@
 #    Eugenio "g7" Paolantonio <me@medesimo.eu>
 #
 
-project {
-	name = vera
-	version = 0.35
-	minimum-bake-version = 0.1
+data.applications {
+	files = vera-screenshot.desktop
+	install-directory = /usr/share/applications
 }

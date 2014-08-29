@@ -50,6 +50,7 @@ namespace Vera.Command {
 		 * Interface for org.semplicelinux.vera.screenshot.
 		*/
 
+		public abstract void Interactive() throws IOError;
 		public abstract void Selection(int delay) throws IOError;
 		public abstract void CurrentWindow(int delay) throws IOError;
 		public abstract void Full(int delay) throws IOError;

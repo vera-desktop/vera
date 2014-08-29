@@ -82,8 +82,12 @@ namespace Vera {
 			/**
 			 * Fired when the user releases the mouse button.
 			*/
-						
-			selection_finished();
+			
+			if (this.selection_width == 0 || this.selection_height == 0) {
+				selection_aborted();
+			} else {
+				selection_finished();
+			}
 			
 			return true;
 		}

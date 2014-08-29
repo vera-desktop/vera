@@ -44,10 +44,16 @@ namespace Vera {
 
 		public Gdk.Point selection_source {
 			get {
-				/* selection_source is basically start, so it's
+				/* selection_source is basically start/end, so it's
 				 * better not duplicate things */
 				
-				return (start == null) ? Gdk.Point() { x = 0, y = 0 } : this.start;
+				if (start == null || end == null) {
+					return Gdk.Point() { x = 0, y = 0 };
+				}
+								
+				/* end may be now lower than start and we should
+				 * handle it to avoid catching the wrong area */
+				return (start.x < end.x && start.y < end.y) ? this.start : this.end;
 			}
 		}
 		public int selection_width { get; private set; }

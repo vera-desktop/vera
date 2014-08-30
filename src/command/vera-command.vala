@@ -160,7 +160,15 @@ namespace Vera.Command {
 			try {
 			
 				/* Connect to DBus */
-				if (screenshot || window_screenshot || screenshot_with_delay > 0 || window_screenshot_with_delay > 0) {
+				if (
+					interactive_screenshot ||
+					screenshot ||
+					window_screenshot ||
+					selection_screenshot ||
+					screenshot_with_delay > 0 ||
+					window_screenshot_with_delay > 0 ||
+					selection_screenshot_with_delay > 0
+				) {
 					/* Connect to org.semplicelinux.vera.Screenshot */
 					screenshot_interface = Bus.get_proxy_sync(
 						BusType.SESSION,

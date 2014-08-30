@@ -26,12 +26,15 @@ namespace Vera {
 	public class Screenshot : Object {
 		
 		/**
-		 * This class exposes logind's methods to shutdown/reboot/suspend/hibernate
-		 * the system.
+		 * This service makes screenshots.
 		 * 
-		 * When calling the method, a dialog is shown requiring the user
-		 * to confirm its decision and - eventually - the Locks that prevent
-		 * the system to properly execute the specified action.
+		 * It has an interactive frontend (Interactive()) as well
+		 * as methods (Full(), Selection() and CurrentWindow()) to do
+		 * the screenshot directly via DBus.
+		 * 
+		 * Note that for security reasons the ScreenshotSaveDialog will
+		 * be always shown after taking the screenshot
+		 * (i.e. it's not scriptable).
 		*/
 
 		public DBusConnection connection = null;
@@ -50,7 +53,7 @@ namespace Vera {
 		[DBus (visible = false)]
 		public static Screenshot start_handler() {
 			/**
-			 * Starts the ExitHandler.
+			 * Starts the Screenshot service.
 			 * To be used internally.
 			*/
 			

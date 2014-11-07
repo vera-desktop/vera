@@ -1,3 +1,14 @@
+vera-desktop (0.36-1) unstable; urgency=medium
+
+  * ScreenshotSelectionWindow: possible bugfix.
+  * vera-command: ensure we properly get the screenshot_interface
+    also for selection and interactive.
+  * Screenshot: updated some docstrings.
+  * schemas: settings: set icon-theme to 'Faba-Mono' and theme to 'Zukitre-Vera'
+  * debian/control: switch to valac-0.26
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Fri, 07 Nov 2014 20:25:56 +0100
+
 vera-desktop (0.35-1) unstable; urgency=medium
 
   * Screenshot: added File Save dialog.

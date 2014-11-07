@@ -27,13 +27,13 @@
 	<schema path="/org/semplicelinux/vera/settings/" id="org.semplicelinux.vera.settings" gettext-domain="vera">
 		
 		<key name="theme-name" type="s">
-			<default>"Orchis"</default>
+			<default>"Zukitre-Vera"</default>
 			<summary>Theme name</summary>
 			<description>Theme to use.</description>
 		</key>
 		
 		<key name="icon-theme-name" type="s">
-			<default>"Faenza-Semplice"</default>
+			<default>"Faba-Mono"</default>
 			<summary>Icon theme name</summary>
 			<description>Icon theme to use.</description>
 		</key>

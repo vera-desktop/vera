@@ -177,7 +177,7 @@ namespace Vera {
 				}
 			);
 			
-			dialog.present();
+			dialog.show();
 		}
 		
 		public void Interactive() {

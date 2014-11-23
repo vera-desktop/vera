@@ -96,7 +96,7 @@ namespace Vera {
 			Object(buttons: Gtk.ButtonsType.YES_NO);
 
 			/* Set suggested action */
-			this.get_widget_for_response(Gtk.ResponseType.YES).get_style_context().add_class("suggested-action");
+			this.set_default_response(Gtk.ResponseType.YES);
 
 			this.modal = true;
 			

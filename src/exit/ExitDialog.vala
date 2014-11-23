@@ -35,7 +35,7 @@ namespace Vera {
 			 * using appropriate values for the specified ExitAction.
 			*/
 			
-			string title = "", text = "", secondary_text = "";
+			string title = "", text = "", secondary_text = "", icon = "";
 			
 			switch (action) {
 				
@@ -43,35 +43,42 @@ namespace Vera {
 					title = "Power off";
 					text = "Do you really want to power off?";
 					secondary_text = "This will close every active application.";
+					icon = "system-shutdown";
 					break;
 				case ExitAction.REBOOT:
 					title = "Restart";
 					text = "Do you really want to restart?";
 					secondary_text = "This will close every active application.";
+					icon = "system-reboot";
 					break;
 				case ExitAction.SUSPEND:
 					title = "Suspend";
 					text = "Do you really want to suspend?";
 					secondary_text = "Your active applications will not be closed.";
+					icon = "system-suspend";
 					break;
 				case ExitAction.HIBERNATE:
 					title = "Hibernate";
 					text = "Do you really want to hibernate?";
 					secondary_text = "Your active applications will not be closed.";
+					icon = "system-hibernate";
 					break;
 				case ExitAction.LOGOUT:
 					title = "Logout";
 					text = "Do you really want to logout?";
 					secondary_text = "This will close every active application.";
+					icon = "system-log-out";
 					break;
 				case ExitAction.LOCK:
 					title = "Lock";
 					text = "Do you really want to lock the screen?";
 					secondary_text = "The password for this temporary user is <b>live</b>.";
+					icon = "system-lock-screen";
 					break;
 			}
 			
 			this.set_title(title);
+			this.set_icon_name(icon);
 			this.set_markup("<big>%s</big>".printf(text));
 			this.format_secondary_markup(secondary_text);
 			

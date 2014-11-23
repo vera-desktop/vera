@@ -1,3 +1,13 @@
+vera-desktop (0.37-1) unstable; urgency=medium
+
+  * Synced gitignore
+  * screenshot: use show() instead of present() when showing up the ScreenshotTakeDialog.
+  * screenshot: use show() instead of present() when showing up the ScreenshotSaveDialog.
+  * ExitDialog: set window icon
+  * ExitDialog: use set_default_response() to highlight the Yes response.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 23 Nov 2014 18:12:33 +0100
+
 vera-desktop (0.36-1) unstable; urgency=medium
 
   * ScreenshotSelectionWindow: possible bugfix.

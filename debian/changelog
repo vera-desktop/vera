@@ -1,3 +1,9 @@
+vera-desktop (0.38-1) unstable; urgency=medium
+
+  * autostart/AutostartManager: actually get the HOME environment variable.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 03 Dec 2014 16:40:15 +0100
+
 vera-desktop (0.37-1) unstable; urgency=medium
 
   * Synced gitignore

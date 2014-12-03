@@ -26,7 +26,7 @@ namespace Vera {
 
 	public class AutostartManager : Object {
 
-		private string HOME = Environ.get_variable(null, "HOME");
+		private string HOME = Environ.get_variable(Environ.get(), "HOME");
 		private Application[] applications = new Application[0];
 		private HashMap<Pid, Application> pid_associations = new HashMap<Pid, Application>();
 		

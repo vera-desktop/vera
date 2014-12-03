@@ -3,7 +3,7 @@
 set -e
 
 case "$1" in
-	remove|update|deconfigure)
+	remove|upgrade|deconfigure)
 		# Install vera-session as an alternative
 		update-alternatives --remove \
 			x-session-manager /usr/bin/vera-session

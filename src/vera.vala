@@ -55,7 +55,7 @@ namespace Vera {
 		
 		// Display
 		public Display display = new XlibDisplay();
-		
+				
 		// XSETTINGS manager
 		private XsettingsManager xsettings_manager = null;
 		

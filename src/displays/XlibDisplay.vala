@@ -80,6 +80,18 @@ namespace Vera {
 	
 	}
 	
+	public ulong get_idle_time() {
+	    /**
+	     * Returns the seconds elapsed since the last mouse movement/last keyboard
+	     * stroke.
+	    */
+	    
+	    XScreenSaver.Info infos = XScreenSaver.query_info(this.display, this.xrootwindow);
+
+	    return infos.idle;
+	    
+	}
+	
 
         public new void send_to_root_window(Gdk.EventButton evnt) {
 	    /**

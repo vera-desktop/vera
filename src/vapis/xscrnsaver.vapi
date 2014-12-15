@@ -1,6 +1,6 @@
 /*
- * vera - a simple, lightweight, GTK3 based desktop environment
- * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ * xscrnsaver.vapi - basic libxss bindings for vala
+ * Copyright (C) 2014  Eugenio "g7" Paolantonio
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,35 +19,25 @@
  * Authors:
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
-namespace Vera {
-	
-	public enum DisplayServer {
-		NONE,
-		XLIB,
-		//WAYLAND,
-		//MIR,
-	}
 
-	public interface Display : Object {
+[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename="X11/extensions/scrnsaver.h")]
+namespace XScreenSaver {
+
+	[CCode (cname = "XScreenSaverInfo", destroy_function = "", has_type_id = false)]
+	public struct Info {
 		
-		/**
-		 * This is vera's display interface.
-		 * You need to subclass this if you want to add support for another
-		 * display servers.
-		*/
+		[CCode (cname = "XScreenSaverAllocInfo")]
+		public Info();
 		
-		public abstract DisplayServer server_type {
-			get {
-				return DisplayServer.NONE;
-			}
-		}
-		
-		public abstract void open();
-		public abstract void close();
-		
-		public abstract ulong get_idle_time();
-		
-		//public virtual void send_to_root_window() {}
-	} 
+		X.Window window;    /* screen saver window */
+		int state;          /* ScreenSaver{Off,On,Disabled} */
+		int kind;           /* ScreenSaver{Blanked,Internal,External} */
+		ulong til_or_since; /* milliseconds */
+		ulong idle;         /* milliseconds */
+		ulong eventMask;    /* events */
+	}
+	
+	[CCode (cname = "XScreenSaverQueryInfo")]
+	public XScreenSaver.Info query_info(X.Display display, X.Drawable drawable);
 
 }

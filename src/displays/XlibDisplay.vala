@@ -33,7 +33,7 @@ namespace Vera {
 	 * This class talks to the X server via the xcb
 	 * library.
 	*/
-			
+				
 	public DisplayServer server_type {
 	    get {
 		    return DisplayServer.XLIB;
@@ -47,6 +47,9 @@ namespace Vera {
 	public weak X.Display display;
 	public weak X.Window xrootwindow;
 	private weak X.Screen xscreen;
+	
+	private int xss_event_base = 0;
+	private int xss_error_base = 0;
 		
 	public XlibDisplay() {
 	    
@@ -65,11 +68,39 @@ namespace Vera {
 	    // And set x11_root_window!
 	    this.x11_root_window = (Gdk.X11.Window)this.root_window;
 	}
+	
+	public Gdk.FilterReturn on_raw_event_received(Gdk.XEvent gdk_xevent, Gdk.Event event) {
+	    /**
+	     * This method is executed before an event reaches Gdk.
+	     * It's currently used to listen to XScreenSaver.NotifyEvents.
+	    */
+	    	    
+	    X.Event* xevent = (X.Event*)gdk_xevent;
+	    
+	    if (xevent->type == this.xss_event_base) {
+		XScreenSaver.NotifyEvent* evnt = (XScreenSaver.NotifyEvent*)xevent;
+
+		this.idle_changed((evnt->state == XScreenSaver.State.ON));
+	    }
+	    
+	    return Gdk.FilterReturn.CONTINUE;
+	    
+	}
 		
 	public void open() {
 	    /**
 	     * Opens the connection.
 	    */
+
+	    /* Listen to X server for XScreenSaver.NotifyEvents */
+	    if (XScreenSaver.query_extension(this.display, ref this.xss_event_base, ref this.xss_error_base)) {
+		/* Good to go */
+		this.root_window.add_filter(this.on_raw_event_received);
+		XScreenSaver.select_input(this.display, this.xrootwindow, XScreenSaver.NotifyMask);
+		
+		//this.display.set_screensaver(10, 0, 1, 1);
+		//this.display.force_screensaver(0);
+	    }
 
 	}
 		

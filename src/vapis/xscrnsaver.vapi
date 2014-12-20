@@ -20,8 +20,25 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename="X11/extensions/scrnsaver.h")]
+[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename="X11/extensions/scrnsaver.h,X11/extensions/saver.h")]
 namespace XScreenSaver {
+
+	public enum State {
+		[CCode (cname = "ScreenSaverOff")]
+		OFF,
+		[CCode (cname = "ScreenSaverOn")]
+		ON,
+		[CCode (cname = "ScreenSaverCycle")]
+		CYCLE,
+		[CCode (cname = "ScreenSaverDisabled")]
+		DISABLED
+	}
+	
+	[CCode (cname = "ScreenSaverNotifyMask")]
+	public const int NotifyMask;
+	
+	[CCode (cname = "ScreenSaverCycleMask")]
+	public const int CycleMask;
 
 	[CCode (cname = "XScreenSaverNotifyEvent", destroy_function = "", has_type_id = false)]
 	public struct NotifyEvent {

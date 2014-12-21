@@ -197,9 +197,9 @@ namespace Vera {
 			if (this.xsettings_manager != null)
 				Environment.set_variable("XCURSOR_THEME", this.xsettings_manager.get_cursor_theme(), true);
 			
-			/* Idle timeout */
-			this.settings.changed["idle-timeout"].connect(this.on_idle_timeout_changed);
-			this.on_idle_timeout_changed();
+			/* Idle timeout (disabled until we replace xscreensaver) */
+			//this.settings.changed["idle-timeout"].connect(this.on_idle_timeout_changed);
+			//this.on_idle_timeout_changed();
 
 			/* Start DBus service */
 			this.service = DBusService.start_handler(this.plugin_manager, this.settings, this.display);

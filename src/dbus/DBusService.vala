@@ -108,8 +108,9 @@ namespace Vera {
 			 * anyway, if the user desires so.
 			*/
 			
-			if (on && this.settings.get_boolean("lock-on-idle"))
-				this.on_lock_request();
+			/* This is disabled until we replace xscreensaver */
+			//if (on && this.settings.get_boolean("lock-on-idle"))
+			//	this.on_lock_request();
 			
 		}
 		

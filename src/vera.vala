@@ -187,7 +187,7 @@ namespace Vera {
 				Environment.set_variable("XCURSOR_THEME", this.xsettings_manager.get_cursor_theme(), true);
 
 			/* Start DBus service */
-			this.service = DBusService.start_handler(this.plugin_manager, this.settings);
+			this.service = DBusService.start_handler(this.plugin_manager, this.settings, this.display);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);

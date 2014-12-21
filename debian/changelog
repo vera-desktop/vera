@@ -1,3 +1,15 @@
+vera-desktop (0.39-1) unstable; urgency=medium
+
+  * Implement new method (ulong)get_idle_time() in the displays.
+  * vapis/xcrnsaver.vapi: bind the full xcrnsaver header.
+  * XlibDisplay: listen to X events and catch XScreenSaver.NotifyEvents.
+  * DBusService: listen to Display()'s idle_changed signal and set session's IdleHint accordingly.
+  * Make the idle timeout configurable.
+  * Disable the previously implemented idle-timeout and lock-on-idle settings.
+  * debian/control: build-depend on libxss-dev.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 21 Dec 2014 23:55:58 +0100
+
 vera-desktop (0.38-2) unstable; urgency=medium
 
   * debian/vera-desktop.prerm: update -> upgrade, silly me.

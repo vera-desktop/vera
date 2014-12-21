@@ -22,6 +22,6 @@
 
 project {
 	name = vera
-	version = 0.38
+	version = 0.39
 	minimum-bake-version = 0.1
 }

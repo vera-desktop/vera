@@ -43,6 +43,8 @@ namespace Vera {
 		 * logind session.
 		*/
 		
+		public abstract void SetIdleHint(bool hint) throws IOError;
+		
 		public abstract signal void Lock();
 		public abstract signal void Unlock();
 		

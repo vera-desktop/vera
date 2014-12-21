@@ -36,14 +36,22 @@ namespace Vera {
 		 * display servers.
 		*/
 		
+		/* Server type (must be in DisplayServer enum) */
 		public abstract DisplayServer server_type {
 			get {
 				return DisplayServer.NONE;
 			}
 		}
 		
+		/* idle_changed() signal. This is fired when the device goes on idle
+		 * or comes from the idle state */
+		public signal void idle_changed(bool status);
+		
 		public abstract void open();
 		public abstract void close();
+		
+		public abstract void set_idle_timeout(int seconds);
+		public abstract ulong get_idle_time();
 		
 		//public virtual void send_to_root_window() {}
 	} 

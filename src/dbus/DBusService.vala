@@ -59,7 +59,9 @@ namespace Vera {
 		private Session session;
 		private logindInterface logind;
 		
-		public DBusService(PluginManager plugin_manager, Settings settings) {
+		private Display display;
+		
+		public DBusService(PluginManager plugin_manager, Settings settings, Display display) {
 			/**
 			 * Constructs the Service.
 			 * 
@@ -70,6 +72,7 @@ namespace Vera {
 			
 			this.plugin_manager = plugin_manager;
 			this.settings = settings;
+			this.display = display;
 			
 			this.logind = Bus.get_proxy_sync(
 				BusType.SYSTEM,
@@ -83,8 +86,32 @@ namespace Vera {
 				this.logind.GetSession(Environment.get_variable("XDG_SESSION_ID"))
 			);
 			
+			/* React on idle changes */
+			this.display.idle_changed.connect(this.on_display_idle_changed);
+			
 			/* Connect Lock signal, unlock currently not supported */
 			this.session.Lock.connect(this.on_lock_request);
+		}
+		
+		private void on_display_idle_changed(bool on) {
+			/**
+			 * Fired when the display idle state changed.
+			*/
+			
+			this.session.SetIdleHint(on);
+			
+			/*
+			 * Even if logind knows about our idle state, it will not 
+			 * trigger anything unless every session have their IdleHints
+			 * set to True.
+			 * This is of course unwanted, and thus we will Lock the screen
+			 * anyway, if the user desires so.
+			*/
+			
+			/* This is disabled until we replace xscreensaver */
+			//if (on && this.settings.get_boolean("lock-on-idle"))
+			//	this.on_lock_request();
+			
 		}
 		
 		private void on_lock_request() {
@@ -92,19 +119,19 @@ namespace Vera {
 			 * Fired when the user (or logind) requested to activate the
 			 * screen lock.
 			*/
-			
+						
 			new Launcher({"xscreensaver-command", "-lock"}).launch();
 			
 		}
 		
 		[DBus (visible = false)]
-		public static DBusService start_handler(PluginManager plugin_manager, Settings settings) {
+		public static DBusService start_handler(PluginManager plugin_manager, Settings settings, Display display) {
 			/**
 			 * Starts the service.
 			 * To be used internally.
 			*/
 			
-			DBusService handler = new DBusService(plugin_manager, settings);
+			DBusService handler = new DBusService(plugin_manager, settings, display);
 			
 			uint identifier = Bus.own_name(
 				BusType.SESSION,

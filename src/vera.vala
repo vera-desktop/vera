@@ -55,7 +55,7 @@ namespace Vera {
 		
 		// Display
 		public Display display = new XlibDisplay();
-		
+				
 		// XSETTINGS manager
 		private XsettingsManager xsettings_manager = null;
 		
@@ -108,6 +108,17 @@ namespace Vera {
 			} catch (Error e) {}
 			
 			return false;
+			
+		}
+		
+		private void on_idle_timeout_changed() {
+			/**
+			 * Fired when the idle-timeout setting has been changed.
+			*/
+			
+			this.display.set_idle_timeout(
+				this.settings.get_int("idle-timeout") * 60
+			);
 			
 		}
 				
@@ -185,9 +196,13 @@ namespace Vera {
 			/* XCURSOR_THEME env variable */
 			if (this.xsettings_manager != null)
 				Environment.set_variable("XCURSOR_THEME", this.xsettings_manager.get_cursor_theme(), true);
+			
+			/* Idle timeout (disabled until we replace xscreensaver) */
+			//this.settings.changed["idle-timeout"].connect(this.on_idle_timeout_changed);
+			//this.on_idle_timeout_changed();
 
 			/* Start DBus service */
-			this.service = DBusService.start_handler(this.plugin_manager, this.settings);
+			this.service = DBusService.start_handler(this.plugin_manager, this.settings, this.display);
 				
 			// INIT
 			this.do_startup(StartupPhase.INIT);

@@ -36,6 +36,18 @@
 
 	<schema path="/org/semplicelinux/vera/" id="org.semplicelinux.vera" gettext-domain="vera">
 
+		<key name="idle-timeout" type="i">
+			<default>30</default>
+			<summary>Idle timeout (in minutes)</summary>
+			<description>The idle-timeout starts when the system is in idle (no mouse/keyboard input). After the timeout elapses, an idle action is performed.</description>
+		</key>
+		
+		<key name="lock-on-idle" type="b">
+			<default>true</default>
+			<summary>Locks the screen after the idle-timeout elapses.</summary>
+			<description>logind handles the idle action, but will be triggered only when every session are on idle. This setting forces the current session to lock, regardless of the status of other sessions.</description>
+		</key>
+
 		<key name="last-screenshot-directory" type="s">
 			<default>""</default>
 			<summary>Last directory where a screenshot has been saved.</summary>

@@ -50,6 +50,7 @@ namespace Vera {
 		public abstract void open();
 		public abstract void close();
 		
+		public abstract void set_idle_timeout(int seconds);
 		public abstract ulong get_idle_time();
 		
 		//public virtual void send_to_root_window() {}

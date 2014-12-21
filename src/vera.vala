@@ -110,6 +110,17 @@ namespace Vera {
 			return false;
 			
 		}
+		
+		private void on_idle_timeout_changed() {
+			/**
+			 * Fired when the idle-timeout setting has been changed.
+			*/
+			
+			this.display.set_idle_timeout(
+				this.settings.get_int("idle-timeout") * 60
+			);
+			
+		}
 				
 				
 		public Main() {
@@ -185,6 +196,10 @@ namespace Vera {
 			/* XCURSOR_THEME env variable */
 			if (this.xsettings_manager != null)
 				Environment.set_variable("XCURSOR_THEME", this.xsettings_manager.get_cursor_theme(), true);
+			
+			/* Idle timeout */
+			this.settings.changed["idle-timeout"].connect(this.on_idle_timeout_changed);
+			this.on_idle_timeout_changed();
 
 			/* Start DBus service */
 			this.service = DBusService.start_handler(this.plugin_manager, this.settings, this.display);

@@ -69,7 +69,7 @@ namespace Vera {
 	    this.x11_root_window = (Gdk.X11.Window)this.root_window;
 	}
 	
-	public Gdk.FilterReturn on_raw_event_received(Gdk.XEvent gdk_xevent, Gdk.Event event) {
+	private Gdk.FilterReturn on_raw_event_received(Gdk.XEvent gdk_xevent, Gdk.Event event) {
 	    /**
 	     * This method is executed before an event reaches Gdk.
 	     * It's currently used to listen to XScreenSaver.NotifyEvents.
@@ -86,6 +86,20 @@ namespace Vera {
 	    return Gdk.FilterReturn.CONTINUE;
 	    
 	}
+	
+	public void set_idle_timeout(int seconds) {
+	    /**
+	     * Sets the idle timeout on the X server.
+	    */
+	    
+	    this.display.set_screensaver(
+		seconds,
+		0, /* interval */
+		0, /* DontPreferBlanking (FIXME: make it configurable) */
+		0  /* NoExposures (FIXME: make it configurable) */
+	    );
+	    
+	}
 		
 	public void open() {
 	    /**
@@ -97,9 +111,6 @@ namespace Vera {
 		/* Good to go */
 		this.root_window.add_filter(this.on_raw_event_received);
 		XScreenSaver.select_input(this.display, this.xrootwindow, XScreenSaver.NotifyMask);
-		
-		//this.display.set_screensaver(10, 0, 1, 1);
-		//this.display.force_screensaver(0);
 	    }
 
 	}

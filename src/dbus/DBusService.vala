@@ -100,6 +100,17 @@ namespace Vera {
 			
 			this.session.SetIdleHint(on);
 			
+			/*
+			 * Even if logind knows about our idle state, it will not 
+			 * trigger anything unless every session have their IdleHints
+			 * set to True.
+			 * This is of course unwanted, and thus we will Lock the screen
+			 * anyway, if the user desires so.
+			*/
+			
+			if (on && this.settings.get_boolean("lock-on-idle"))
+				this.on_lock_request();
+			
 		}
 		
 		private void on_lock_request() {
@@ -107,7 +118,7 @@ namespace Vera {
 			 * Fired when the user (or logind) requested to activate the
 			 * screen lock.
 			*/
-			
+						
 			new Launcher({"xscreensaver-command", "-lock"}).launch();
 			
 		}

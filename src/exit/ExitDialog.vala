@@ -105,7 +105,9 @@ namespace Vera {
 			
 			/* Keep above */
 			this.set_keep_above(true);
-						
+			
+			/* Grab focus on the Yes button */
+			this.get_widget_for_response(Gtk.ResponseType.YES).grab_focus();
 		}
 		
 	}

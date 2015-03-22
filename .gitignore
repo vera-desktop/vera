@@ -174,3 +174,5 @@ vera_0.39-0_amd64.deb
 vera-0.39.tar.gz
 vera-0.39-1.x86_64.rpm
 vera-0.39.tar.xz
+.built/./po/vera/it_IT.mo
+.built/./po/vera/

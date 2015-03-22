@@ -51,10 +51,11 @@ programs.vera {
 		exit/ExitDialog.vala \
 		autostart/AutostartManager.vala \
 		vera.vala
-	compile-flags = -O2 -flto
+	compile-flags = -O2 -flto -include config.h
 	libraries = vera (local)
 	link-flags = -lX11 -flto -Wl,--as-needed
 	vala-compile-flags = --vapidir=./vapis
+	gettext-domain = vera
 	
 	vala-packages = gio-2.0 gee-1.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 posix vera-xsettings
 	packages = gee-1.0 gio-2.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 vera-xsettings

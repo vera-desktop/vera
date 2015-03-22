@@ -1,0 +1,4 @@
+data.translations {
+	gettext-translations = 
+	gettext-domain = vera
+}

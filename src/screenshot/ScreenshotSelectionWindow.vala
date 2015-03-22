@@ -261,7 +261,7 @@ namespace Vera {
 			 * Constructor.
 			*/
 			
-			Object(title: "Selection");
+			Object(title: _("Selection"));
 						
 			this.root_window = Gdk.Screen.get_default().get_root_window();
 			this.width = this.root_window.get_width();

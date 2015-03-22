@@ -34,7 +34,7 @@ namespace Vera {
 			 * Constructor.
 			*/
 			
-			Object(title: "Save screenshot...", parent: null, action: Gtk.FileChooserAction.SAVE);
+			Object(title: _("Save screenshot..."), parent: null, action: Gtk.FileChooserAction.SAVE);
 						
 			/* Icon */
 			this.set_icon_name("applets-screenshooter");
@@ -52,20 +52,20 @@ namespace Vera {
 			
 			/* Add filters */
 			Gtk.FileFilter png = new Gtk.FileFilter();
-			png.set_filter_name("PNG image");
+			png.set_filter_name(_("PNG image"));
 			png.add_pattern("*.png");
 			this.add_filter(png);
 			
 			Gtk.FileFilter all = new Gtk.FileFilter();
-			all.set_filter_name("All files");
+			all.set_filter_name(_("All files"));
 			all.add_pattern("*");
 			this.add_filter(all);
 			
 			/* Add buttons */
 			this.add_buttons(
-				"_Cancel",
+				_("_Cancel"),
 				Gtk.ResponseType.REJECT,
-				"_Save",
+				_("_Save"),
 				Gtk.ResponseType.ACCEPT,
 				null
 			);

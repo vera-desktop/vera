@@ -1,6 +1,8 @@
 #!/bin/sh
 # Creates a pot template ready for transifex upload.
 
+set -e
+
 APP_NAME="vera"
 
 # Necessary step
@@ -13,7 +15,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-20 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

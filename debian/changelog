@@ -1,3 +1,13 @@
+vera-desktop (0.40-1) unstable; urgency=medium
+
+  * AutostartManager: do not forcibly split command-line arguments in quotation marks.
+  * ExitDialog: grab focus on the YES button.
+  * screenshot: test for pixbuf != null
+  * Translation support.
+  * Updated translations.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 01 Apr 2015 22:10:05 +0200
+
 vera-desktop (0.39-1) unstable; urgency=medium
 
   * Implement new method (ulong)get_idle_time() in the displays.

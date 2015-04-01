@@ -21,6 +21,9 @@
 #
 
 data.translations {
-	gettext-translations = 
+	gettext-translations = \
+		it.po \
+		hu.po \
+		nl_NL.po
 	gettext-domain = vera
 }

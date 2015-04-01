@@ -158,6 +158,12 @@ namespace Vera {
 				height
 			);
 			
+			if (pixbuf == null) {
+				/* Error */
+				warning("Unable to take screenshot.");
+				return;
+			}
+			
 			Cairo.Context cx = new Cairo.Context(surface);
 			Gdk.cairo_set_source_pixbuf(cx, pixbuf, 0, 0);
 			cx.paint();
@@ -238,7 +244,7 @@ namespace Vera {
 						(delay == 0) ? 200 : delay * 1000,
 						() => {
 							this.take_screenshot(
-								Gdk.get_default_root_window(),
+								Gdk.Screen.get_default().get_root_window(),
 								null,
 								win.selection_area.selection_source,
 								win.selection_area.selection_width,
@@ -270,7 +276,7 @@ namespace Vera {
 			Timeout.add_seconds(
 				delay,
 				() => {
-					this.take_screenshot(Gdk.get_default_root_window());
+					this.take_screenshot(Gdk.Screen.get_default().get_root_window());
 					
 					return false;
 				}
@@ -307,7 +313,7 @@ namespace Vera {
 						window = window.get_toplevel();
 					}
 					
-					this.take_screenshot(Gdk.get_default_root_window(), window);
+					this.take_screenshot(Gdk.Screen.get_default().get_root_window(), window);
 					
 					return false;
 				}

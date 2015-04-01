@@ -84,7 +84,7 @@ namespace Vera {
 					respawn = true;
 					
 				try {
-					launcher = new Launcher(app.executable.split(" "), sync, respawn);
+					launcher = new Launcher(Launcher.command_split(app.executable), sync, respawn);
 					pid = launcher.launch();
 					
 					if (pid != null) {

@@ -41,6 +41,46 @@ namespace Vera {
 		private bool respawn;
 		private string[] application;
 		
+		public static string[] command_split(string command) {
+			/**
+			 * Splits a shell command.
+			*/
+			
+			string[] splt = command.split(" ");
+			string[] result = new string[0];
+			
+			string prefix, _out;
+			string[] out_string;
+			for (int i = 0; i < splt.length; i++) {
+				
+				if (
+					(splt[i].has_prefix("\"") && !splt[i].has_suffix("\"")) ||
+					(splt[i].has_prefix("'") && !splt[i].has_suffix("'"))
+				) {
+					/* Start of a larger command line argument */
+					prefix = (splt[i].has_prefix("\"")) ? "\"" : "'";
+					
+					out_string = new string[0];
+					while (true) {
+						out_string += splt[i];
+						
+						if (i+1 >= splt.length || splt[i].has_suffix(prefix))
+							break;
+						
+						i++;
+					}
+					
+					/* Strip the prefix and the suffix */
+					_out = string.joinv(" ", out_string);
+					result += _out.slice(1, _out.length-1);
+				} else {
+					result += splt[i];
+				}
+			}
+			
+			return result;
+		}
+		
 		public Launcher(string[] application, bool sync = false, bool respawn = false) {
 			/**
 			 * Constructs the object.

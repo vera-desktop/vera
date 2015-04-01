@@ -20,6 +20,8 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
+const string GETTEXT_PACKAGE = "vera";
+
 namespace Vera {
 		
 	public class Main : Object {
@@ -258,6 +260,11 @@ namespace Vera {
 			/**
 			 * This is the main entrypoint for Vera.
 			*/
+			
+			/* Translations */
+			Intl.setlocale(LocaleCategory.MESSAGES, "");
+			Intl.textdomain(GETTEXT_PACKAGE); 
+			Intl.bind_textdomain_codeset(GETTEXT_PACKAGE, "utf-8"); 
 			
 			Gtk.init(ref args);
 

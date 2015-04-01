@@ -40,39 +40,39 @@ namespace Vera {
 			switch (action) {
 				
 				case ExitAction.POWEROFF:
-					title = "Power off";
-					text = "Do you really want to power off?";
-					secondary_text = "This will close every active application.";
+					title = _("Power off");
+					text = _("Do you really want to power off?");
+					secondary_text = _("This will close every active application.");
 					icon = "system-shutdown";
 					break;
 				case ExitAction.REBOOT:
-					title = "Restart";
-					text = "Do you really want to restart?";
-					secondary_text = "This will close every active application.";
+					title = _("Restart");
+					text = _("Do you really want to restart?");
+					secondary_text = _("This will close every active application.");
 					icon = "system-reboot";
 					break;
 				case ExitAction.SUSPEND:
-					title = "Suspend";
-					text = "Do you really want to suspend?";
-					secondary_text = "Your active applications will not be closed.";
+					title = _("Suspend");
+					text = _("Do you really want to suspend?");
+					secondary_text = _("Your active applications will not be closed.");
 					icon = "system-suspend";
 					break;
 				case ExitAction.HIBERNATE:
-					title = "Hibernate";
-					text = "Do you really want to hibernate?";
+					title = _("Hibernate");
+					text = _("Do you really want to hibernate?");
 					secondary_text = "Your active applications will not be closed.";
 					icon = "system-hibernate";
 					break;
 				case ExitAction.LOGOUT:
-					title = "Logout";
-					text = "Do you really want to logout?";
-					secondary_text = "This will close every active application.";
+					title = _("Logout");
+					text = _("Do you really want to logout?");
+					secondary_text = _("This will close every active application.");
 					icon = "system-log-out";
 					break;
 				case ExitAction.LOCK:
-					title = "Lock";
-					text = "Do you really want to lock the screen?";
-					secondary_text = "The password for this temporary user is <b>live</b>.";
+					title = _("Lock");
+					text = _("Do you really want to lock the screen?");
+					secondary_text = _("The password for this temporary user is <b>live</b>.");
 					icon = "system-lock-screen";
 					break;
 			}
@@ -105,7 +105,9 @@ namespace Vera {
 			
 			/* Keep above */
 			this.set_keep_above(true);
-						
+			
+			/* Grab focus on the Yes button */
+			this.get_widget_for_response(Gtk.ResponseType.YES).grab_focus();
 		}
 		
 	}

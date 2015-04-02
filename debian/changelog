@@ -1,3 +1,9 @@
+vera-desktop (0.40-2) unstable; urgency=medium
+
+  * debian/vera-desktop.install: install translations.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 02 Apr 2015 17:57:37 +0200
+
 vera-desktop (0.40-1) unstable; urgency=medium
 
   * AutostartManager: do not forcibly split command-line arguments in quotation marks.

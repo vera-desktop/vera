@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-04-01 07:47+0000\n"
+"PO-Revision-Date: 2015-04-03 13:17+0000\n"
 "Last-Translator: Puskas-Kolozsvari Frederic <pkfric@yahoo.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/vera/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "Kikapcsolás"
 
 #: exit/ExitDialog.vala:44
 msgid "Do you really want to power off?"
-msgstr "Valóban ki szeretné kapcsolni?"
+msgstr "Valóban ki akarja kapcsolni?"
 
 #: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
 msgid "This will close every active application."
@@ -79,7 +79,7 @@ msgstr "Újraindítás"
 
 #: exit/ExitDialog.vala:50
 msgid "Do you really want to restart?"
-msgstr "Valóban újra szeretné indítani?"
+msgstr "Valóban újra akarja indítani?"
 
 #: exit/ExitDialog.vala:55
 msgid "Suspend"
@@ -87,7 +87,7 @@ msgstr "Felfüggesztés"
 
 #: exit/ExitDialog.vala:56
 msgid "Do you really want to suspend?"
-msgstr "Valóban fel szeretné függeszteni?"
+msgstr "Valóban fel akarja függeszteni?"
 
 #: exit/ExitDialog.vala:57
 msgid "Your active applications will not be closed."
@@ -99,7 +99,7 @@ msgstr "Hibernálás"
 
 #: exit/ExitDialog.vala:62
 msgid "Do you really want to hibernate?"
-msgstr "Valóban szeretné hibernálni?"
+msgstr "Valóban hibernálni akarja?"
 
 #: exit/ExitDialog.vala:67
 msgid "Logout"
@@ -107,7 +107,7 @@ msgstr "Kijelentkezés"
 
 #: exit/ExitDialog.vala:68
 msgid "Do you really want to logout?"
-msgstr "Valóban szeretne kijelentkezni?"
+msgstr "Valóban ki akar jelentkezni?"
 
 #: exit/ExitDialog.vala:73
 msgid "Lock"
@@ -115,7 +115,7 @@ msgstr "Zárolás"
 
 #: exit/ExitDialog.vala:74
 msgid "Do you really want to lock the screen?"
-msgstr "Valóban szeretné zárolni a képernyőt?"
+msgstr "Valóban zárolni akarja a képernyőt?"
 
 #: exit/ExitDialog.vala:75
 msgid "The password for this temporary user is <b>live</b>."

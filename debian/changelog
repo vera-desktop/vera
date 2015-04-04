@@ -1,3 +1,12 @@
+vera-desktop (1.0.0-1) unstable; urgency=medium
+
+  * PluginManager: disable python and gjs plugin loaders.
+  * Updated translations.
+  * org.semplicelinux.vera.gschema: ignore alan-watcher.desktop and alan-reference-watcher.desktop by default.
+  * vera 1.0.0.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 04 Apr 2015 19:57:56 +0200
+
 vera-desktop (0.40-2) unstable; urgency=medium
 
   * debian/vera-desktop.install: install translations.

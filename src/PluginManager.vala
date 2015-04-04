@@ -66,8 +66,8 @@ namespace Vera {
 			
 			// Create the engine
 			this.engine = Engine.get_default();
-			this.engine.enable_loader("python");
-			this.engine.enable_loader("gjs");
+			//this.engine.enable_loader("python");
+			//this.engine.enable_loader("gjs");
 			
 			// Add the search path(s)
 			foreach (string path in this.settings.get_strv("plugin-search-path")) {

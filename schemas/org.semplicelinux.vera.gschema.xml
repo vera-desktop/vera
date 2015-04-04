@@ -97,7 +97,7 @@
 		</key>
 		
 		<key name="autostart-ignore" type="as">
-			<default>[]</default>
+			<default>['alan-watcher.desktop', 'alan-reference-watcher.desktop']</default>
 			<summary>Autostart files to ignore</summary>
 			<description>The autostart files to ignore (they will not be started automatically).</description>
 		</key>

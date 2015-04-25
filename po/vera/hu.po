@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-04-03 13:17+0000\n"
+"PO-Revision-Date: 2015-04-07 10:20+0000\n"
 "Last-Translator: Puskas-Kolozsvari Frederic <pkfric@yahoo.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/vera/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -63,15 +63,15 @@ msgstr "_Készíts egy képernyőképet"
 
 #: exit/ExitDialog.vala:43
 msgid "Power off"
-msgstr "Kikapcsolás"
+msgstr "Leállítás"
 
 #: exit/ExitDialog.vala:44
 msgid "Do you really want to power off?"
-msgstr "Valóban ki akarja kapcsolni?"
+msgstr "Valóban le akarja állítani?"
 
 #: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
 msgid "This will close every active application."
-msgstr "Ez kikapcsol minden futó programot."
+msgstr "Ez be fog zárni minden futó programot."
 
 #: exit/ExitDialog.vala:49
 msgid "Restart"
@@ -91,7 +91,7 @@ msgstr "Valóban fel akarja függeszteni?"
 
 #: exit/ExitDialog.vala:57
 msgid "Your active applications will not be closed."
-msgstr "A futó programok most bezáródnak."
+msgstr "A futó alkalmazások most bezáródnak."
 
 #: exit/ExitDialog.vala:61
 msgid "Hibernate"
@@ -173,7 +173,7 @@ msgstr "Ha ki van választva, zárolja a legutóbbi kilépési műveletet, hogy 
 
 #: org.semplicelinux.vera.gschema.xml:71
 msgid "CTRL+ALT+SPACE shortcut"
-msgstr "CTRL+ALT+SPACE hivatkozás"
+msgstr "CTRL+ALT+SPACE rövidítés"
 
 #: org.semplicelinux.vera.gschema.xml:72
 msgid ""

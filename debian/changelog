@@ -1,3 +1,11 @@
+vera-desktop (1.0.1-1) unstable; urgency=medium
+
+  * autostart/Application: strip useless file/uri placeholders.
+  * Updated translations.
+  * 1.0.1
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 26 Apr 2015 00:19:21 +0200
+
 vera-desktop (1.0.0-1) unstable; urgency=medium
 
   * PluginManager: disable python and gjs plugin loaders.

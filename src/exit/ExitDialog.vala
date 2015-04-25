@@ -98,7 +98,7 @@ namespace Vera {
 			/* Set suggested action */
 			this.set_default_response(Gtk.ResponseType.YES);
 
-			this.modal = true;
+			//this.modal = true;
 			
 			/* Set details */
 			this.set_details(action);

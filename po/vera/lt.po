@@ -1,12 +1,13 @@
 # 
 # Translators:
+# Moo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-03-22 16:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-04-21 19:27+0000\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/vera/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,24 +17,24 @@ msgstr ""
 
 #: screenshot/ScreenshotSaveDialog.vala:37
 msgid "Save screenshot..."
-msgstr ""
+msgstr "Išsaugoti ekrano kopiją..."
 
 #: screenshot/ScreenshotSaveDialog.vala:55
 msgid "PNG image"
-msgstr ""
+msgstr "PNG paveikslas"
 
 #: screenshot/ScreenshotSaveDialog.vala:60
 msgid "All files"
-msgstr ""
+msgstr "Visi failai"
 
 #: screenshot/ScreenshotSaveDialog.vala:66
 #: screenshot/ScreenshotTakeDialog.vala:107
 msgid "_Cancel"
-msgstr ""
+msgstr "_Atšaukti"
 
 #: screenshot/ScreenshotSaveDialog.vala:68
 msgid "_Save"
-msgstr ""
+msgstr "_Išsaugoti"
 
 #: screenshot/ScreenshotSelectionWindow.vala:264
 #: screenshot/ScreenshotTakeDialog.vala:88
@@ -42,7 +43,7 @@ msgstr ""
 
 #: screenshot/ScreenshotTakeDialog.vala:68
 msgid "Take a screenshot"
-msgstr ""
+msgstr "Padaryti ekrano kopiją"
 
 #: screenshot/ScreenshotTakeDialog.vala:86
 msgid "Full screen"
@@ -58,67 +59,67 @@ msgstr ""
 
 #: screenshot/ScreenshotTakeDialog.vala:109
 msgid "_Take a screenshot"
-msgstr ""
+msgstr "_Padaryti ekrano kopiją"
 
 #: exit/ExitDialog.vala:43
 msgid "Power off"
-msgstr ""
+msgstr "Išjungti"
 
 #: exit/ExitDialog.vala:44
 msgid "Do you really want to power off?"
-msgstr ""
+msgstr "Ar tikrai norite išjungti?"
 
 #: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
 msgid "This will close every active application."
-msgstr ""
+msgstr "Tai uždarys visas aktyvias programas."
 
 #: exit/ExitDialog.vala:49
 msgid "Restart"
-msgstr ""
+msgstr "Paleisti iš naujo"
 
 #: exit/ExitDialog.vala:50
 msgid "Do you really want to restart?"
-msgstr ""
+msgstr "Ar tikrai norite paleisti iš naujo?"
 
 #: exit/ExitDialog.vala:55
 msgid "Suspend"
-msgstr ""
+msgstr "Pristabdyti"
 
 #: exit/ExitDialog.vala:56
 msgid "Do you really want to suspend?"
-msgstr ""
+msgstr "Ar tikrai norite pristabdyti?"
 
 #: exit/ExitDialog.vala:57
 msgid "Your active applications will not be closed."
-msgstr ""
+msgstr "Jūsų aktyvios programos nebus uždarytos."
 
 #: exit/ExitDialog.vala:61
 msgid "Hibernate"
-msgstr ""
+msgstr "Užmigdyti"
 
 #: exit/ExitDialog.vala:62
 msgid "Do you really want to hibernate?"
-msgstr ""
+msgstr "Ar tikrai norite užmigdyti?"
 
 #: exit/ExitDialog.vala:67
 msgid "Logout"
-msgstr ""
+msgstr "Atsijungti"
 
 #: exit/ExitDialog.vala:68
 msgid "Do you really want to logout?"
-msgstr ""
+msgstr "Ar tikrai norite atsijungti?"
 
 #: exit/ExitDialog.vala:73
 msgid "Lock"
-msgstr ""
+msgstr "Užrakinti"
 
 #: exit/ExitDialog.vala:74
 msgid "Do you really want to lock the screen?"
-msgstr ""
+msgstr "Ar tikrai norite užrakinti ekraną?"
 
 #: exit/ExitDialog.vala:75
 msgid "The password for this temporary user is <b>live</b>."
-msgstr ""
+msgstr "Šio laikinojo naudotojo slaptažodis yra <b>live</b>."
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -143,13 +144,13 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:53
 msgid "Last directory where a screenshot has been saved."
-msgstr ""
+msgstr "Paskutinis katalogas, kuriame buvo išsaugota ekrano kopija."
 
 #: org.semplicelinux.vera.gschema.xml:54
 msgid ""
 "This is used internally to remember the last directory where a screenshot "
 "has been saved."
-msgstr ""
+msgstr "Tai skirta vidiniam naudojimui, siekiant prisiminti paskutinį katalogą, kuriame buvo išsaugota ekrano kopija."
 
 #: org.semplicelinux.vera.gschema.xml:59
 msgid "Last exit action"
@@ -347,7 +348,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:104
 msgid "Text hinting"
-msgstr ""
+msgstr "Teksto taškinė korekcija"
 
 #: org.semplicelinux.vera.settings.gschema.xml:105
 msgid ""
@@ -387,11 +388,11 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:135
 msgid "Images in buttons"
-msgstr ""
+msgstr "Paveikslai mygtukuose"
 
 #: org.semplicelinux.vera.settings.gschema.xml:136
 msgid "If enabled, the buttons will show an icon alongside the text."
-msgstr ""
+msgstr "Jei įjungta, mygtukuose šalia teksto bus rodomos piktogramos."
 
 #: org.semplicelinux.vera.settings.gschema.xml:141
 msgid "Cursor theme name"
@@ -403,7 +404,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:148
 msgid "Cursor size"
-msgstr ""
+msgstr "Žymeklio dydis"
 
 #: org.semplicelinux.vera.settings.gschema.xml:149
 msgid "The size to use for cursors. If 0, it will use the default size."
@@ -427,11 +428,11 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:166
 msgid "Animations"
-msgstr ""
+msgstr "Animacijos"
 
 #: org.semplicelinux.vera.settings.gschema.xml:167
 msgid "Enables the animations."
-msgstr ""
+msgstr "Įjungia animacijas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:172
 msgid "Error bell"
@@ -445,11 +446,11 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:178
 msgid "Font name"
-msgstr ""
+msgstr "Šriftas pavadinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:179
 msgid "The font to use."
-msgstr ""
+msgstr "Naudojamas šriftas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:184
 msgid "Input method"
@@ -469,19 +470,19 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:196
 msgid "Images in menus"
-msgstr ""
+msgstr "Paveikslai meniu"
 
 #: org.semplicelinux.vera.settings.gschema.xml:197
 msgid "If enabled, the menus will show an icon alongside the text."
-msgstr ""
+msgstr "Jei įjungta, meniu šalia teksto bus rodomos piktogramos."
 
 #: org.semplicelinux.vera.settings.gschema.xml:202
 msgid "GTK+ modules"
-msgstr ""
+msgstr "GTK+ moduliai"
 
 #: org.semplicelinux.vera.settings.gschema.xml:203
 msgid "List of currently active GTK+ modules."
-msgstr ""
+msgstr "Esamų aktyvių GTK+ modulių sąrašas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:208
 msgid "Print backends"

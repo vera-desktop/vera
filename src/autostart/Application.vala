@@ -56,7 +56,8 @@ namespace Vera {
 				
 				this.name = this.file.get_string("Desktop Entry", "Name");
 				
-				this.executable = this.file.get_string("Desktop Entry", "Exec");
+				this.executable = this.file.get_string("Desktop Entry", "Exec").replace(
+					"%u","").replace("%U","").replace("%f","").replace("%F","").strip();
 				
 				if (this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync") && this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
 					this.mode = LaunchMode.SYNC;

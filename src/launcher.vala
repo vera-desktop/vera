@@ -120,6 +120,11 @@ namespace Vera {
 			/**
 			 * Launches the given application.
 			*/
+
+			/*
+			 * FIXME: Should handle properly %u, %f and family instead
+			 * of requiring callers to strip them before
+			*/
 			
 			Pid pid;
 			string[] env = Environ.get();

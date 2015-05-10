@@ -1,4 +1,4 @@
-vera-desktop (1.0.1-1) unstable; urgency=medium
+vera-desktop (1.0.2-1) unstable; urgency=medium
 
   * screenshot: make the screenshot service a separate standalone application.
   * vera-command: invoke vera-screenshot when a screenshot action has been required.

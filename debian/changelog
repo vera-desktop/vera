@@ -1,5 +1,17 @@
 vera-desktop (1.0.1-1) unstable; urgency=medium
 
+  * screenshot: make the screenshot service a separate standalone application.
+  * vera-command: invoke vera-screenshot when a screenshot action has been required.
+  * command: use Vera.Launcher to handle the vera-screenshot launch.
+  * data/applications/vera-screenshot.desktop: use vera-screenshot instead of vera-command.
+  * Updated translations.
+  * 1.0.2
+  * schemas: remove enable-screenshot setting as it's not needed anymore.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 10 May 2015 12:03:33 +0200
+
+vera-desktop (1.0.1-1) unstable; urgency=medium
+
   * autostart/Application: strip useless file/uri placeholders.
   * Updated translations.
   * 1.0.1

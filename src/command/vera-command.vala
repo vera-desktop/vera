@@ -176,6 +176,7 @@ namespace Vera.Command {
 				}
 								
 				/* Execute action! */
+				Vera.Launcher launch = null;
 				if (load_plugin != null)
 					vera_interface.LoadPlugin(load_plugin);
 				else if (unload_plugin != null)
@@ -201,19 +202,23 @@ namespace Vera.Command {
 				else if (switch_to_guest)
 					vera_interface.SwitchToGuest();
 				else if (interactive_screenshot)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--interactive-screenshot");
+					launch = new Launcher({"vera-screenshot", "--interactive-screenshot"}, true);
 				else if (screenshot)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--screenshot");
+					launch = new Launcher({"vera-screenshot", "--screenshot"}, true);
 				else if (window_screenshot)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--window-screenshot");
+					launch = new Launcher({"vera-screenshot", "--window-screenshot"}, true);
 				else if (selection_screenshot)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--selection-screenshot");
+					launch = new Launcher({"vera-screenshot", "--selection-screenshot"}, true);
 				else if (screenshot_with_delay > 0)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--screenshot-with-delay=%d".printf(screenshot_with_delay));
+					launch = new Launcher({"vera-screenshot", "--screenshot-with-delay=%d".printf(screenshot_with_delay)}, true);
 				else if (window_screenshot_with_delay > 0)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--window-screenshot-with-delay=%d".printf(window_screenshot_with_delay));
+					launch = new Launcher({"vera-screenshot", "--window-screenshot-with-delay=%d".printf(window_screenshot_with_delay)}, true);
 				else if (selection_screenshot_with_delay > 0)
-					Posix.execl("vera-screenshot", "vera-screenshot", "--selection-screenshot-with-delay=%d".printf(selection_screenshot_with_delay));
+					launch = new Launcher({"vera-screenshot", "--selection-screenshot-with-delay=%d".printf(selection_screenshot_with_delay)}, true);
+				
+				if (launch != null)
+					launch.launch();
+				
 			} catch (Error e) {
 				error(e.message);
 			}

@@ -20,6 +20,8 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
+const string GETTEXT_PACKAGE = "vera";
+
 namespace Vera {
 	
 	public class Screenshot : Object {
@@ -319,6 +321,11 @@ namespace Vera {
 			/**
 			 * Main entrypoint for vera-screenshot.
 			*/
+
+			/* Translations */
+			Intl.setlocale(LocaleCategory.MESSAGES, "");
+			Intl.textdomain(GETTEXT_PACKAGE);
+			Intl.bind_textdomain_codeset(GETTEXT_PACKAGE, "utf-8");
 			
 			Gtk.init(ref args);
 

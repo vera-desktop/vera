@@ -84,12 +84,6 @@
 			<description>Enables the XSETTINGS manager for toolkit settings sharing among the applications. Do not disable if you don't know what an XSETTINGS manager is.</description>
 		</key>
 		
-		<key name="enable-screenshot" type="b">
-			<default>true</default>
-			<summary>Screenshooter</summary>
-			<description>If enabled, vera will automatically expose via DBus some methods to make screenshots.</description>
-		</key>
-		
 		<key name="enable-autostart" type="b">
 			<default>true</default>
 			<summary>Autostart</summary>

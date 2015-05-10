@@ -1,12 +1,13 @@
 # 
 # Translators:
+# seacat <seacat.linux@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-03-22 16:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-04-27 19:16+0000\n"
+"Last-Translator: seacat <seacat.linux@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/vera/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,123 +17,123 @@ msgstr ""
 
 #: screenshot/ScreenshotSaveDialog.vala:37
 msgid "Save screenshot..."
-msgstr ""
+msgstr "Guardar captura de pantalla..."
 
 #: screenshot/ScreenshotSaveDialog.vala:55
 msgid "PNG image"
-msgstr ""
+msgstr "Imagen PNG"
 
 #: screenshot/ScreenshotSaveDialog.vala:60
 msgid "All files"
-msgstr ""
+msgstr "Todos los archivos"
 
 #: screenshot/ScreenshotSaveDialog.vala:66
 #: screenshot/ScreenshotTakeDialog.vala:107
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: screenshot/ScreenshotSaveDialog.vala:68
 msgid "_Save"
-msgstr ""
+msgstr "_Guardar"
 
 #: screenshot/ScreenshotSelectionWindow.vala:264
 #: screenshot/ScreenshotTakeDialog.vala:88
 msgid "Selection"
-msgstr ""
+msgstr "Selección"
 
 #: screenshot/ScreenshotTakeDialog.vala:68
 msgid "Take a screenshot"
-msgstr ""
+msgstr "Capturar pantalla"
 
 #: screenshot/ScreenshotTakeDialog.vala:86
 msgid "Full screen"
-msgstr ""
+msgstr "Pantalla completa"
 
 #: screenshot/ScreenshotTakeDialog.vala:87
 msgid "Active window"
-msgstr ""
+msgstr "Ventana activa"
 
 #: screenshot/ScreenshotTakeDialog.vala:94
 msgid "Delay"
-msgstr ""
+msgstr "Demora"
 
 #: screenshot/ScreenshotTakeDialog.vala:109
 msgid "_Take a screenshot"
-msgstr ""
+msgstr "_Capturar pantalla"
 
 #: exit/ExitDialog.vala:43
 msgid "Power off"
-msgstr ""
+msgstr "Apagar"
 
 #: exit/ExitDialog.vala:44
 msgid "Do you really want to power off?"
-msgstr ""
+msgstr "¿Realmente quiere apagar?"
 
 #: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
 msgid "This will close every active application."
-msgstr ""
+msgstr "Esto cerrará todas las aplicaciones activas."
 
 #: exit/ExitDialog.vala:49
 msgid "Restart"
-msgstr ""
+msgstr "Reiniciar"
 
 #: exit/ExitDialog.vala:50
 msgid "Do you really want to restart?"
-msgstr ""
+msgstr "¿Realmente quiere reiniciar?"
 
 #: exit/ExitDialog.vala:55
 msgid "Suspend"
-msgstr ""
+msgstr "Suspender"
 
 #: exit/ExitDialog.vala:56
 msgid "Do you really want to suspend?"
-msgstr ""
+msgstr "¿Realmente quiere suspender?"
 
 #: exit/ExitDialog.vala:57
 msgid "Your active applications will not be closed."
-msgstr ""
+msgstr "Las aplicaciones activas no se cerrarán."
 
 #: exit/ExitDialog.vala:61
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernar"
 
 #: exit/ExitDialog.vala:62
 msgid "Do you really want to hibernate?"
-msgstr ""
+msgstr "¿Realmente quiere hibernar?"
 
 #: exit/ExitDialog.vala:67
 msgid "Logout"
-msgstr ""
+msgstr "Cerrar la sesión"
 
 #: exit/ExitDialog.vala:68
 msgid "Do you really want to logout?"
-msgstr ""
+msgstr "¿Realmente quiere cerrar la sesión?"
 
 #: exit/ExitDialog.vala:73
 msgid "Lock"
-msgstr ""
+msgstr "Bloquear"
 
 #: exit/ExitDialog.vala:74
 msgid "Do you really want to lock the screen?"
-msgstr ""
+msgstr "¿Realmente quiere bloquear la pantalla?"
 
 #: exit/ExitDialog.vala:75
 msgid "The password for this temporary user is <b>live</b>."
-msgstr ""
+msgstr "La contraseña para este usuario temporario es <b>live</b>."
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
-msgstr ""
+msgstr "Tiempo de espera de inactividad (en minutos)"
 
 #: org.semplicelinux.vera.gschema.xml:42
 msgid ""
 "The idle-timeout starts when the system is in idle (no mouse/keyboard "
 "input). After the timeout elapses, an idle action is performed."
-msgstr ""
+msgstr "El tiempo de espera inactivo comienza cuando el sistema está inactivo (sin ratón o entrada de teclado). Después que vence el tiempo de espera, se ejecuta una acción de inactividad."
 
 #: org.semplicelinux.vera.gschema.xml:47
 msgid "Locks the screen after the idle-timeout elapses."
-msgstr ""
+msgstr "Bloquea la pantalla después que se vence el tiempo de espera inactivo."
 
 #: org.semplicelinux.vera.gschema.xml:48
 msgid ""
@@ -143,7 +144,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:53
 msgid "Last directory where a screenshot has been saved."
-msgstr ""
+msgstr "Último directorio donde se guardó una captura de pantalla."
 
 #: org.semplicelinux.vera.gschema.xml:54
 msgid ""
@@ -153,7 +154,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:59
 msgid "Last exit action"
-msgstr ""
+msgstr "Última acción de salida"
 
 #: org.semplicelinux.vera.gschema.xml:60
 msgid ""
@@ -163,16 +164,16 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:65
 msgid "Lock the last exit action"
-msgstr ""
+msgstr "Bloquear la última acción de salida"
 
 #: org.semplicelinux.vera.gschema.xml:66
 msgid ""
 "If true, locks the last exit action, so that it will not be overwritten."
-msgstr ""
+msgstr "Si es verdadero, bloquea la última acción de salida, de modo que no se sobrescribe."
 
 #: org.semplicelinux.vera.gschema.xml:71
 msgid "CTRL+ALT+SPACE shortcut"
-msgstr ""
+msgstr "Atajo de teclado CTR+ALT+ESPACIO"
 
 #: org.semplicelinux.vera.gschema.xml:72
 msgid ""
@@ -182,7 +183,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:77
 msgid "Hide exit window"
-msgstr ""
+msgstr "Ocultar la ventana de salida"
 
 #: org.semplicelinux.vera.gschema.xml:78
 msgid ""
@@ -192,7 +193,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:83
 msgid "XSETTINGS manager"
-msgstr ""
+msgstr "Administrador de XSETTINGS"
 
 #: org.semplicelinux.vera.gschema.xml:84
 msgid ""
@@ -208,52 +209,52 @@ msgstr ""
 msgid ""
 "If enabled, vera will automatically expose via DBus some methods to make "
 "screenshots."
-msgstr ""
+msgstr "Si está habilitado, vera expondrá automáticamente a través de DBus algunos métodos para hacer capturas de pantalla. "
 
 #: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
-msgstr ""
+msgstr "Inicio automático"
 
 #: org.semplicelinux.vera.gschema.xml:96
 msgid "Enables the application autostart."
-msgstr ""
+msgstr "Habilita el inicio automático de la aplicación."
 
 #: org.semplicelinux.vera.gschema.xml:101
 msgid "Autostart files to ignore"
-msgstr ""
+msgstr "Archivos de inicio automático a ignorar"
 
 #: org.semplicelinux.vera.gschema.xml:102
 msgid ""
 "The autostart files to ignore (they will not be started automatically)."
-msgstr ""
+msgstr "Los archivos de inicio automático a ignorar (no se iniciarán automáticamente)."
 
 #: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin support"
-msgstr ""
+msgstr "Soporte de complementos"
 
 #: org.semplicelinux.vera.gschema.xml:108
 msgid "vera would be pretty useless if you disable this setting."
-msgstr ""
+msgstr "vera sería bastante inútil si deshabilita esta configuración."
 
 #: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugin search path"
-msgstr ""
+msgstr "Ruta de búsqueda del complemento"
 
 #: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugin search path. Touch this only if you know what you're doing."
-msgstr ""
+msgstr "La ruta de búsqueda del complemento. Tocar solamente si sabe lo que está haciendo."
 
 #: org.semplicelinux.vera.gschema.xml:119
 msgid "Plugins to ignore"
-msgstr ""
+msgstr "Complementos a ignorar"
 
 #: org.semplicelinux.vera.gschema.xml:120
 msgid "The plugins to ignore (they will not be started)"
-msgstr ""
+msgstr "Los complementos a ignorar (no se iniciarán)."
 
 #: org.semplicelinux.vera.gschema.xml:125
 msgid "Reverse the ignore-plugin setting"
-msgstr ""
+msgstr "Invertir el valor ignore-plugin"
 
 #: org.semplicelinux.vera.gschema.xml:126
 msgid ""
@@ -264,40 +265,40 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:31
 msgid "Theme name"
-msgstr ""
+msgstr "Nombre del tema"
 
 #: org.semplicelinux.vera.settings.gschema.xml:32
 msgid "Theme to use."
-msgstr ""
+msgstr "Tema a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:37
 msgid "Icon theme name"
-msgstr ""
+msgstr "Nombre del tema del icono"
 
 #: org.semplicelinux.vera.settings.gschema.xml:38
 msgid "Icon theme to use."
-msgstr ""
+msgstr "Tema del icono a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:43
 msgid "Sound theme name"
-msgstr ""
+msgstr "Nmobre del tema de sonido"
 
 #: org.semplicelinux.vera.settings.gschema.xml:44
 msgid "Sound theme to use."
-msgstr ""
+msgstr "Tema de sonido a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:49
 msgid "Event sounds"
-msgstr ""
+msgstr "Sonidos de evento"
 
 #: org.semplicelinux.vera.settings.gschema.xml:50
 msgid ""
 "If enabled, the system will play event sound if a sound theme is specified."
-msgstr ""
+msgstr "Si está habilitado, el sistema ejecutará el sonido del evento, si está especificado un tema de sonido."
 
 #: org.semplicelinux.vera.settings.gschema.xml:55
 msgid "Event sounds in response to input"
-msgstr ""
+msgstr "El evento suena en respuesta a la entrada"
 
 #: org.semplicelinux.vera.settings.gschema.xml:56
 msgid ""
@@ -307,33 +308,33 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:61
 msgid "Window scaling factor"
-msgstr ""
+msgstr "Factor de escala de la ventana"
 
 #: org.semplicelinux.vera.settings.gschema.xml:62
 msgid ""
 "The scaling factor for the windows. Increase this if you have high "
 "definition ('Retina', HiDPI) monitors."
-msgstr ""
+msgstr "Factor de escala para las ventanas. Incrementar si Ud tiene monitores de alta definición ('Retina', HiDPI)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:67
 msgid "DPI"
-msgstr ""
+msgstr "DPI"
 
 #: org.semplicelinux.vera.settings.gschema.xml:68
 msgid ""
 "The Dots-per-inch of your monitor. Note that when the Window scaling factor "
 "is > 1, the DPI setting is adjusted accordingly."
-msgstr ""
+msgstr "Puntos por pulgada de su monitor. Advierta que cuando el factor de escala de la ventana es > 1, la configuración de DPI se ajusta en consecuencia."
 
 #: org.semplicelinux.vera.settings.gschema.xml:74
 msgid "Text antialiasing"
-msgstr ""
+msgstr "Antialiasing del texto"
 
 #: org.semplicelinux.vera.settings.gschema.xml:75
 msgid ""
 "Manages the text antialiasing. 0 is no, 1 is yes, and -1 is default (takes "
 "the value from the server)."
-msgstr ""
+msgstr "Gestiona el antialiasing del texto. 0 es no, 1 es sí y -1 el valor por defecto (toma el valor desde el servidor)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:97
 msgid "Text hinting style"
@@ -387,77 +388,77 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:135
 msgid "Images in buttons"
-msgstr ""
+msgstr "Imágenes en botones"
 
 #: org.semplicelinux.vera.settings.gschema.xml:136
 msgid "If enabled, the buttons will show an icon alongside the text."
-msgstr ""
+msgstr "Si está habilitado, los botones mostrarán un icono junto al texto."
 
 #: org.semplicelinux.vera.settings.gschema.xml:141
 msgid "Cursor theme name"
-msgstr ""
+msgstr "Nombre del tema del cursor"
 
 #: org.semplicelinux.vera.settings.gschema.xml:142
 msgid "The cursor theme to use. If blank, it will use the default."
-msgstr ""
+msgstr "Tema del cursor a usar. Si está en blanco, se usará el valor por defecto."
 
 #: org.semplicelinux.vera.settings.gschema.xml:148
 msgid "Cursor size"
-msgstr ""
+msgstr "Tamaño del cursor"
 
 #: org.semplicelinux.vera.settings.gschema.xml:149
 msgid "The size to use for cursors. If 0, it will use the default size."
-msgstr ""
+msgstr "Tamaño a usar para los cursores. Si es 0, se usará el tamaño por defecto."
 
 #: org.semplicelinux.vera.settings.gschema.xml:154
 msgid "Decoration for client-side decorations"
-msgstr ""
+msgstr "Decoración para las decoraciones del lado del cliente"
 
 #: org.semplicelinux.vera.settings.gschema.xml:155
 msgid "The decoration to use for client-size decorations."
-msgstr ""
+msgstr "La decoración a usar para las decoraciones del lado del cliente."
 
 #: org.semplicelinux.vera.settings.gschema.xml:160
 msgid "Client-side decorations for builtin GTK+ dialogs"
-msgstr ""
+msgstr "Decoraciones del lado del cliente para los diálogos GTK+ incorporados"
 
 #: org.semplicelinux.vera.settings.gschema.xml:161
 msgid "If enabled, the builtin GTK+ dialogs will use client-side decorations."
-msgstr ""
+msgstr "Si está habilitado, los diálogos GTK+ incorporados usarán las decoraciones del lado del cliente."
 
 #: org.semplicelinux.vera.settings.gschema.xml:166
 msgid "Animations"
-msgstr ""
+msgstr "Animaciones"
 
 #: org.semplicelinux.vera.settings.gschema.xml:167
 msgid "Enables the animations."
-msgstr ""
+msgstr "Habilita las animaciones."
 
 #: org.semplicelinux.vera.settings.gschema.xml:172
 msgid "Error bell"
-msgstr ""
+msgstr "Campanilla de error"
 
 #: org.semplicelinux.vera.settings.gschema.xml:173
 msgid ""
 "If enabled, keyboard navigation and other input-related errors will (may) "
 "cause a beep."
-msgstr ""
+msgstr "Si está habilitado, los errores de navegación por teclado y otros relacionados a otras entradas, causarán un bip."
 
 #: org.semplicelinux.vera.settings.gschema.xml:178
 msgid "Font name"
-msgstr ""
+msgstr "Nombre de la fuente"
 
 #: org.semplicelinux.vera.settings.gschema.xml:179
 msgid "The font to use."
-msgstr ""
+msgstr "Fuente a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:184
 msgid "Input method"
-msgstr ""
+msgstr "Método de entrada"
 
 #: org.semplicelinux.vera.settings.gschema.xml:185
 msgid "The input method to use."
-msgstr ""
+msgstr "El método de entrada a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:190
 msgid "Key theme name"
@@ -469,23 +470,23 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:196
 msgid "Images in menus"
-msgstr ""
+msgstr "Imágenes en menús"
 
 #: org.semplicelinux.vera.settings.gschema.xml:197
 msgid "If enabled, the menus will show an icon alongside the text."
-msgstr ""
+msgstr "Si está habilitado, los menús mostrarán un icono junto al texto."
 
 #: org.semplicelinux.vera.settings.gschema.xml:202
 msgid "GTK+ modules"
-msgstr ""
+msgstr "Módulos GTK+"
 
 #: org.semplicelinux.vera.settings.gschema.xml:203
 msgid "List of currently active GTK+ modules."
-msgstr ""
+msgstr "Lista de los módulos GTK+ actualmente activos."
 
 #: org.semplicelinux.vera.settings.gschema.xml:208
 msgid "Print backends"
-msgstr ""
+msgstr "Imprimir fondos"
 
 #: org.semplicelinux.vera.settings.gschema.xml:209
 msgid "A comma-separated list of print backends to use in the print dialog"
@@ -493,10 +494,10 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:214
 msgid "Print preview command"
-msgstr ""
+msgstr "Comando imprimir vista previa"
 
 #: org.semplicelinux.vera.settings.gschema.xml:215
 msgid ""
 "Command to execute when the 'Preview' button has been clicked in the print "
 "dialog."
-msgstr ""
+msgstr "Comando a ejecutar cuando se hizo clic en el botón 'Vista previa' del diálogo Imprimir."

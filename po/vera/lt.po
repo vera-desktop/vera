@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-04-21 19:27+0000\n"
+"PO-Revision-Date: 2015-05-01 16:24+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/vera/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -47,11 +47,11 @@ msgstr "Padaryti ekrano kopiją"
 
 #: screenshot/ScreenshotTakeDialog.vala:86
 msgid "Full screen"
-msgstr ""
+msgstr "Visas ekranas"
 
 #: screenshot/ScreenshotTakeDialog.vala:87
 msgid "Active window"
-msgstr ""
+msgstr "Aktyvus langas"
 
 #: screenshot/ScreenshotTakeDialog.vala:94
 msgid "Delay"

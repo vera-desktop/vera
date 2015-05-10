@@ -66,7 +66,7 @@ programs.vera-command {
 		command/vera-command.vala \
 		command/VeraInterface.vala
 	
-	vala-packages = gio-2.0
+	vala-packages = gio-2.0 posix
 	packages = gio-2.0
 }
 

@@ -209,6 +209,8 @@ namespace Vera {
 								return false;
 							}
 						);
+					} else {
+						Gtk.main_quit();
 					}
 					
 					dialog.destroy();

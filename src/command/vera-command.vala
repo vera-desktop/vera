@@ -28,7 +28,6 @@ namespace Vera.Command {
 		*/
 		
 		private static VeraInterface vera_interface = null;
-		private static ScreenshotInterface screenshot_interface = null;
 		
 		private static string? load_plugin = null;
 		private static string? unload_plugin = null;
@@ -160,7 +159,7 @@ namespace Vera.Command {
 			try {
 			
 				/* Connect to DBus */
-				if (
+				if (!(
 					interactive_screenshot ||
 					screenshot ||
 					window_screenshot ||
@@ -168,14 +167,7 @@ namespace Vera.Command {
 					screenshot_with_delay > 0 ||
 					window_screenshot_with_delay > 0 ||
 					selection_screenshot_with_delay > 0
-				) {
-					/* Connect to org.semplicelinux.vera.Screenshot */
-					screenshot_interface = Bus.get_proxy_sync(
-						BusType.SESSION,
-						"org.semplicelinux.vera.Screenshot",
-						"/org/semplicelinux/vera/Screenshot"
-					);
-				} else {
+				)) {
 					vera_interface = Bus.get_proxy_sync(
 						BusType.SESSION,
 						"org.semplicelinux.vera",
@@ -209,19 +201,19 @@ namespace Vera.Command {
 				else if (switch_to_guest)
 					vera_interface.SwitchToGuest();
 				else if (interactive_screenshot)
-					screenshot_interface.Interactive();
+					Posix.execl("vera-screenshot", "vera-screenshot", "--interactive-screenshot");
 				else if (screenshot)
-					screenshot_interface.Full(0);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--screenshot");
 				else if (window_screenshot)
-					screenshot_interface.CurrentWindow(0);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--window-screenshot");
 				else if (selection_screenshot)
-					screenshot_interface.Selection(0);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--selection-screenshot");
 				else if (screenshot_with_delay > 0)
-					screenshot_interface.Full(screenshot_with_delay);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--screenshot-with-delay=%d".printf(screenshot_with_delay));
 				else if (window_screenshot_with_delay > 0)
-					screenshot_interface.CurrentWindow(window_screenshot_with_delay);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--window-screenshot-with-delay=%d".printf(window_screenshot_with_delay));
 				else if (selection_screenshot_with_delay > 0)
-					screenshot_interface.Selection(selection_screenshot_with_delay);
+					Posix.execl("vera-screenshot", "vera-screenshot", "--selection-screenshot-with-delay=%d".printf(selection_screenshot_with_delay));
 			} catch (Error e) {
 				error(e.message);
 			}

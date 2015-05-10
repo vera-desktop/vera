@@ -1,6 +1,6 @@
 /*
  * vera - a simple, lightweight, GTK3 based desktop environment
- * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ * Copyright (C) 2014-2015  Eugenio "g7" Paolantonio and the Semplice Project
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,11 +22,10 @@
 
 namespace Vera {
 	
-	[DBus (name = "org.semplicelinux.vera.Screenshot")]
 	public class Screenshot : Object {
 		
 		/**
-		 * This service makes screenshots.
+		 * This applications makes screenshots.
 		 * 
 		 * It has an interactive frontend (Interactive()) as well
 		 * as methods (Full(), Selection() and CurrentWindow()) to do
@@ -37,8 +36,45 @@ namespace Vera {
 		 * (i.e. it's not scriptable).
 		*/
 
-		public DBusConnection connection = null;
-		public uint? identifier = null;
+		/*
+		 * Command-line arguments
+		*/
+		
+		private static bool interactive_screenshot = false;
+		private static bool full_screenshot = false;
+		private static bool window_screenshot = false;
+		private static bool selection_screenshot = false;
+
+		private static int full_screenshot_with_delay = 0;
+		private static int window_screenshot_with_delay = 0;
+		private static int selection_screenshot_with_delay = 0;
+		
+		private const OptionEntry[] options = {
+			/* Interactive screenshot */
+			{ "interactive-screenshot", 0, 0, OptionArg.NONE, ref interactive_screenshot, "Displays the 'Take a screenshot' window.", null },
+			
+			/* Screenshot */
+			{ "screenshot", 'c', 0, OptionArg.NONE, ref full_screenshot, "Takes a screenshot", null },
+			
+			/* Window screenshot */
+			{ "window-screenshot", 'w', 0, OptionArg.NONE, ref window_screenshot, "Takes a screenshot of the current active window", null },
+			
+			/* Selection screenshot */
+			{ "selection-screenshot", 'e', 0, OptionArg.NONE, ref selection_screenshot, "Takes a screenshot of a selection.", null },
+			
+			/* Screenshot (with delay) */
+			{ "screenshot-with-delay", 0, 0, OptionArg.INT, ref full_screenshot_with_delay, "Takes a screenshot, with delay", "DELAY" },
+			
+			/* Window screenshot (with delay) */
+			{ "window-screenshot-with-delay", 0, 0, OptionArg.INT, ref window_screenshot_with_delay, "Takes a screenshot of the current active window, with delay", "DELAY" },
+			
+			/* Selection screenshot (with delay) */
+			{ "selection-screenshot-with-delay", 0, 0, OptionArg.INT, ref selection_screenshot_with_delay, "Takes a screenshot of a selection, with delay", "DELAY" },
+			
+			/* The end */
+			{ null }
+		};
+
 		
 		private Settings settings;
 
@@ -48,52 +84,6 @@ namespace Vera {
 			*/
 			
 			this.settings = new Settings("org.semplicelinux.vera");
-		}
-		
-		[DBus (visible = false)]
-		public static Screenshot start_handler() {
-			/**
-			 * Starts the Screenshot service.
-			 * To be used internally.
-			*/
-			
-			Screenshot handler = new Screenshot();
-			
-			uint identifier = Bus.own_name(
-				BusType.SESSION,
-				"org.semplicelinux.vera.Screenshot",
-				BusNameOwnerFlags.NONE,
-				(connection) => {
-					// Register the object
-					try {
-						handler.connection = connection;
-						connection.register_object("/org/semplicelinux/vera/Screenshot", handler);
-					} catch (IOError e) {
-						warning("Couldn't register Screenshot: %s", e.message);
-					}
-				},
-				() => {},
-				(connection, name) => warning("Unable to acquire bus %s", name)
-			);
-			
-			handler.identifier = identifier;
-			
-			return handler;
-		}
-
-		[DBus (visible = false)]
-		public void quit() {
-			/**
-			 * Quits the service.
-			*/
-						
-			if (this.connection == null && this.identifier == null) {
-				warning("connection or identifier not specified. Please use start_handler() to start the service.");
-				return;
-			}
-			
-			this.connection.close_sync();
-			Bus.unown_name(this.identifier);
 		}
 
 		private void take_screenshot(
@@ -180,6 +170,7 @@ namespace Vera {
 					}
 					
 					dialog.destroy();
+					Gtk.main_quit();
 				}
 			);
 			
@@ -218,6 +209,8 @@ namespace Vera {
 								return false;
 							}
 						);
+					} else {
+						Gtk.main_quit();
 					}
 					
 					dialog.destroy();
@@ -262,6 +255,7 @@ namespace Vera {
 			win.selection_area.selection_aborted.connect(
 				() => {
 					win.destroy();
+					Gtk.main_quit();
 				}
 			);
 			
@@ -319,6 +313,72 @@ namespace Vera {
 				}
 			);
 		
+		}
+		
+		public static int main(string[] args) {
+			/**
+			 * Main entrypoint for vera-screenshot.
+			*/
+			
+			Gtk.init(ref args);
+
+			if (args.length == 1) {
+				stdout.puts("You need to specify at least an argument! See -h for more details.\n");
+				return 1;
+			}
+			
+			/*
+			 * We support only one option at a time, so we need to check
+			 * if this is the case.
+			 * It seems that the OptionContext doesn't have an option for
+			 * this, so we need to manually do the check.
+			 * This is a bit tricky because there are some arguments with
+			 * require an argument, so we can't do a simple 'args.length > 2'.
+			*/
+			bool found_one = false;
+			foreach (string arg in args) {
+				if (arg.has_prefix("-")) {
+					if (found_one)
+						error("Only an argument is permitted!");
+					else
+						found_one = true;
+				}
+			}
+
+			// Parse arguments
+			try {
+				OptionContext optcontext = new OptionContext("");
+				optcontext.set_help_enabled(true);
+				optcontext.set_ignore_unknown_options(false);
+				optcontext.add_main_entries(options, null);
+				
+				optcontext.parse(ref args);
+			} catch (OptionError e) {
+				stdout.printf("error: %s\n", e.message);
+				stdout.puts("Use the -h switch to see the full list of available command line arguments.\n");
+				return 1;
+			}
+			
+			Screenshot screenshot = new Screenshot();
+			
+			if (interactive_screenshot)
+				screenshot.Interactive();
+			else if (full_screenshot)
+				screenshot.Full(0);
+			else if (window_screenshot)
+				screenshot.CurrentWindow(0);
+			else if (selection_screenshot)
+				screenshot.Selection(0);
+			else if (full_screenshot_with_delay > 0)
+				screenshot.Full(full_screenshot_with_delay);
+			else if (window_screenshot_with_delay > 0)
+				screenshot.CurrentWindow(window_screenshot_with_delay);
+			else if (selection_screenshot_with_delay > 0)
+				screenshot.Selection(selection_screenshot_with_delay);
+			
+			Gtk.main();
+			
+			return 0;
 		}
 		
 	}

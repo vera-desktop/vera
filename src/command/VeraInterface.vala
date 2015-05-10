@@ -43,18 +43,5 @@ namespace Vera.Command {
 		public abstract void SwitchToGuest() throws IOError;
 		
 	}
-	
-	[DBus (name = "org.semplicelinux.vera.Screenshot")]
-	public interface ScreenshotInterface : Object {
-		/**
-		 * Interface for org.semplicelinux.vera.screenshot.
-		*/
-
-		public abstract void Interactive() throws IOError;
-		public abstract void Selection(int delay) throws IOError;
-		public abstract void CurrentWindow(int delay) throws IOError;
-		public abstract void Full(int delay) throws IOError;
-		
-	}
 
 }

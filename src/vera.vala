@@ -70,9 +70,6 @@ namespace Vera {
 		// Settings
 		private Settings settings;
 		
-		/* Screenshot DBus service */
-		private Screenshot screenshot = null;
-		
 		/* DBus service */
 		private DBusService service;
 		
@@ -165,13 +162,6 @@ namespace Vera {
 			// Settings
 			this.settings = new Settings("org.semplicelinux.vera");
 			
-			// Should we start the screenshooter?
-			if (this.settings.get_boolean("enable-screenshot")) {
-				this.screenshot = Screenshot.start_handler();
-			} else {
-				message("Internal screenshooter not started, as requested.");
-			}
-			
 			// Should we start the XsettingsManager?
 			if (this.settings.get_boolean("enable-xsettings")) {
 				this.xsettings_manager = new XsettingsManager((XlibDisplay)this.display);
@@ -234,10 +224,6 @@ namespace Vera {
 			try {
 				/* Quit the org.semplicelinux.vera DBus service */
 				this.service.quit();
-				
-				/* Quit the org.semplicelinux.vera.Screenshot DBus service */
-				if (this.screenshot != null)
-					this.screenshot.quit();
 			} catch (Error e) {
 			}
 			

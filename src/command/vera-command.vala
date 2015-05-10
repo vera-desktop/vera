@@ -28,7 +28,6 @@ namespace Vera.Command {
 		*/
 		
 		private static VeraInterface vera_interface = null;
-		private static ScreenshotInterface screenshot_interface = null;
 		
 		private static string? load_plugin = null;
 		private static string? unload_plugin = null;
@@ -160,7 +159,7 @@ namespace Vera.Command {
 			try {
 			
 				/* Connect to DBus */
-				if (
+				if (!(
 					interactive_screenshot ||
 					screenshot ||
 					window_screenshot ||
@@ -168,14 +167,7 @@ namespace Vera.Command {
 					screenshot_with_delay > 0 ||
 					window_screenshot_with_delay > 0 ||
 					selection_screenshot_with_delay > 0
-				) {
-					/* Connect to org.semplicelinux.vera.Screenshot */
-					screenshot_interface = Bus.get_proxy_sync(
-						BusType.SESSION,
-						"org.semplicelinux.vera.Screenshot",
-						"/org/semplicelinux/vera/Screenshot"
-					);
-				} else {
+				)) {
 					vera_interface = Bus.get_proxy_sync(
 						BusType.SESSION,
 						"org.semplicelinux.vera",
@@ -184,6 +176,7 @@ namespace Vera.Command {
 				}
 								
 				/* Execute action! */
+				Vera.Launcher launch = null;
 				if (load_plugin != null)
 					vera_interface.LoadPlugin(load_plugin);
 				else if (unload_plugin != null)
@@ -209,19 +202,23 @@ namespace Vera.Command {
 				else if (switch_to_guest)
 					vera_interface.SwitchToGuest();
 				else if (interactive_screenshot)
-					screenshot_interface.Interactive();
+					launch = new Launcher({"vera-screenshot", "--interactive-screenshot"}, true);
 				else if (screenshot)
-					screenshot_interface.Full(0);
+					launch = new Launcher({"vera-screenshot", "--screenshot"}, true);
 				else if (window_screenshot)
-					screenshot_interface.CurrentWindow(0);
+					launch = new Launcher({"vera-screenshot", "--window-screenshot"}, true);
 				else if (selection_screenshot)
-					screenshot_interface.Selection(0);
+					launch = new Launcher({"vera-screenshot", "--selection-screenshot"}, true);
 				else if (screenshot_with_delay > 0)
-					screenshot_interface.Full(screenshot_with_delay);
+					launch = new Launcher({"vera-screenshot", "--screenshot-with-delay=%d".printf(screenshot_with_delay)}, true);
 				else if (window_screenshot_with_delay > 0)
-					screenshot_interface.CurrentWindow(window_screenshot_with_delay);
+					launch = new Launcher({"vera-screenshot", "--window-screenshot-with-delay=%d".printf(window_screenshot_with_delay)}, true);
 				else if (selection_screenshot_with_delay > 0)
-					screenshot_interface.Selection(selection_screenshot_with_delay);
+					launch = new Launcher({"vera-screenshot", "--selection-screenshot-with-delay=%d".printf(selection_screenshot_with_delay)}, true);
+				
+				if (launch != null)
+					launch.launch();
+				
 			} catch (Error e) {
 				error(e.message);
 			}

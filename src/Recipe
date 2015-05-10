@@ -43,10 +43,6 @@ programs.vera {
 	sources = \
 		PluginManager.vala \
 		settings/xsettings-manager.vala \
-		screenshot/screenshot.vala \
-		screenshot/ScreenshotSaveDialog.vala \
-		screenshot/ScreenshotSelectionWindow.vala \
-		screenshot/ScreenshotTakeDialog.vala \
 		dbus/DBusService.vala \
 		exit/ExitDialog.vala \
 		autostart/AutostartManager.vala \
@@ -66,10 +62,27 @@ programs.vera-session {
 }
 
 programs.vera-command {
+	# Include here the launcher.vala source file to avoid linking to
+	# libvera and everything in-between
 	sources = \
+		launcher.vala \ 
 		command/vera-command.vala \
 		command/VeraInterface.vala
 	
 	vala-packages = gio-2.0
 	packages = gio-2.0
+}
+
+programs.vera-screenshot {
+	sources = \
+		screenshot/screenshot.vala \
+		screenshot/ScreenshotSaveDialog.vala \
+		screenshot/ScreenshotSelectionWindow.vala \
+		screenshot/ScreenshotTakeDialog.vala
+	compile-flags = -O2 -flto -include config.h
+	vala-compile-flags = --vapidir=./vapis
+	gettext-domain = vera
+
+	vala-packages = gio-2.0 gtk+-3.0 gdk-3.0 
+	packages = gio-2.0 gtk+-3.0  gdk-3.0
 }

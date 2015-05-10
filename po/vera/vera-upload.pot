@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-20 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,52 +9,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: screenshot/ScreenshotSaveDialog.vala:37
-msgid "Save screenshot..."
-msgstr ""
-
-#: screenshot/ScreenshotSaveDialog.vala:55
-msgid "PNG image"
-msgstr ""
-
-#: screenshot/ScreenshotSaveDialog.vala:60
-msgid "All files"
-msgstr ""
-
-#: screenshot/ScreenshotSaveDialog.vala:66
-#: screenshot/ScreenshotTakeDialog.vala:107
-msgid "_Cancel"
-msgstr ""
-
-#: screenshot/ScreenshotSaveDialog.vala:68
-msgid "_Save"
-msgstr ""
-
-#: screenshot/ScreenshotSelectionWindow.vala:264
-#: screenshot/ScreenshotTakeDialog.vala:88
-msgid "Selection"
-msgstr ""
-
-#: screenshot/ScreenshotTakeDialog.vala:68
-msgid "Take a screenshot"
-msgstr ""
-
-#: screenshot/ScreenshotTakeDialog.vala:86
-msgid "Full screen"
-msgstr ""
-
-#: screenshot/ScreenshotTakeDialog.vala:87
-msgid "Active window"
-msgstr ""
-
-#: screenshot/ScreenshotTakeDialog.vala:94
-msgid "Delay"
-msgstr ""
-
-#: screenshot/ScreenshotTakeDialog.vala:109
-msgid "_Take a screenshot"
-msgstr ""
 
 #: exit/ExitDialog.vala:43
 msgid "Power off"
@@ -115,6 +68,52 @@ msgstr ""
 
 #: exit/ExitDialog.vala:75
 msgid "The password for this temporary user is <b>live</b>."
+msgstr ""
+
+#: screenshot/ScreenshotSaveDialog.vala:37
+msgid "Save screenshot..."
+msgstr ""
+
+#: screenshot/ScreenshotSaveDialog.vala:55
+msgid "PNG image"
+msgstr ""
+
+#: screenshot/ScreenshotSaveDialog.vala:60
+msgid "All files"
+msgstr ""
+
+#: screenshot/ScreenshotSaveDialog.vala:66
+#: screenshot/ScreenshotTakeDialog.vala:107
+msgid "_Cancel"
+msgstr ""
+
+#: screenshot/ScreenshotSaveDialog.vala:68
+msgid "_Save"
+msgstr ""
+
+#: screenshot/ScreenshotSelectionWindow.vala:264
+#: screenshot/ScreenshotTakeDialog.vala:88
+msgid "Selection"
+msgstr ""
+
+#: screenshot/ScreenshotTakeDialog.vala:68
+msgid "Take a screenshot"
+msgstr ""
+
+#: screenshot/ScreenshotTakeDialog.vala:86
+msgid "Full screen"
+msgstr ""
+
+#: screenshot/ScreenshotTakeDialog.vala:87
+msgid "Active window"
+msgstr ""
+
+#: screenshot/ScreenshotTakeDialog.vala:94
+msgid "Delay"
+msgstr ""
+
+#: screenshot/ScreenshotTakeDialog.vala:109
+msgid "_Take a screenshot"
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41

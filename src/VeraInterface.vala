@@ -1,6 +1,6 @@
 /*
- * vera-command - simple wrapper to vera's DBus interface
- * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
+ * vera - a simple, lightweight, GTK3 based desktop environment
+ * Copyright (C) 2014-2015  Eugenio "g7" Paolantonio and the Semplice Project
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,9 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
+/* This Interface is used by separate binaries to talk to vera's DBus interface */
 
-namespace Vera.Command {
+namespace Vera {
 
 	[DBus (name = "org.semplicelinux.vera")]
 	public interface VeraInterface : Object {

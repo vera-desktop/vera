@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		# Install vera-session as an alternative
+		update-alternatives --install /usr/bin/x-session-manager \
+			x-session-manager /usr/bin/vera-session 50
+		
+		;;
+	
+	abort-upgrade|abort-remove|abort-deconfigure)
+		
+		;;
+	
+	*)
+		echo "postinst called with unknown argument $1" >&2
+		exit 1
+		
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0

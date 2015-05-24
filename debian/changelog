@@ -1,0 +1,250 @@
+vera-desktop (1.0.2-1) unstable; urgency=medium
+
+  * screenshot: make the screenshot service a separate standalone application.
+  * vera-command: invoke vera-screenshot when a screenshot action has been required.
+  * command: use Vera.Launcher to handle the vera-screenshot launch.
+  * data/applications/vera-screenshot.desktop: use vera-screenshot instead of vera-command.
+  * Updated translations.
+  * 1.0.2
+  * schemas: remove enable-screenshot setting as it's not needed anymore.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 10 May 2015 12:03:33 +0200
+
+vera-desktop (1.0.1-1) unstable; urgency=medium
+
+  * autostart/Application: strip useless file/uri placeholders.
+  * Updated translations.
+  * 1.0.1
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 26 Apr 2015 00:19:21 +0200
+
+vera-desktop (1.0.0-1) unstable; urgency=medium
+
+  * PluginManager: disable python and gjs plugin loaders.
+  * Updated translations.
+  * org.semplicelinux.vera.gschema: ignore alan-watcher.desktop and alan-reference-watcher.desktop by default.
+  * vera 1.0.0.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 04 Apr 2015 19:57:56 +0200
+
+vera-desktop (0.40-2) unstable; urgency=medium
+
+  * debian/vera-desktop.install: install translations.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 02 Apr 2015 17:57:37 +0200
+
+vera-desktop (0.40-1) unstable; urgency=medium
+
+  * AutostartManager: do not forcibly split command-line arguments in quotation marks.
+  * ExitDialog: grab focus on the YES button.
+  * screenshot: test for pixbuf != null
+  * Translation support.
+  * Updated translations.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 01 Apr 2015 22:10:05 +0200
+
+vera-desktop (0.39-1) unstable; urgency=medium
+
+  * Implement new method (ulong)get_idle_time() in the displays.
+  * vapis/xcrnsaver.vapi: bind the full xcrnsaver header.
+  * XlibDisplay: listen to X events and catch XScreenSaver.NotifyEvents.
+  * DBusService: listen to Display()'s idle_changed signal and set session's IdleHint accordingly.
+  * Make the idle timeout configurable.
+  * Disable the previously implemented idle-timeout and lock-on-idle settings.
+  * debian/control: build-depend on libxss-dev.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 21 Dec 2014 23:55:58 +0100
+
+vera-desktop (0.38-2) unstable; urgency=medium
+
+  * debian/vera-desktop.prerm: update -> upgrade, silly me.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 03 Dec 2014 17:18:58 +0100
+
+vera-desktop (0.38-1) unstable; urgency=medium
+
+  * autostart/AutostartManager: actually get the HOME environment variable.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 03 Dec 2014 16:40:15 +0100
+
+vera-desktop (0.37-1) unstable; urgency=medium
+
+  * Synced gitignore
+  * screenshot: use show() instead of present() when showing up the ScreenshotTakeDialog.
+  * screenshot: use show() instead of present() when showing up the ScreenshotSaveDialog.
+  * ExitDialog: set window icon
+  * ExitDialog: use set_default_response() to highlight the Yes response.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 23 Nov 2014 18:12:33 +0100
+
+vera-desktop (0.36-1) unstable; urgency=medium
+
+  * ScreenshotSelectionWindow: possible bugfix.
+  * vera-command: ensure we properly get the screenshot_interface
+    also for selection and interactive.
+  * Screenshot: updated some docstrings.
+  * schemas: settings: set icon-theme to 'Faba-Mono' and theme to 'Zukitre-Vera'
+  * debian/control: switch to valac-0.26
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Fri, 07 Nov 2014 20:25:56 +0100
+
+vera-desktop (0.35-1) unstable; urgency=medium
+
+  * Screenshot: added File Save dialog.
+  * Screenshot: do not take the screenshot directly from the Gdk.Window, but use instead a region from the entire root window.
+  * Screenshot: added screenshot via selection support.
+  * Added screenshot selection support in vera-command.
+  * Screenshot: added ScreenshotTakeDialog, an interactive frontend for vera's screenshot capabilities.
+  * debian/vera-desktop.install: ship /usr/share/applications.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Fri, 29 Aug 2014 20:35:51 +0200
+
+vera-desktop (0.34-1) unstable; urgency=medium
+
+  * vera.settings: changed default theme to 'Orchis'
+  * vera.settings: gtk-modules: add vera-color to the list
+    of GTK+ modules to load.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 18 Aug 2014 00:01:20 +0200
+
+vera-desktop (0.33-1) unstable; urgency=medium
+
+  * vera: added touchpad support.
+  * Ship the Applications menu.
+  * debian/vera-desktop.install: ship etc/.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 06 Aug 2014 00:31:16 +0200
+
+vera-desktop (0.32-1) unstable; urgency=medium
+
+  * vera: export XCURSOR_THEME environment variable.
+  * DBusService: Lock support.
+  * DBusService: fail if we are unable to acquire the bus.
+  * ExitDialog: added hibernate ExitAction description.
+  * ExitDialog: ensure the dialog is above everything.
+  * ExitDialog and DBusService: show the confirmation dialog if in live mode.
+  * User switching support.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 31 Jul 2014 19:23:12 +0200
+
+vera-desktop (0.31-1) unstable; urgency=medium
+
+  * Added hibernation support.
+  * Added vera-command utility.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 30 Jul 2014 22:23:50 +0200
+
+vera-desktop (0.30-1) unstable; urgency=medium
+
+  * AutostartManager: do not store pid if it is null.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 30 Jul 2014 00:02:12 +0200
+
+vera-desktop (0.29-1) unstable; urgency=medium
+
+  * Application: Properly set LaunchMode to ASYNC even
+    if X-Vera-Launch-Sync is not present in the .desktop file
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 28 Jul 2014 19:47:27 +0200
+
+vera-desktop (0.28-1) unstable; urgency=medium
+
+  * Some changes, and added a Launcher class, with respawn support.
+  * Enable images in menus by default.
+  * Automatically autostart pcmanfm.
+    Also, added the option to launch an application and wait until it exits.
+  * Set DMZ-White as the default cursor theme.
+  * dbus: added "ninja-shortcut" capabilities
+    (--> the CTRL+ALT+SPACE shortcut found in Semplice 2.0+).
+  * Added hide-exit-window setting.
+    If enabled, vera will not ask for confirmation when executing an exit action.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 26 Jul 2014 20:05:54 +0200
+
+vera-desktop (0.27-1) unstable; urgency=medium
+
+  * debian/: added vera-desktop's postinst and prerm, that install the vera-session
+    alternative for x-session-manager.
+  * autostart: assume that every Phase outside the specified ones are OTHER.
+  * data/autostart: added opensnap, volumeicon and xscreensaver autostarting.
+  * autostart/: parse OnlyShowIn and skip KDE autostart applications.
+  * vera-desktop: install /usr/share/vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Wed, 16 Jul 2014 01:18:30 +0200
+
+vera-desktop (0.26-1) unstable; urgency=medium
+
+  * xsettings-manager: added tentative HiDPI support.
+  * libvera-dev: install also the .so library.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 15 Jul 2014 14:01:49 +0200
+
+vera-desktop (0.25-1) unstable; urgency=medium
+
+  * vera: ensure we return the right exit code.
+  * debian/control: libvera-vapi: changed architecture to 'all',
+    as the vapis are platform-independent.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 10 Jul 2014 18:30:06 +0200
+
+vera-desktop (0.24-1) unstable; urgency=medium
+
+  * vera-session: exit after a maximum number of restarts, to avoid infinite loops.
+    Also ensure we start vera with --disable-autostart in case of a crash.
+  * Moved the ExitHandler to dbus/, and rename it using a more generic name.
+  * PluginManager: support plugin unloading.
+    Also implemented new methods to load a plugin singularly.
+  * DBusService: export methods to dynamically load and unload plugins.
+  * PluginInterface: API change -- added shutdown() method,
+    that will be called when the plugin has been unloaded.
+  * DbusService and PluginManager: ensure we invoke startup() on the loaded plugin.
+  * Catch SIGQUIT, SIGTERM and SIGINT, and use them to end the main loop,
+    because after it vera will now do some cleanup.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 10 Jul 2014 12:24:43 +0200
+
+vera-desktop (0.23-1) unstable; urgency=medium
+
+  * Added vera-session, a not-so-beautiful wrapper to launch vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 08 Jul 2014 20:46:28 +0200
+
+vera-desktop (0.22-1) unstable; urgency=medium
+
+  * autostart: added new setting autostart-ignore.
+  * vera: added an OptionContext to parse command-line arguments.
+  * vera: added the GTK+ option group to the OptionContext.
+  * src/Recipe: ensure we embed the soname in the library.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 08 Jul 2014 16:39:28 +0200
+
+vera-desktop (0.21-2) unstable; urgency=medium
+
+  * Renamed source and binaries package to vera-desktop, to avoid
+    conflicts with the 'vera' Debian package.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 29 Jun 2014 01:21:30 +0200
+
+vera (0.21-1) unstable; urgency=medium
+
+  * src/Recipe: ensure we install library headers to (include-directory)/vera.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 20:30:56 +0200
+
+vera (0.20-3) unstable; urgency=medium
+
+  * debian/control: also build-depend on libvera-xsettings-vapi.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 20:11:56 +0200
+
+vera (0.20-2) unstable; urgency=medium
+
+  * debian/control: added libgee-dev to Build-Depends.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 19:14:21 +0200
+
+vera (0.20-1) unstable; urgency=low
+
+  * Initial release 
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sat, 28 Jun 2014 18:46:51 +0200

@@ -22,19 +22,6 @@
 
 namespace Vera {
 	
-	public enum ExitAction {
-		
-		NONE = 0,
-		POWEROFF = 1,
-		REBOOT = 2,
-		SUSPEND = 3,
-		LOGOUT = 4,
-		LOCK = 5,
-		HIBERNATE = 6,
-		SWITCH_USER = 7
-		
-	}
-	
 	[DBus (name = "org.semplicelinux.vera")]
 	public class DBusService : Object {
 		

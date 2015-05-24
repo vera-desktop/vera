@@ -41,6 +41,7 @@ libraries.vera {
 
 programs.vera {
 	sources = \
+		ExitActions.vala \
 		PluginManager.vala \
 		settings/xsettings-manager.vala \
 		dbus/DBusService.vala \

@@ -67,7 +67,7 @@ programs.vera-command {
 	sources = \
 		launcher.vala \ 
 		command/vera-command.vala \
-		command/VeraInterface.vala
+		VeraInterface.vala
 	
 	vala-packages = gio-2.0
 	packages = gio-2.0

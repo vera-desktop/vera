@@ -1,5 +1,5 @@
 /*
- * vera-command - simple wrapper to vera's DBus interface
+ * vera - a simple, lightweight, GTK3 based desktop environment
  * Copyright (C) 2014  Eugenio "g7" Paolantonio and the Semplice Project
  * 
  * This library is free software; you can redistribute it and/or
@@ -20,27 +20,19 @@
  *    Eugenio "g7" Paolantonio <me@medesimo.eu>
 */
 
-
-namespace Vera.Command {
-
-	[DBus (name = "org.semplicelinux.vera")]
-	public interface VeraInterface : Object {
-		/**
-		 * Main interface to org.semplicelinux.vera.
-		*/
+namespace Vera {
+	
+	public enum ExitAction {
 		
-		public abstract void UnloadPlugin(string name) throws IOError;
-		public abstract void LoadPlugin(string name) throws IOError;
-		public abstract void NinjaShortcut() throws IOError;
-		public abstract void PowerOff() throws IOError;
-		public abstract void Reboot() throws IOError;
-		public abstract void Suspend() throws IOError;
-		public abstract void Hibernate() throws IOError;
-		public abstract void Logout() throws IOError;
-		public abstract void Lock() throws IOError;
-		public abstract void SwitchUser() throws IOError;
-		public abstract void SwitchUserTo(string user) throws IOError;
-		public abstract void SwitchToGuest() throws IOError;
+		NONE = 0,
+		POWEROFF = 1,
+		REBOOT = 2,
+		SUSPEND = 3,
+		LOGOUT = 4,
+		LOCK = 5,
+		HIBERNATE = 6,
+		SWITCH_USER = 7,
+		NINJA_SHORTCUT = 8
 		
 	}
 

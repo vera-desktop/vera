@@ -22,19 +22,6 @@
 
 namespace Vera {
 	
-	public enum ExitAction {
-		
-		NONE = 0,
-		POWEROFF = 1,
-		REBOOT = 2,
-		SUSPEND = 3,
-		LOGOUT = 4,
-		LOCK = 5,
-		HIBERNATE = 6,
-		SWITCH_USER = 7
-		
-	}
-	
 	[DBus (name = "org.semplicelinux.vera")]
 	public class DBusService : Object {
 		
@@ -244,26 +231,6 @@ namespace Vera {
 			}
 			
 		}
-		
-		private int show_dialog(ExitAction action) {
-			/**
-			 * Shows a dialog, and returns its ResponseType.
-			*/
-			
-			int result;
-			
-			if (!this.settings.get_boolean("hide-exit-window")) {
-				ExitDialog dialog = new ExitDialog(action);
-				result = dialog.run();
-				dialog.destroy();
-			} else {
-				/* Should hide, set result to ResponseType.YES */
-				result = Gtk.ResponseType.YES;
-			}
-			
-			return result;
-			
-		}
 			
 		
 		public void PowerOff() {
@@ -271,14 +238,10 @@ namespace Vera {
 			 * Shutdowns the system.
 			*/
 			
-			int result = this.show_dialog(ExitAction.POWEROFF);
-			
-			if (result == Gtk.ResponseType.YES) {
-				/* Hand-off to vera */
-				Main.exit_action = ExitAction.POWEROFF;
-				this.store_exit_action(ExitAction.POWEROFF);
-				Gtk.main_quit();
-			}
+			/* Hand-off to vera */
+			Main.exit_action = ExitAction.POWEROFF;
+			this.store_exit_action(ExitAction.POWEROFF);
+			Gtk.main_quit();
 			
 		}
 		
@@ -287,14 +250,10 @@ namespace Vera {
 			 * Reboots the system.
 			*/
 
-			int result = this.show_dialog(ExitAction.REBOOT);
-
-			if (result == Gtk.ResponseType.YES) {
-				/* Hand-off to vera */
-				Main.exit_action = ExitAction.REBOOT;
-				this.store_exit_action(ExitAction.REBOOT);
-				Gtk.main_quit();
-			}
+			/* Hand-off to vera */
+			Main.exit_action = ExitAction.REBOOT;
+			this.store_exit_action(ExitAction.REBOOT);
+			Gtk.main_quit();
 			
 		}
 		
@@ -303,13 +262,9 @@ namespace Vera {
 			 * Suspends the system.
 			*/
 			
-			int result = this.show_dialog(ExitAction.SUSPEND);
-
-			if (result == Gtk.ResponseType.YES) {
-				// Yes! We should suspend!
-				this.store_exit_action(ExitAction.SUSPEND);
-				this.logind.Suspend(true);
-			}
+			/* Yes! We should suspend! */
+			this.store_exit_action(ExitAction.SUSPEND);
+			this.logind.Suspend(true);
 			
 		}
 		
@@ -317,14 +272,10 @@ namespace Vera {
 			/**
 			 * Hibernates the system.
 			*/
-			
-			int result = this.show_dialog(ExitAction.HIBERNATE);
-			
-			if (result == Gtk.ResponseType.YES) {
-				/* Yeah! */
-				this.store_exit_action(ExitAction.HIBERNATE);
-				this.logind.Hibernate(true);
-			}
+						
+			/* Yeah! */
+			this.store_exit_action(ExitAction.HIBERNATE);
+			this.logind.Hibernate(true);
 			
 		}
 		
@@ -333,19 +284,15 @@ namespace Vera {
 			 * Logouts the user.
 			*/
 
-			int result = this.show_dialog(ExitAction.LOGOUT);
-
-			if (result == Gtk.ResponseType.YES) {
-				/*
-				 * If we exit with status 0, we will automatically
-				 * logout (vera-session will not restart us).
-				 * So, we actually need to quit only the main loop,
-				 * the quit() method in vera's main class will
-				 * do the job.
-				*/
-				this.store_exit_action(ExitAction.LOGOUT);
-				Gtk.main_quit();
-			}
+			/*
+			 * If we exit with status 0, we will automatically
+			 * logout (vera-session will not restart us).
+			 * So, we actually need to quit only the main loop,
+			 * the quit() method in vera's main class will
+			 * do the job.
+			*/
+			this.store_exit_action(ExitAction.LOGOUT);
+			Gtk.main_quit();
 			
 		}
 		
@@ -371,15 +318,6 @@ namespace Vera {
 			 * 
 			 * [1] https://www.mail-archive.com/systemd-devel@lists.freedesktop.org/msg20351.html
 			*/
-			
-			/* Check for live, and if so, display the confirmation dialog */
-			if (FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS)) {
-				int result = this.show_dialog(ExitAction.LOCK);
-				
-				if (result != Gtk.ResponseType.YES)
-					return;
-					
-			}
 			
 			this.on_lock_request();
 			this.store_exit_action(ExitAction.LOCK);

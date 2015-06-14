@@ -5,9 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-05-01 16:24+0000\n"
-"Last-Translator: Moo\n"
+"PO-Revision-Date: 2015-06-14 15:07+0000\n"
+"Last-Translator: g7 <me@medesimo.eu>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/vera/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,65 +60,74 @@ msgstr ""
 msgid "_Take a screenshot"
 msgstr "_Padaryti ekrano kopiją"
 
-#: exit/ExitDialog.vala:43
+#: logout/ExitDialog.vala:32
+msgid "_Yes (in %ds)"
+msgstr ""
+
+#: logout/ExitDialog.vala:47
 msgid "Power off"
 msgstr "Išjungti"
 
-#: exit/ExitDialog.vala:44
+#: logout/ExitDialog.vala:48
 msgid "Do you really want to power off?"
 msgstr "Ar tikrai norite išjungti?"
 
-#: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
+#: logout/ExitDialog.vala:49 logout/ExitDialog.vala:55
+#: logout/ExitDialog.vala:73
 msgid "This will close every active application."
 msgstr "Tai uždarys visas aktyvias programas."
 
-#: exit/ExitDialog.vala:49
+#: logout/ExitDialog.vala:53
 msgid "Restart"
 msgstr "Paleisti iš naujo"
 
-#: exit/ExitDialog.vala:50
+#: logout/ExitDialog.vala:54
 msgid "Do you really want to restart?"
 msgstr "Ar tikrai norite paleisti iš naujo?"
 
-#: exit/ExitDialog.vala:55
+#: logout/ExitDialog.vala:59
 msgid "Suspend"
 msgstr "Pristabdyti"
 
-#: exit/ExitDialog.vala:56
+#: logout/ExitDialog.vala:60
 msgid "Do you really want to suspend?"
 msgstr "Ar tikrai norite pristabdyti?"
 
-#: exit/ExitDialog.vala:57
+#: logout/ExitDialog.vala:61 logout/ExitDialog.vala:67
 msgid "Your active applications will not be closed."
 msgstr "Jūsų aktyvios programos nebus uždarytos."
 
-#: exit/ExitDialog.vala:61
+#: logout/ExitDialog.vala:65
 msgid "Hibernate"
 msgstr "Užmigdyti"
 
-#: exit/ExitDialog.vala:62
+#: logout/ExitDialog.vala:66
 msgid "Do you really want to hibernate?"
 msgstr "Ar tikrai norite užmigdyti?"
 
-#: exit/ExitDialog.vala:67
+#: logout/ExitDialog.vala:71
 msgid "Logout"
 msgstr "Atsijungti"
 
-#: exit/ExitDialog.vala:68
+#: logout/ExitDialog.vala:72
 msgid "Do you really want to logout?"
 msgstr "Ar tikrai norite atsijungti?"
 
-#: exit/ExitDialog.vala:73
+#: logout/ExitDialog.vala:77
 msgid "Lock"
 msgstr "Užrakinti"
 
-#: exit/ExitDialog.vala:74
+#: logout/ExitDialog.vala:78
 msgid "Do you really want to lock the screen?"
 msgstr "Ar tikrai norite užrakinti ekraną?"
 
-#: exit/ExitDialog.vala:75
+#: logout/ExitDialog.vala:79
 msgid "The password for this temporary user is <b>live</b>."
 msgstr "Šio laikinojo naudotojo slaptažodis yra <b>live</b>."
+
+#: logout/ExitDialog.vala:104
+msgid "_No"
+msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -202,61 +210,51 @@ msgid ""
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:89
-msgid "Screenshooter"
-msgstr ""
-
-#: org.semplicelinux.vera.gschema.xml:90
-msgid ""
-"If enabled, vera will automatically expose via DBus some methods to make "
-"screenshots."
-msgstr ""
-
-#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:96
+#: org.semplicelinux.vera.gschema.xml:90
 msgid "Enables the application autostart."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:101
+#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart files to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:102
+#: org.semplicelinux.vera.gschema.xml:96
 msgid ""
 "The autostart files to ignore (they will not be started automatically)."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:107
+#: org.semplicelinux.vera.gschema.xml:101
 msgid "Plugin support"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:108
+#: org.semplicelinux.vera.gschema.xml:102
 msgid "vera would be pretty useless if you disable this setting."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:113
+#: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin search path"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:114
+#: org.semplicelinux.vera.gschema.xml:108
 msgid "The plugin search path. Touch this only if you know what you're doing."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:119
+#: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugins to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:120
+#: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugins to ignore (they will not be started)"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:125
+#: org.semplicelinux.vera.gschema.xml:119
 msgid "Reverse the ignore-plugin setting"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:126
+#: org.semplicelinux.vera.gschema.xml:120
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "
@@ -408,7 +406,7 @@ msgstr "Žymeklio dydis"
 
 #: org.semplicelinux.vera.settings.gschema.xml:149
 msgid "The size to use for cursors. If 0, it will use the default size."
-msgstr ""
+msgstr "Naudojamo žymeklio dydis. Jeigu 0, bus naudojamas numatytasis dydis."
 
 #: org.semplicelinux.vera.settings.gschema.xml:154
 msgid "Decoration for client-side decorations"
@@ -436,13 +434,13 @@ msgstr "Įjungia animacijas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:172
 msgid "Error bell"
-msgstr ""
+msgstr "Klaidų skambutis"
 
 #: org.semplicelinux.vera.settings.gschema.xml:173
 msgid ""
 "If enabled, keyboard navigation and other input-related errors will (may) "
 "cause a beep."
-msgstr ""
+msgstr "Jei įjungta, klaviatūros naršymo ar kitos įvesties klaidos (galbūt) įjungs skambutį."
 
 #: org.semplicelinux.vera.settings.gschema.xml:178
 msgid "Font name"
@@ -454,11 +452,11 @@ msgstr "Naudojamas šriftas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:184
 msgid "Input method"
-msgstr ""
+msgstr "Įvesties metodas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:185
 msgid "The input method to use."
-msgstr ""
+msgstr "Naudojamas įvesties metodas."
 
 #: org.semplicelinux.vera.settings.gschema.xml:190
 msgid "Key theme name"

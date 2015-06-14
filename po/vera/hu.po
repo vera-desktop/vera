@@ -5,9 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-04-07 10:20+0000\n"
-"Last-Translator: Puskas-Kolozsvari Frederic <pkfric@yahoo.com>\n"
+"PO-Revision-Date: 2015-06-14 15:07+0000\n"
+"Last-Translator: g7 <me@medesimo.eu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/vera/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,65 +60,74 @@ msgstr "Késleltetés"
 msgid "_Take a screenshot"
 msgstr "_Készíts egy képernyőképet"
 
-#: exit/ExitDialog.vala:43
+#: logout/ExitDialog.vala:32
+msgid "_Yes (in %ds)"
+msgstr ""
+
+#: logout/ExitDialog.vala:47
 msgid "Power off"
 msgstr "Leállítás"
 
-#: exit/ExitDialog.vala:44
+#: logout/ExitDialog.vala:48
 msgid "Do you really want to power off?"
 msgstr "Valóban le akarja állítani?"
 
-#: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
+#: logout/ExitDialog.vala:49 logout/ExitDialog.vala:55
+#: logout/ExitDialog.vala:73
 msgid "This will close every active application."
 msgstr "Ez be fog zárni minden futó programot."
 
-#: exit/ExitDialog.vala:49
+#: logout/ExitDialog.vala:53
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: exit/ExitDialog.vala:50
+#: logout/ExitDialog.vala:54
 msgid "Do you really want to restart?"
 msgstr "Valóban újra akarja indítani?"
 
-#: exit/ExitDialog.vala:55
+#: logout/ExitDialog.vala:59
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: exit/ExitDialog.vala:56
+#: logout/ExitDialog.vala:60
 msgid "Do you really want to suspend?"
 msgstr "Valóban fel akarja függeszteni?"
 
-#: exit/ExitDialog.vala:57
+#: logout/ExitDialog.vala:61 logout/ExitDialog.vala:67
 msgid "Your active applications will not be closed."
 msgstr "A futó alkalmazások most bezáródnak."
 
-#: exit/ExitDialog.vala:61
+#: logout/ExitDialog.vala:65
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: exit/ExitDialog.vala:62
+#: logout/ExitDialog.vala:66
 msgid "Do you really want to hibernate?"
 msgstr "Valóban hibernálni akarja?"
 
-#: exit/ExitDialog.vala:67
+#: logout/ExitDialog.vala:71
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: exit/ExitDialog.vala:68
+#: logout/ExitDialog.vala:72
 msgid "Do you really want to logout?"
 msgstr "Valóban ki akar jelentkezni?"
 
-#: exit/ExitDialog.vala:73
+#: logout/ExitDialog.vala:77
 msgid "Lock"
 msgstr "Zárolás"
 
-#: exit/ExitDialog.vala:74
+#: logout/ExitDialog.vala:78
 msgid "Do you really want to lock the screen?"
 msgstr "Valóban zárolni akarja a képernyőt?"
 
-#: exit/ExitDialog.vala:75
+#: logout/ExitDialog.vala:79
 msgid "The password for this temporary user is <b>live</b>."
 msgstr "Ennek az ideiglenes felhasználónak a jelszava <b>live</b>."
+
+#: logout/ExitDialog.vala:104
+msgid "_No"
+msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -202,61 +210,51 @@ msgid ""
 msgstr "Engedélyezi az XSETTINGS menedzsernek az eszköztár beállításainak alkalmazások közötti megosztását. Ne tiltsa le, ha nem tudja, mi az XSETTINGS menedzser."
 
 #: org.semplicelinux.vera.gschema.xml:89
-msgid "Screenshooter"
-msgstr "Képernyőkép mentő"
-
-#: org.semplicelinux.vera.gschema.xml:90
-msgid ""
-"If enabled, vera will automatically expose via DBus some methods to make "
-"screenshots."
-msgstr "Ha engedélyezett, a vera automatikusan megjelenít a DBus-on keresztül néhány módszert a képernyőkép mentésére."
-
-#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
 msgstr "Automatikus indítás"
 
-#: org.semplicelinux.vera.gschema.xml:96
+#: org.semplicelinux.vera.gschema.xml:90
 msgid "Enables the application autostart."
 msgstr "Engedélyezi a program automatikus indítását."
 
-#: org.semplicelinux.vera.gschema.xml:101
+#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart files to ignore"
 msgstr "Automatikusan induló fájlok figyelmen kívül hagyása"
 
-#: org.semplicelinux.vera.gschema.xml:102
+#: org.semplicelinux.vera.gschema.xml:96
 msgid ""
 "The autostart files to ignore (they will not be started automatically)."
 msgstr "A figyelmen kívül hagyott automatikusan induló fájlok (ezek nem lesznek automatikusan elindítva)."
 
-#: org.semplicelinux.vera.gschema.xml:107
+#: org.semplicelinux.vera.gschema.xml:101
 msgid "Plugin support"
 msgstr "Bővítmény támogatás"
 
-#: org.semplicelinux.vera.gschema.xml:108
+#: org.semplicelinux.vera.gschema.xml:102
 msgid "vera would be pretty useless if you disable this setting."
 msgstr "A vera hasznavehetetlen lesz, ha letiltod ezt a beállítást."
 
-#: org.semplicelinux.vera.gschema.xml:113
+#: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin search path"
 msgstr "Bővítmény támogatás útvonala"
 
-#: org.semplicelinux.vera.gschema.xml:114
+#: org.semplicelinux.vera.gschema.xml:108
 msgid "The plugin search path. Touch this only if you know what you're doing."
 msgstr "A bővítmény támogatás útvonala. Csak akkor módosítsd, ha tudod, mit teszel."
 
-#: org.semplicelinux.vera.gschema.xml:119
+#: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugins to ignore"
 msgstr "Figyelmen kívül hagyott bővítmények"
 
-#: org.semplicelinux.vera.gschema.xml:120
+#: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugins to ignore (they will not be started)"
 msgstr "A figyelmen kívül hagyott bővítmények (ezek nem lesznek elindítva)"
 
-#: org.semplicelinux.vera.gschema.xml:125
+#: org.semplicelinux.vera.gschema.xml:119
 msgid "Reverse the ignore-plugin setting"
 msgstr "A figyelmen kívül hagyott bővítmények beállításának megfordítása"
 
-#: org.semplicelinux.vera.gschema.xml:126
+#: org.semplicelinux.vera.gschema.xml:120
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "

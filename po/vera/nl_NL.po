@@ -5,9 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-20 20:35+0100\n"
-"PO-Revision-Date: 2015-03-22 20:26+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2015-06-14 15:07+0000\n"
+"Last-Translator: g7 <me@medesimo.eu>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/vera/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,65 +60,74 @@ msgstr "Vertraging"
 msgid "_Take a screenshot"
 msgstr "_Een schermafbeelding maken"
 
-#: exit/ExitDialog.vala:43
+#: logout/ExitDialog.vala:32
+msgid "_Yes (in %ds)"
+msgstr ""
+
+#: logout/ExitDialog.vala:47
 msgid "Power off"
 msgstr "Uitschakelen"
 
-#: exit/ExitDialog.vala:44
+#: logout/ExitDialog.vala:48
 msgid "Do you really want to power off?"
 msgstr "Weet u zeker dat u uit wilt schakelen?"
 
-#: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
+#: logout/ExitDialog.vala:49 logout/ExitDialog.vala:55
+#: logout/ExitDialog.vala:73
 msgid "This will close every active application."
 msgstr "Dit zal alle actieve applicaties sluiten."
 
-#: exit/ExitDialog.vala:49
+#: logout/ExitDialog.vala:53
 msgid "Restart"
 msgstr "Herstarten"
 
-#: exit/ExitDialog.vala:50
+#: logout/ExitDialog.vala:54
 msgid "Do you really want to restart?"
 msgstr "Weet u zeker dat u wilt herstarten?"
 
-#: exit/ExitDialog.vala:55
+#: logout/ExitDialog.vala:59
 msgid "Suspend"
 msgstr "Slaapstand"
 
-#: exit/ExitDialog.vala:56
+#: logout/ExitDialog.vala:60
 msgid "Do you really want to suspend?"
 msgstr "Weet u zeker dat u de slaapstand wilt activeren?"
 
-#: exit/ExitDialog.vala:57
+#: logout/ExitDialog.vala:61 logout/ExitDialog.vala:67
 msgid "Your active applications will not be closed."
 msgstr "Uw actieve applicaties zullen niet worden gesloten."
 
-#: exit/ExitDialog.vala:61
+#: logout/ExitDialog.vala:65
 msgid "Hibernate"
 msgstr "Pauzestand"
 
-#: exit/ExitDialog.vala:62
+#: logout/ExitDialog.vala:66
 msgid "Do you really want to hibernate?"
 msgstr "Weet u zeker dat u de pauzestand wilt activeren?"
 
-#: exit/ExitDialog.vala:67
+#: logout/ExitDialog.vala:71
 msgid "Logout"
 msgstr "Afmelden?"
 
-#: exit/ExitDialog.vala:68
+#: logout/ExitDialog.vala:72
 msgid "Do you really want to logout?"
 msgstr "Weet u zeker dat u af wilt melden?"
 
-#: exit/ExitDialog.vala:73
+#: logout/ExitDialog.vala:77
 msgid "Lock"
 msgstr "Vergrendelen"
 
-#: exit/ExitDialog.vala:74
+#: logout/ExitDialog.vala:78
 msgid "Do you really want to lock the screen?"
 msgstr "Weet u zeker dat u het scherm wilt vergrendelen?"
 
-#: exit/ExitDialog.vala:75
+#: logout/ExitDialog.vala:79
 msgid "The password for this temporary user is <b>live</b>."
 msgstr "Het wachtwoord van deze tijdelijke gebruiker is <b>live</b>."
+
+#: logout/ExitDialog.vala:104
+msgid "_No"
+msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -202,61 +210,51 @@ msgid ""
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:89
-msgid "Screenshooter"
-msgstr "Schermafbeeldingmaker"
-
-#: org.semplicelinux.vera.gschema.xml:90
-msgid ""
-"If enabled, vera will automatically expose via DBus some methods to make "
-"screenshots."
-msgstr ""
-
-#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
 msgstr "Automatisch opstarten"
 
-#: org.semplicelinux.vera.gschema.xml:96
+#: org.semplicelinux.vera.gschema.xml:90
 msgid "Enables the application autostart."
 msgstr "Schakelt het automatisch opstarten van de applicatie in."
 
-#: org.semplicelinux.vera.gschema.xml:101
+#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart files to ignore"
 msgstr "Automatisch opstarten-bestanden die moeten worden genegeerd"
 
-#: org.semplicelinux.vera.gschema.xml:102
+#: org.semplicelinux.vera.gschema.xml:96
 msgid ""
 "The autostart files to ignore (they will not be started automatically)."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:107
+#: org.semplicelinux.vera.gschema.xml:101
 msgid "Plugin support"
 msgstr "Plug-in-ondersteuning"
 
-#: org.semplicelinux.vera.gschema.xml:108
+#: org.semplicelinux.vera.gschema.xml:102
 msgid "vera would be pretty useless if you disable this setting."
 msgstr "vera zal nutteloos worden als u deze instelling uitschakelt."
 
-#: org.semplicelinux.vera.gschema.xml:113
+#: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin search path"
 msgstr "Plug-in-zoekpad"
 
-#: org.semplicelinux.vera.gschema.xml:114
+#: org.semplicelinux.vera.gschema.xml:108
 msgid "The plugin search path. Touch this only if you know what you're doing."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:119
+#: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugins to ignore"
 msgstr "Plug-ins die moeten worden genegeerd"
 
-#: org.semplicelinux.vera.gschema.xml:120
+#: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugins to ignore (they will not be started)"
-msgstr ""
+msgstr "De plug-ins die moeten worden genegeerd (deze zullen niet worden gestart)"
 
-#: org.semplicelinux.vera.gschema.xml:125
+#: org.semplicelinux.vera.gschema.xml:119
 msgid "Reverse the ignore-plugin setting"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:126
+#: org.semplicelinux.vera.gschema.xml:120
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "
@@ -298,7 +296,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:55
 msgid "Event sounds in response to input"
-msgstr ""
+msgstr "Evenementgeluiden als antwoord op invoer"
 
 #: org.semplicelinux.vera.settings.gschema.xml:56
 msgid ""
@@ -314,7 +312,7 @@ msgstr "Schalingsfactor van vensters"
 msgid ""
 "The scaling factor for the windows. Increase this if you have high "
 "definition ('Retina', HiDPI) monitors."
-msgstr ""
+msgstr "De schaalfactor die moet worden gebruikt om vensters te schalen. Verhoog dit getal als u een hoge resolutie-scherm (zoals 'Retina' of HiDPI) hebt."
 
 #: org.semplicelinux.vera.settings.gschema.xml:67
 msgid "DPI"
@@ -338,7 +336,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:97
 msgid "Text hinting style"
-msgstr ""
+msgstr "Stijl van tekst-hinten"
 
 #: org.semplicelinux.vera.settings.gschema.xml:98
 msgid ""
@@ -348,7 +346,7 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:104
 msgid "Text hinting"
-msgstr ""
+msgstr "Tekst-hinten"
 
 #: org.semplicelinux.vera.settings.gschema.xml:105
 msgid ""
@@ -412,15 +410,15 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:154
 msgid "Decoration for client-side decorations"
-msgstr ""
+msgstr "Decoratie voor client-side-decoraties"
 
 #: org.semplicelinux.vera.settings.gschema.xml:155
 msgid "The decoration to use for client-size decorations."
-msgstr ""
+msgstr "De te gebruiken decoratie voor client-side-decoraties."
 
 #: org.semplicelinux.vera.settings.gschema.xml:160
 msgid "Client-side decorations for builtin GTK+ dialogs"
-msgstr ""
+msgstr "Client-side-decoraties voor ingebouwde GTK+-dialoogvensters"
 
 #: org.semplicelinux.vera.settings.gschema.xml:161
 msgid "If enabled, the builtin GTK+ dialogs will use client-side decorations."
@@ -458,7 +456,7 @@ msgstr "Invoermethode"
 
 #: org.semplicelinux.vera.settings.gschema.xml:185
 msgid "The input method to use."
-msgstr ""
+msgstr "De te gebruiken invoermethode"
 
 #: org.semplicelinux.vera.settings.gschema.xml:190
 msgid "Key theme name"
@@ -466,7 +464,7 @@ msgstr "Toetsenthemanaam"
 
 #: org.semplicelinux.vera.settings.gschema.xml:191
 msgid "Name of the key theme to load."
-msgstr ""
+msgstr "Naam van het thema dat moet worden geladen."
 
 #: org.semplicelinux.vera.settings.gschema.xml:196
 msgid "Images in menus"

@@ -10,66 +10,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: exit/ExitDialog.vala:43
-msgid "Power off"
-msgstr ""
-
-#: exit/ExitDialog.vala:44
-msgid "Do you really want to power off?"
-msgstr ""
-
-#: exit/ExitDialog.vala:45 exit/ExitDialog.vala:51 exit/ExitDialog.vala:69
-msgid "This will close every active application."
-msgstr ""
-
-#: exit/ExitDialog.vala:49
-msgid "Restart"
-msgstr ""
-
-#: exit/ExitDialog.vala:50
-msgid "Do you really want to restart?"
-msgstr ""
-
-#: exit/ExitDialog.vala:55
-msgid "Suspend"
-msgstr ""
-
-#: exit/ExitDialog.vala:56
-msgid "Do you really want to suspend?"
-msgstr ""
-
-#: exit/ExitDialog.vala:57
-msgid "Your active applications will not be closed."
-msgstr ""
-
-#: exit/ExitDialog.vala:61
-msgid "Hibernate"
-msgstr ""
-
-#: exit/ExitDialog.vala:62
-msgid "Do you really want to hibernate?"
-msgstr ""
-
-#: exit/ExitDialog.vala:67
-msgid "Logout"
-msgstr ""
-
-#: exit/ExitDialog.vala:68
-msgid "Do you really want to logout?"
-msgstr ""
-
-#: exit/ExitDialog.vala:73
-msgid "Lock"
-msgstr ""
-
-#: exit/ExitDialog.vala:74
-msgid "Do you really want to lock the screen?"
-msgstr ""
-
-#: exit/ExitDialog.vala:75
-msgid "The password for this temporary user is <b>live</b>."
-msgstr ""
-
 #: screenshot/ScreenshotSaveDialog.vala:37
 msgid "Save screenshot..."
 msgstr ""
@@ -114,6 +54,75 @@ msgstr ""
 
 #: screenshot/ScreenshotTakeDialog.vala:109
 msgid "_Take a screenshot"
+msgstr ""
+
+#: logout/ExitDialog.vala:32
+msgid "_Yes (in %ds)"
+msgstr ""
+
+#: logout/ExitDialog.vala:47
+msgid "Power off"
+msgstr ""
+
+#: logout/ExitDialog.vala:48
+msgid "Do you really want to power off?"
+msgstr ""
+
+#: logout/ExitDialog.vala:49 logout/ExitDialog.vala:55
+#: logout/ExitDialog.vala:73
+msgid "This will close every active application."
+msgstr ""
+
+#: logout/ExitDialog.vala:53
+msgid "Restart"
+msgstr ""
+
+#: logout/ExitDialog.vala:54
+msgid "Do you really want to restart?"
+msgstr ""
+
+#: logout/ExitDialog.vala:59
+msgid "Suspend"
+msgstr ""
+
+#: logout/ExitDialog.vala:60
+msgid "Do you really want to suspend?"
+msgstr ""
+
+#: logout/ExitDialog.vala:61 logout/ExitDialog.vala:67
+msgid "Your active applications will not be closed."
+msgstr ""
+
+#: logout/ExitDialog.vala:65
+msgid "Hibernate"
+msgstr ""
+
+#: logout/ExitDialog.vala:66
+msgid "Do you really want to hibernate?"
+msgstr ""
+
+#: logout/ExitDialog.vala:71
+msgid "Logout"
+msgstr ""
+
+#: logout/ExitDialog.vala:72
+msgid "Do you really want to logout?"
+msgstr ""
+
+#: logout/ExitDialog.vala:77
+msgid "Lock"
+msgstr ""
+
+#: logout/ExitDialog.vala:78
+msgid "Do you really want to lock the screen?"
+msgstr ""
+
+#: logout/ExitDialog.vala:79
+msgid "The password for this temporary user is <b>live</b>."
+msgstr ""
+
+#: logout/ExitDialog.vala:104
+msgid "_No"
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41
@@ -197,60 +206,50 @@ msgid ""
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:89
-msgid "Screenshooter"
-msgstr ""
-
-#: org.semplicelinux.vera.gschema.xml:90
-msgid ""
-"If enabled, vera will automatically expose via DBus some methods to make "
-"screenshots."
-msgstr ""
-
-#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:96
+#: org.semplicelinux.vera.gschema.xml:90
 msgid "Enables the application autostart."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:101
+#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart files to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:102
+#: org.semplicelinux.vera.gschema.xml:96
 msgid "The autostart files to ignore (they will not be started automatically)."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:107
+#: org.semplicelinux.vera.gschema.xml:101
 msgid "Plugin support"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:108
+#: org.semplicelinux.vera.gschema.xml:102
 msgid "vera would be pretty useless if you disable this setting."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:113
+#: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin search path"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:114
+#: org.semplicelinux.vera.gschema.xml:108
 msgid "The plugin search path. Touch this only if you know what you're doing."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:119
+#: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugins to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:120
+#: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugins to ignore (they will not be started)"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:125
+#: org.semplicelinux.vera.gschema.xml:119
 msgid "Reverse the ignore-plugin setting"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:126
+#: org.semplicelinux.vera.gschema.xml:120
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "

@@ -1,3 +1,16 @@
+vera-desktop (1.0.3-1) unstable; urgency=medium
+
+  * vera-screenshot: properly setup translation support
+  * [command] Physically move the VeraInterface interface to a more generic place.
+  * [vera] Made the VeraInterface more generic.
+  * [dbus] Move ExitActions to a more generic place (src/ExitActions.vala).
+  * [dbus] Remove the confirmation dialog when processing exit actions.
+  * [logout] Renamed exit/ directory to logout/ for clarity.
+  * [logout] Introduce new vera-logout binary.
+  * [command] Launch vera-logout when processing exit actions.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 14 Jun 2015 16:06:20 +0200
+
 vera-desktop (1.0.2-1) unstable; urgency=medium
 
   * screenshot: make the screenshot service a separate standalone application.

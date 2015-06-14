@@ -60,7 +60,7 @@ namespace Vera.Logout {
 				case ExitAction.HIBERNATE:
 					title = _("Hibernate");
 					text = _("Do you really want to hibernate?");
-					secondary_text = "Your active applications will not be closed.";
+					secondary_text = _("Your active applications will not be closed.");
 					icon = "system-hibernate";
 					break;
 				case ExitAction.LOGOUT:

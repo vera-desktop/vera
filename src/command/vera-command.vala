@@ -182,19 +182,19 @@ namespace Vera.Command {
 				else if (unload_plugin != null)
 					vera_interface.UnloadPlugin(unload_plugin);
 				else if (ninja_shortcut)
-					vera_interface.NinjaShortcut();
+					launch = new Launcher({"vera-logout", "--ninja-shortcut"}, true);
 				else if (poweroff)
-					vera_interface.PowerOff();
+					launch = new Launcher({"vera-logout", "--poweroff"}, true);
 				else if (reboot)
-					vera_interface.Reboot();
+					launch = new Launcher({"vera-logout", "--reboot"}, true);
 				else if (suspend)
-					vera_interface.Suspend();
+					launch = new Launcher({"vera-logout", "--suspend"}, true);
 				else if (hibernate)
-					vera_interface.Hibernate();
+					launch = new Launcher({"vera-logout", "--hibernate"}, true);
 				else if (logout)
-					vera_interface.Logout();
+					launch = new Launcher({"vera-logout", "--logout"}, true);
 				else if (lock)
-					vera_interface.Lock();
+					launch = new Launcher({"vera-logout", "--lock"}, true);
 				else if (switch_user)
 					vera_interface.SwitchUser();
 				else if (switch_user_to != null)

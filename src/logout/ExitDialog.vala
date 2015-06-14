@@ -29,6 +29,10 @@ namespace Vera.Logout {
 		 * the user invokes a method on the ExitHandler D-Bus interface.
 		*/
 		
+		private const string YES_BUTTON_STRING = _("_Yes (in %d seconds)");
+		
+		private int countdown { get; set; default = 60; }
+		
 		private void set_details(ExitAction action) {
 			/**
 			 * Sets the text, secondary text and image of the ExitDialog,
@@ -93,7 +97,14 @@ namespace Vera.Logout {
 			*/
 			
 			/* Initial things */
-			Object(buttons: Gtk.ButtonsType.YES_NO);
+			Object();
+
+			/* Add buttons */
+			this.add_buttons(
+				_("_No"), Gtk.ResponseType.NO,
+				YES_BUTTON_STRING.printf(countdown), Gtk.ResponseType.YES
+			);
+			Gtk.Button yes_button = (Gtk.Button)this.get_widget_for_response(Gtk.ResponseType.YES);
 
 			/* Set suggested action */
 			this.set_default_response(Gtk.ResponseType.YES);
@@ -103,11 +114,31 @@ namespace Vera.Logout {
 			/* Set details */
 			this.set_details(action);
 			
+			/* Add countdown */
+			Timeout.add_seconds(
+				1,
+				() => {
+					this.countdown -= 1;
+					
+					if (this.countdown == 0) {
+						/* Trigger a yes response */
+						this.response(Gtk.ResponseType.YES);
+						
+						return false;
+					} else {
+						/* Continue with the countdown */
+						yes_button.set_label(YES_BUTTON_STRING.printf(countdown));
+						
+						return true;
+					}
+				}
+			);
+			
 			/* Keep above */
 			this.set_keep_above(true);
 			
 			/* Grab focus on the Yes button */
-			this.get_widget_for_response(Gtk.ResponseType.YES).grab_focus();
+			yes_button.grab_focus();
 		}
 		
 	}

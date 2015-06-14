@@ -29,7 +29,7 @@ namespace Vera.Logout {
 		 * the user invokes a method on the ExitHandler D-Bus interface.
 		*/
 		
-		private const string YES_BUTTON_STRING = _("_Yes (in %d seconds)");
+		private const string YES_BUTTON_STRING = _("_Yes (in %ds)");
 		
 		private int countdown { get; set; default = 60; }
 		

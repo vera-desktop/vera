@@ -1,3 +1,9 @@
+vera-desktop (1.0.6-1) unstable; urgency=medium
+
+  * [logout] Use the last-exit-action informations when on NINJA_SHORTCUT.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 16 Jun 2015 18:49:09 +0200
+
 vera-desktop (1.0.5-1) unstable; urgency=medium
 
   * [logout] Make the window countdown configurable via org.semplicelinux.vera's exit-window-countdown.

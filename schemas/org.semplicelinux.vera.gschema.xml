@@ -78,6 +78,12 @@
 			<description>If true, the exit window will not be shown (the exit action will be executed ASAP).</description>
 		</key>
 
+		<key name="exit-window-countdown" type="i">
+			<default>60</default>
+			<summary>Logout dialog countdown</summary>
+			<description>Put to 0 to disable.</description>
+		</key>
+
 		<key name="enable-xsettings" type="b">
 			<default>true</default>
 			<summary>XSETTINGS manager</summary>

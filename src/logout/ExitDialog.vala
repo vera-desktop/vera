@@ -31,7 +31,7 @@ namespace Vera.Logout {
 		
 		private const string YES_BUTTON_STRING = _("_Yes (in %ds)");
 		
-		private int countdown { get; set; default = 60; }
+		private int countdown { get; set; }
 		
 		private void set_details(ExitAction action) {
 			/**
@@ -88,7 +88,7 @@ namespace Vera.Logout {
 			
 		}
 		
-		public ExitDialog(ExitAction action) {
+		public ExitDialog(ExitAction action, int countdown) {
 			/**
 			 * Constructs the dialog.
 			 * 
@@ -98,11 +98,17 @@ namespace Vera.Logout {
 			
 			/* Initial things */
 			Object();
+			this.countdown = countdown;
 
 			/* Add buttons */
 			this.add_buttons(
-				_("_No"), Gtk.ResponseType.NO,
-				YES_BUTTON_STRING.printf(countdown), Gtk.ResponseType.YES
+				_("_No"),
+				Gtk.ResponseType.NO,
+				
+				(this.countdown > 0) ?
+					YES_BUTTON_STRING.printf(countdown) :
+					_("_Yes"),
+				Gtk.ResponseType.YES
 			);
 			Gtk.Button yes_button = (Gtk.Button)this.get_widget_for_response(Gtk.ResponseType.YES);
 
@@ -115,24 +121,26 @@ namespace Vera.Logout {
 			this.set_details(action);
 			
 			/* Add countdown */
-			Timeout.add_seconds(
-				1,
-				() => {
-					this.countdown -= 1;
-					
-					if (this.countdown == 0) {
-						/* Trigger a yes response */
-						this.response(Gtk.ResponseType.YES);
+			if (this.countdown > 0) {
+				Timeout.add_seconds(
+					1,
+					() => {
+						this.countdown -= 1;
 						
-						return false;
-					} else {
-						/* Continue with the countdown */
-						yes_button.set_label(YES_BUTTON_STRING.printf(countdown));
-						
-						return true;
+						if (this.countdown == 0) {
+							/* Trigger a yes response */
+							this.response(Gtk.ResponseType.YES);
+							
+							return false;
+						} else {
+							/* Continue with the countdown */
+							yes_button.set_label(YES_BUTTON_STRING.printf(this.countdown));
+							
+							return true;
+						}
 					}
-				}
-			);
+				);
+			}
 			
 			/* Keep above */
 			this.set_keep_above(true);

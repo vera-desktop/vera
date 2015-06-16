@@ -80,7 +80,7 @@ namespace Vera.Logout {
 				(action == ExitAction.LOCK && FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS)) ||
 				(!settings.get_boolean("hide-exit-window"))
 			) {
-				ExitDialog dialog = new ExitDialog(action);
+				ExitDialog dialog = new ExitDialog(action, settings.get_int("exit-window-countdown"));
 				result = dialog.run();
 				dialog.destroy();
 			} else {

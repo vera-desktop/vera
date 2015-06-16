@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-06-14 15:07+0000\n"
+"PO-Revision-Date: 2015-06-16 09:46+0000\n"
 "Last-Translator: g7 <me@medesimo.eu>\n"
 "Language-Team: English (Australia) (http://www.transifex.com/projects/p/vera/language/en_AU/)\n"
 "MIME-Version: 1.0\n"
@@ -124,8 +124,12 @@ msgstr ""
 msgid "The password for this temporary user is <b>live</b>."
 msgstr ""
 
-#: logout/ExitDialog.vala:104
+#: logout/ExitDialog.vala:105
 msgid "_No"
+msgstr ""
+
+#: logout/ExitDialog.vala:110
+msgid "_Yes"
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:41
@@ -199,61 +203,69 @@ msgid ""
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:83
-msgid "XSETTINGS manager"
+msgid "Logout dialog countdown"
 msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:84
+msgid "Put to 0 to disable."
+msgstr ""
+
+#: org.semplicelinux.vera.gschema.xml:89
+msgid "XSETTINGS manager"
+msgstr ""
+
+#: org.semplicelinux.vera.gschema.xml:90
 msgid ""
 "Enables the XSETTINGS manager for toolkit settings sharing among the "
 "applications. Do not disable if you don't know what an XSETTINGS manager is."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:89
+#: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:90
+#: org.semplicelinux.vera.gschema.xml:96
 msgid "Enables the application autostart."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:95
+#: org.semplicelinux.vera.gschema.xml:101
 msgid "Autostart files to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:96
+#: org.semplicelinux.vera.gschema.xml:102
 msgid ""
 "The autostart files to ignore (they will not be started automatically)."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:101
+#: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin support"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:102
+#: org.semplicelinux.vera.gschema.xml:108
 msgid "vera would be pretty useless if you disable this setting."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:107
+#: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugin search path"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:108
+#: org.semplicelinux.vera.gschema.xml:114
 msgid "The plugin search path. Touch this only if you know what you're doing."
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:113
+#: org.semplicelinux.vera.gschema.xml:119
 msgid "Plugins to ignore"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:114
+#: org.semplicelinux.vera.gschema.xml:120
 msgid "The plugins to ignore (they will not be started)"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:119
+#: org.semplicelinux.vera.gschema.xml:125
 msgid "Reverse the ignore-plugin setting"
 msgstr ""
 
-#: org.semplicelinux.vera.gschema.xml:120
+#: org.semplicelinux.vera.gschema.xml:126
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "

@@ -1,3 +1,10 @@
+vera-desktop (1.0.5-1) unstable; urgency=medium
+
+  * [logout] Make the window countdown configurable via org.semplicelinux.vera's exit-window-countdown.
+  * Updated translations.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 16 Jun 2015 11:51:01 +0200
+
 vera-desktop (1.0.4-1) unstable; urgency=medium
 
   * [logout] Ensure the secondary_text is properly translated on ExitAction.HIBERNATE.

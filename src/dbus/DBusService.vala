@@ -227,6 +227,11 @@ namespace Vera {
 				case ExitAction.LOCK:
 					this.Lock();
 					break;
+				
+				/* Generic switch user */
+				case ExitAction.SWITCH_USER:
+					this.SwitchUser();
+					break;
 					
 			}
 			

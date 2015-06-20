@@ -78,13 +78,12 @@ namespace Vera.Logout {
 			if (
 				/* Force the dialog if in live mode */
 				(action == ExitAction.LOCK && FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS)) ||
-				(!settings.get_boolean("hide-exit-window"))
+				((action != ExitAction.SWITCH_USER && action != ExitAction.LOCK) && !settings.get_boolean("hide-exit-window"))
 			) {
 				ExitDialog dialog = new ExitDialog(
-					(action == ExitAction.NINJA_SHORTCUT) ?
-						(ExitAction)settings.get_enum("last-exit-action") :
-						action,
-					settings.get_int("exit-window-countdown"));
+					action,
+					settings.get_int("exit-window-countdown")
+				);
 				result = dialog.run();
 				dialog.destroy();
 			} else {
@@ -214,7 +213,13 @@ namespace Vera.Logout {
 					action = Vera.ExitAction.LOCK;
 				
 				/* Show the dialog and do things */
-				if (show_dialog(action) == Gtk.ResponseType.YES)
+				if (
+					show_dialog(
+						(action == ExitAction.NINJA_SHORTCUT) ?
+							(ExitAction)settings.get_enum("last-exit-action") :
+							action
+					) == Gtk.ResponseType.YES
+				)
 					call_vera(action);
 				
 			} catch (Error e) {

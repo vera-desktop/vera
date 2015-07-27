@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Eugenio Paolantonio (g7) <me@medesimo.eu>
 Build-Depends: debhelper (>= 8.0.0), build-essential, bake, libx11-dev,
  libglib2.0-dev, libgee-dev, libgtk-3-dev, libpeas-dev, libxss-dev,
- libvera-xsettings-dev, libvera-xsettings-vapi, valac-0.26
+ libvera-xsettings-dev, libvera-xsettings-vapi, valac-0.28
 Standards-Version: 3.9.5
 Homepage: https://semplice-linux.org/
 Vcs-Git: https://github.com/vera-desktop/vera.git

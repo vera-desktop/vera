@@ -54,6 +54,9 @@ namespace Vera {
 		public abstract ulong get_idle_time();
 		
 		//public virtual void send_to_root_window() {}
+		
+		/* Used to update desktop numbers on-the-fly */
+		public abstract void change_desktops_number(int number);
 	} 
 
 }

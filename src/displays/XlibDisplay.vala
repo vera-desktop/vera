@@ -134,6 +134,33 @@ namespace Vera {
 	    
 	}
 	
+	public void change_desktops_number(int number) {
+	    /**
+	     * Tells X11 to change the virtual desktops number.
+	    */
+	    
+	    X.Event event = X.Event();
+	    
+	    event.xclient.type = X.EventType.ClientMessage;
+	    event.xclient.message_type = Gdk.X11.get_xatom_by_name("_NET_NUMBER_OF_DESKTOPS");
+	    event.xclient.display = this.display;
+	    event.xclient.window = this.xrootwindow;
+	    event.xclient.format = 32;
+	    event.xclient.data.l[0] = (number < 1) ? 1 : number;
+	    event.xclient.data.l[1] = 0;
+	    event.xclient.data.l[2] = 0;
+	    event.xclient.data.l[3] = 0;
+	    event.xclient.data.l[4] = 0;
+	    
+	    this.display.send_event(
+		this.xrootwindow,
+		false,
+		X.EventMask.SubstructureNotifyMask | X.EventMask.SubstructureRedirectMask,
+		ref event
+	    );
+	    
+	}
+	
 
         public new void send_to_root_window(Gdk.EventButton evnt) {
 	    /**

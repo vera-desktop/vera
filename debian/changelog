@@ -1,3 +1,14 @@
+vera-desktop (1.10.0-1) unstable; urgency=medium
+
+  * [logout] Do not display the dialog if the ExitAction is SWITCH_USER.
+  * [packaging] Build-depend on valac-0.28.
+  * [libvera] Added new XmlFile class, powered by GLib's MarkupParser.
+  * [displays] DisplayInterface: new abstract method change_desktops_number().
+  * [displays] XlibDisplay: implement change_desktops_number().
+  * [XmlFile] Lock the root node when writing the file.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 28 Jul 2015 22:13:39 +0200
+
 vera-desktop (1.0.6-1) unstable; urgency=medium
 
   * [logout] Use the last-exit-action informations when on NINJA_SHORTCUT.

@@ -1,3 +1,9 @@
+vera-desktop (1.10.1-1) unstable; urgency=medium
+
+  * [src] Ship XmlFile.vala again.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Tue, 28 Jul 2015 23:12:13 +0200
+
 vera-desktop (1.10.0-1) unstable; urgency=medium
 
   * [logout] Do not display the dialog if the ExitAction is SWITCH_USER.

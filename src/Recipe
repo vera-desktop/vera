@@ -25,7 +25,6 @@ libraries.vera {
 		displays/DisplayInterface.vala \
 		displays/XlibDisplay.vala \
 		autostart/Application.vala \
-		XmlFile.vala \
 		ExitActions.vala \
 		launcher.vala \
 		logindInterface.vala \

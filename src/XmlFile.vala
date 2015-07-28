@@ -265,14 +265,18 @@ namespace Vera {
 				file.delete();
 			}
 			
-			try {
-				DataOutputStream stream = new DataOutputStream(file.create(FileCreateFlags.REPLACE_DESTINATION));
+			lock (this.root_node) {
+			
+				try {
+					DataOutputStream stream = new DataOutputStream(file.create(FileCreateFlags.REPLACE_DESTINATION));
+					
+					stream.put_string(this.root_node.to_string(0) + "\n");
+					
+					stream.close();
+				} catch (Error e) {
+					warning("Unable to write openbox configuration: %s", e.message);
+				}
 				
-				stream.put_string(this.root_node.to_string(0) + "\n");
-				
-				stream.close();
-			} catch (Error e) {
-				warning("Unable to write openbox configuration: %s", e.message);
 			}
 			
 		}

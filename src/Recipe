@@ -34,7 +34,6 @@ libraries.vera {
 	header-install-directory = $(options.include-directory)/vera
 	compile-flags = -O2 -flto
 	link-flags = -flto -Wl,--as-needed,-soname,libvera.so.$(libraries.vera.so-version)
-	vala-compile-flags = --vapidir=./vapis
 
 	vala-packages = gio-2.0 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11 xscrnsaver
 	packages = gee-1.0 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11 xscrnsaver
@@ -51,7 +50,6 @@ programs.vera {
 	compile-flags = -O2 -flto -include config.h
 	libraries = vera (local)
 	link-flags = -lX11 -flto -Wl,--as-needed
-	vala-compile-flags = --vapidir=./vapis
 	gettext-domain = vera
 	
 	vala-packages = gio-2.0 gee-1.0 libpeas-1.0 gtk+-3.0 gdk-x11-3.0 gdk-3.0 posix vera-xsettings
@@ -81,7 +79,6 @@ programs.vera-screenshot {
 		screenshot/ScreenshotSelectionWindow.vala \
 		screenshot/ScreenshotTakeDialog.vala
 	compile-flags = -O2 -flto -include config.h
-	vala-compile-flags = --vapidir=./vapis
 	gettext-domain = vera
 
 	vala-packages = gio-2.0 gtk+-3.0 gdk-3.0 
@@ -95,7 +92,6 @@ programs.vera-logout {
 		VeraInterface.vala \
 		ExitActions.vala
 	compile-flags = -O2 -flto -include config.h
-	vala-compile-flags = --vapidir=./vapis
 	gettext-domain = vera
 
 	vala-packages = gio-2.0 gtk+-3.0 gdk-3.0 

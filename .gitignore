@@ -1,4 +1,5 @@
 plugins/
+Recipe.conf
 .built
 vera-0.0.1.tar.bz2
 vera_0.0.1.orig.tar.gz

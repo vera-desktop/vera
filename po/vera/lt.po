@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-06-16 09:46+0000\n"
-"Last-Translator: g7 <me@medesimo.eu>\n"
-"Language-Team: Lithuanian (http://www.transifex.com/projects/p/vera/language/lt/)\n"
+"PO-Revision-Date: 2015-06-16 18:06+0000\n"
+"Last-Translator: Moo\n"
+"Language-Team: Lithuanian (http://www.transifex.com/semplice/vera/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,7 +54,7 @@ msgstr "Aktyvus langas"
 
 #: screenshot/ScreenshotTakeDialog.vala:94
 msgid "Delay"
-msgstr ""
+msgstr "Delsa"
 
 #: screenshot/ScreenshotTakeDialog.vala:109
 msgid "_Take a screenshot"
@@ -131,7 +131,7 @@ msgstr "_Ne"
 
 #: logout/ExitDialog.vala:110
 msgid "_Yes"
-msgstr ""
+msgstr "_Taip"
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -176,12 +176,12 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:65
 msgid "Lock the last exit action"
-msgstr ""
+msgstr "Užrakinti paskutinį išėjimo veiksmą"
 
 #: org.semplicelinux.vera.gschema.xml:66
 msgid ""
 "If true, locks the last exit action, so that it will not be overwritten."
-msgstr ""
+msgstr "Jei įjungta, užrakina paskutinį išėjimo veiksmą, kad jis nebūtų perrašytas."
 
 #: org.semplicelinux.vera.gschema.xml:71
 msgid "CTRL+ALT+SPACE shortcut"
@@ -195,21 +195,21 @@ msgstr "Jei įjungta, naudotojas, norėdamas vykdyti paskutinį veiksmą, gali n
 
 #: org.semplicelinux.vera.gschema.xml:77
 msgid "Hide exit window"
-msgstr ""
+msgstr "Slėpti išėjimo langą"
 
 #: org.semplicelinux.vera.gschema.xml:78
 msgid ""
 "If true, the exit window will not be shown (the exit action will be executed"
 " ASAP)."
-msgstr ""
+msgstr "Jei įjungta, išėjimo langas nebus rodomas (išėjimo veiksmas bus įvykdytas kaip įmanoma greičiau)."
 
 #: org.semplicelinux.vera.gschema.xml:83
 msgid "Logout dialog countdown"
-msgstr ""
+msgstr "Atsijungimo dialogo atvirkštinis skaičiavimas"
 
 #: org.semplicelinux.vera.gschema.xml:84
 msgid "Put to 0 to disable."
-msgstr ""
+msgstr "Įveskite 0, norėdami išjungti."
 
 #: org.semplicelinux.vera.gschema.xml:89
 msgid "XSETTINGS manager"
@@ -223,11 +223,11 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
-msgstr ""
+msgstr "Automatinis paleidimas"
 
 #: org.semplicelinux.vera.gschema.xml:96
 msgid "Enables the application autostart."
-msgstr ""
+msgstr "Įjungia automatinį programos paleidimą."
 
 #: org.semplicelinux.vera.gschema.xml:101
 msgid "Autostart files to ignore"
@@ -240,11 +240,11 @@ msgstr ""
 
 #: org.semplicelinux.vera.gschema.xml:107
 msgid "Plugin support"
-msgstr ""
+msgstr "Papildinių palaikymas"
 
 #: org.semplicelinux.vera.gschema.xml:108
 msgid "vera would be pretty useless if you disable this setting."
-msgstr ""
+msgstr "jei išjungsite šį nustatymą, vera bus ganėtinai nenaudinga."
 
 #: org.semplicelinux.vera.gschema.xml:113
 msgid "Plugin search path"
@@ -275,36 +275,36 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:31
 msgid "Theme name"
-msgstr ""
+msgstr "Temos pavadinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:32
 msgid "Theme to use."
-msgstr ""
+msgstr "Norima naudoti tema."
 
 #: org.semplicelinux.vera.settings.gschema.xml:37
 msgid "Icon theme name"
-msgstr ""
+msgstr "Piktogramų temos pavadinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:38
 msgid "Icon theme to use."
-msgstr ""
+msgstr "Norima naudoti piktogramų tema."
 
 #: org.semplicelinux.vera.settings.gschema.xml:43
 msgid "Sound theme name"
-msgstr ""
+msgstr "Garsų temos pavadinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:44
 msgid "Sound theme to use."
-msgstr ""
+msgstr "Norima naudoti garsų tema."
 
 #: org.semplicelinux.vera.settings.gschema.xml:49
 msgid "Event sounds"
-msgstr ""
+msgstr "Įvykių garsai"
 
 #: org.semplicelinux.vera.settings.gschema.xml:50
 msgid ""
 "If enabled, the system will play event sound if a sound theme is specified."
-msgstr ""
+msgstr "Jei įjungta, sistema gros įvykių garsus, jei bus nurodyta garsų tema."
 
 #: org.semplicelinux.vera.settings.gschema.xml:55
 msgid "Event sounds in response to input"
@@ -318,33 +318,33 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:61
 msgid "Window scaling factor"
-msgstr ""
+msgstr "Langų mastelio koeficientas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:62
 msgid ""
 "The scaling factor for the windows. Increase this if you have high "
 "definition ('Retina', HiDPI) monitors."
-msgstr ""
+msgstr "Langų mastelio koeficientas. Padidinkite šią reikšmę, jei turite aukštos raiškos ('Retina', HiDPI) monitorius."
 
 #: org.semplicelinux.vera.settings.gschema.xml:67
 msgid "DPI"
-msgstr ""
+msgstr "DPI"
 
 #: org.semplicelinux.vera.settings.gschema.xml:68
 msgid ""
 "The Dots-per-inch of your monitor. Note that when the Window scaling factor "
 "is > 1, the DPI setting is adjusted accordingly."
-msgstr ""
+msgstr "Jūsų monitoriaus taškų colyje reikšmė. Turėkite omeny, kad kai Langų mastelio koeficientas yra > 1, DPI nustatymas yra priderinamas atitinkamai."
 
 #: org.semplicelinux.vera.settings.gschema.xml:74
 msgid "Text antialiasing"
-msgstr ""
+msgstr "Teksto glodinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:75
 msgid ""
 "Manages the text antialiasing. 0 is no, 1 is yes, and -1 is default (takes "
 "the value from the server)."
-msgstr ""
+msgstr "Valdo teksto glodinimą. 0 yra ne, 1 yra taip, o -1 yra numatytoji reikšmė (paima reikšmę iš serverio)"
 
 #: org.semplicelinux.vera.settings.gschema.xml:97
 msgid "Text hinting style"
@@ -406,11 +406,11 @@ msgstr "Jei įjungta, mygtukuose šalia teksto bus rodomos piktogramos."
 
 #: org.semplicelinux.vera.settings.gschema.xml:141
 msgid "Cursor theme name"
-msgstr ""
+msgstr "Žymeklio temos pavadinimas"
 
 #: org.semplicelinux.vera.settings.gschema.xml:142
 msgid "The cursor theme to use. If blank, it will use the default."
-msgstr ""
+msgstr "Naudojama žymeklio tema. Jei tuščia, bus naudojama numatytoji."
 
 #: org.semplicelinux.vera.settings.gschema.xml:148
 msgid "Cursor size"
@@ -504,10 +504,10 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:214
 msgid "Print preview command"
-msgstr ""
+msgstr "Spaudinio peržiūros komanda"
 
 #: org.semplicelinux.vera.settings.gschema.xml:215
 msgid ""
 "Command to execute when the 'Preview' button has been clicked in the print "
 "dialog."
-msgstr ""
+msgstr "Komanda, kuri bus vykdoma, kai spausdinimo dialoge bus nuspaudžiamas mygtukas 'Peržiūra'."

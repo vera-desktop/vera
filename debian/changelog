@@ -1,3 +1,12 @@
+vera-desktop (1.0.7-1) unstable; urgency=medium
+
+  * [logout] Do not display the dialog if the ExitAction is SWITCH_USER.
+  * [packaging] Build-depend on valac-0.28.
+  * [logout] Ensure that the ExitDialog sticks on every desktop.
+  * [translations] Updated.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Thu, 20 Aug 2015 19:01:18 +0200
+
 vera-desktop (1.0.6-1) unstable; urgency=medium
 
   * [logout] Use the last-exit-action informations when on NINJA_SHORTCUT.

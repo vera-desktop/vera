@@ -145,6 +145,9 @@ namespace Vera.Logout {
 			/* Keep above */
 			this.set_keep_above(true);
 			
+			/* Stick */
+			this.stick();
+			
 			/* Grab focus on the Yes button */
 			yes_button.grab_focus();
 		}

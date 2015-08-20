@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-06-16 09:46+0000\n"
-"Last-Translator: g7 <me@medesimo.eu>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/vera/language/es/)\n"
+"PO-Revision-Date: 2015-07-14 15:53+0000\n"
+"Last-Translator: seacat <seacat.linux@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/semplice/vera/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,7 +62,7 @@ msgstr "_Capturar pantalla"
 
 #: logout/ExitDialog.vala:32
 msgid "_Yes (in %ds)"
-msgstr ""
+msgstr "_Si (en %ds)"
 
 #: logout/ExitDialog.vala:47
 msgid "Power off"
@@ -127,11 +127,11 @@ msgstr "La contraseña para este usuario temporario es <b>live</b>."
 
 #: logout/ExitDialog.vala:105
 msgid "_No"
-msgstr ""
+msgstr "_No"
 
 #: logout/ExitDialog.vala:110
 msgid "_Yes"
-msgstr ""
+msgstr "_Si"
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -152,7 +152,7 @@ msgid ""
 "logind handles the idle action, but will be triggered only when every "
 "session are on idle. This setting forces the current session to lock, "
 "regardless of the status of other sessions."
-msgstr ""
+msgstr "logind maneja la acción inactiva, pero se disparará solamente cuando cada sesión esté inactiva. Este parámetro fuerza el bloqueo de la sesión actual, independientemente del estado de otras sesiones."
 
 #: org.semplicelinux.vera.gschema.xml:53
 msgid "Last directory where a screenshot has been saved."
@@ -162,7 +162,7 @@ msgstr "Último directorio donde se guardó una captura de pantalla."
 msgid ""
 "This is used internally to remember the last directory where a screenshot "
 "has been saved."
-msgstr ""
+msgstr "Esto se usa internamente para recordar el último directorio donde se guardó una captura de pantalla."
 
 #: org.semplicelinux.vera.gschema.xml:59
 msgid "Last exit action"
@@ -172,7 +172,7 @@ msgstr "Última acción de salida"
 msgid ""
 "This setting stores the last exit action used. It can be locked by setting "
 "'lock-last-exit-action' to true."
-msgstr ""
+msgstr "Este parámetro almacena la última acción de salida utilizada. Se puede bloquear al establecer 'lock-last-exit-action' a verdadero."
 
 #: org.semplicelinux.vera.gschema.xml:65
 msgid "Lock the last exit action"
@@ -191,7 +191,7 @@ msgstr "Atajo de teclado CTR+ALT+ESPACIO"
 msgid ""
 "If enabled, the user can press CTRL+ALT+SPACE to execute the last exit "
 "action."
-msgstr ""
+msgstr "Si está habilitado, el usuario puede preisonar CTRL+ALT+ESPACIO para ejecutar la última acción de salida."
 
 #: org.semplicelinux.vera.gschema.xml:77
 msgid "Hide exit window"
@@ -201,15 +201,15 @@ msgstr "Ocultar la ventana de salida"
 msgid ""
 "If true, the exit window will not be shown (the exit action will be executed"
 " ASAP)."
-msgstr ""
+msgstr "Si es verdadero, la ventana de salida no se mostrará (la acción de salida se ejecutará tan pronto como sea posible)."
 
 #: org.semplicelinux.vera.gschema.xml:83
 msgid "Logout dialog countdown"
-msgstr ""
+msgstr "Cuenta regresiva del diálogo Cerrar sesión"
 
 #: org.semplicelinux.vera.gschema.xml:84
 msgid "Put to 0 to disable."
-msgstr ""
+msgstr "Poner a 0 para deshabilitar."
 
 #: org.semplicelinux.vera.gschema.xml:89
 msgid "XSETTINGS manager"
@@ -219,7 +219,7 @@ msgstr "Administrador de XSETTINGS"
 msgid ""
 "Enables the XSETTINGS manager for toolkit settings sharing among the "
 "applications. Do not disable if you don't know what an XSETTINGS manager is."
-msgstr ""
+msgstr "Habilita al administrador de XSETTINGS para la configuración del kit de herramientas que se comparten entre las aplicaciones. No desactivar si no sabe lo que es un administrador de XSETTINGS."
 
 #: org.semplicelinux.vera.gschema.xml:95
 msgid "Autostart"
@@ -264,14 +264,14 @@ msgstr "Los complementos a ignorar (no se iniciarán)."
 
 #: org.semplicelinux.vera.gschema.xml:125
 msgid "Reverse the ignore-plugin setting"
-msgstr "Invertir el valor ignore-plugin"
+msgstr "Invertir el parámetro ignore-plugin"
 
 #: org.semplicelinux.vera.gschema.xml:126
 msgid ""
 "If enabled, the ignore-plugins array will be used to whitelist plugins. "
 "Every plugin not listed there will not be started. Do not enable unless you "
 "know what you're doing."
-msgstr ""
+msgstr "Si está habilitado, se usará el array ignore-plugins como la lista blanca de plugins. No se iniciará ningún plugin que no esté en la lista. No habilitar a menos que sepa lo que está haciendo."
 
 #: org.semplicelinux.vera.settings.gschema.xml:31
 msgid "Theme name"
@@ -314,7 +314,7 @@ msgstr "El evento suena en respuesta a la entrada"
 msgid ""
 "If enabled, the system will play sounds in response input (if event-sounds "
 "are enabled too)."
-msgstr ""
+msgstr "Si está habilitado, el sistema reproducirá sonidos en la entrada de respuesta (si event-sounds está habilitado también)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:61
 msgid "Window scaling factor"
@@ -348,23 +348,23 @@ msgstr "Gestiona el antialiasing del texto. 0 es no, 1 es sí y -1 el valor por 
 
 #: org.semplicelinux.vera.settings.gschema.xml:97
 msgid "Text hinting style"
-msgstr ""
+msgstr "Estilo del texto de sugerencia"
 
 #: org.semplicelinux.vera.settings.gschema.xml:98
 msgid ""
 "Specifies the text hinting style. The possible values are: hintnone, "
 "hintslight, hintmedium and hintfull."
-msgstr ""
+msgstr "Especifica el estilo del texto de sugerencia. Los valores posibles son: hintnone, hintslight, hintmedium y hintfull."
 
 #: org.semplicelinux.vera.settings.gschema.xml:104
 msgid "Text hinting"
-msgstr ""
+msgstr "Texto de sugerencia"
 
 #: org.semplicelinux.vera.settings.gschema.xml:105
 msgid ""
 "Manages the text hinting. 0 is no, 1 is yes and -1 is default (takes the "
 "value from the server)."
-msgstr ""
+msgstr "Gestiona el texto de sugerencia. 0 es no, 1 es sí y -1 el valor por defecto (toma el valor desde el servidor)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:117
 msgid "Text subpixel rendering"
@@ -378,23 +378,23 @@ msgstr ""
 
 #: org.semplicelinux.vera.settings.gschema.xml:123
 msgid "Double click time"
-msgstr ""
+msgstr "Tiempo de doble clic"
 
 #: org.semplicelinux.vera.settings.gschema.xml:124
 msgid ""
 "Time allowed for two clicks to be registered as 'double click', in "
 "milliseconds."
-msgstr ""
+msgstr "Tiempo permitido,en milisegundos, para que dos clics se registen como 'doble clic'."
 
 #: org.semplicelinux.vera.settings.gschema.xml:129
 msgid "Double click distance"
-msgstr ""
+msgstr "Distancia de doble clic"
 
 #: org.semplicelinux.vera.settings.gschema.xml:130
 msgid ""
 "Maximum distance allowed between two clicks for them to be considered a "
 "double click (in pixels)."
-msgstr ""
+msgstr "Máxima distancia permitida entre dos clics para que se los considere como un doble clic (en pixeles)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:135
 msgid "Images in buttons"
@@ -472,11 +472,11 @@ msgstr "El método de entrada a usar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:190
 msgid "Key theme name"
-msgstr ""
+msgstr "Nombre del tema clave:"
 
 #: org.semplicelinux.vera.settings.gschema.xml:191
 msgid "Name of the key theme to load."
-msgstr ""
+msgstr "Nombre del tema clave a cargar."
 
 #: org.semplicelinux.vera.settings.gschema.xml:196
 msgid "Images in menus"

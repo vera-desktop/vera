@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vera\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-06-16 09:46+0000\n"
-"Last-Translator: g7 <me@medesimo.eu>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/vera/language/nl_NL/)\n"
+"PO-Revision-Date: 2015-06-16 12:05+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/semplice/vera/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -131,7 +131,7 @@ msgstr "_Nee"
 
 #: logout/ExitDialog.vala:110
 msgid "_Yes"
-msgstr ""
+msgstr "_Ja"
 
 #: org.semplicelinux.vera.gschema.xml:41
 msgid "Idle timeout (in minutes)"
@@ -172,7 +172,7 @@ msgstr "Laatste afsluitactie"
 msgid ""
 "This setting stores the last exit action used. It can be locked by setting "
 "'lock-last-exit-action' to true."
-msgstr ""
+msgstr "De instellingen bewaart de laastgebruikte afsluitactie. Het kan worden vergrendeld door de waarde 'lock-last-exit-action' op waar te zetten."
 
 #: org.semplicelinux.vera.gschema.xml:65
 msgid "Lock the last exit action"
@@ -181,7 +181,7 @@ msgstr "De laatste afsluitactie vergrendelen"
 #: org.semplicelinux.vera.gschema.xml:66
 msgid ""
 "If true, locks the last exit action, so that it will not be overwritten."
-msgstr ""
+msgstr "Indien dit op waar wordt gezet zal de laatste afsluitactie vergrendeld worden zodat deze niet zal worden overschreven."
 
 #: org.semplicelinux.vera.gschema.xml:71
 msgid "CTRL+ALT+SPACE shortcut"
@@ -191,7 +191,7 @@ msgstr "CTRL+ALT+SPACE-snelkoppeling"
 msgid ""
 "If enabled, the user can press CTRL+ALT+SPACE to execute the last exit "
 "action."
-msgstr ""
+msgstr "Als dit wordt ingeschakeld kan de gebruiker op CTRL+ALT+SPATIE drukken om de laatstgebruikte afsluitactie uit te voeren."
 
 #: org.semplicelinux.vera.gschema.xml:77
 msgid "Hide exit window"
@@ -201,15 +201,15 @@ msgstr "Afsluitvenster verbergen"
 msgid ""
 "If true, the exit window will not be shown (the exit action will be executed"
 " ASAP)."
-msgstr ""
+msgstr "Indien dit op waar wordt gezet zal het afsluitvenster niet worden weergegeven en de afsluitactie z.s.m. worden uitgevoerd."
 
 #: org.semplicelinux.vera.gschema.xml:83
 msgid "Logout dialog countdown"
-msgstr ""
+msgstr "Afmeld-dialoogvenster-aftelling"
 
 #: org.semplicelinux.vera.gschema.xml:84
 msgid "Put to 0 to disable."
-msgstr ""
+msgstr "Vul 0 in om dit uit te schakelen."
 
 #: org.semplicelinux.vera.gschema.xml:89
 msgid "XSETTINGS manager"
@@ -304,7 +304,7 @@ msgstr "Evenementgeluiden"
 #: org.semplicelinux.vera.settings.gschema.xml:50
 msgid ""
 "If enabled, the system will play event sound if a sound theme is specified."
-msgstr ""
+msgstr "Als dit wordt ingeschakeld zal het systeem een evenementgeluid afspelen als er een geluidsthema is opgegeven."
 
 #: org.semplicelinux.vera.settings.gschema.xml:55
 msgid "Event sounds in response to input"
@@ -314,7 +314,7 @@ msgstr "Evenementgeluiden als antwoord op invoer"
 msgid ""
 "If enabled, the system will play sounds in response input (if event-sounds "
 "are enabled too)."
-msgstr ""
+msgstr "Als dit wordt ingeschakeld zal het systeem geluiden afspelen n.a.v. gebruikersinvoeren (als event-sounds ook ingeschakeld is)."
 
 #: org.semplicelinux.vera.settings.gschema.xml:61
 msgid "Window scaling factor"
@@ -402,7 +402,7 @@ msgstr "Afbeeldingen op knoppen"
 
 #: org.semplicelinux.vera.settings.gschema.xml:136
 msgid "If enabled, the buttons will show an icon alongside the text."
-msgstr ""
+msgstr "Als dit ingeschakeld wordt zullen knoppen een pictogram weergeven naast de tekst."
 
 #: org.semplicelinux.vera.settings.gschema.xml:141
 msgid "Cursor theme name"
@@ -418,7 +418,7 @@ msgstr "Cursorgrootte"
 
 #: org.semplicelinux.vera.settings.gschema.xml:149
 msgid "The size to use for cursors. If 0, it will use the default size."
-msgstr ""
+msgstr "De cursorgrootte. Als 0 wordt ingevuld zal de standaard grootte gebruikt worden."
 
 #: org.semplicelinux.vera.settings.gschema.xml:154
 msgid "Decoration for client-side decorations"
@@ -434,7 +434,7 @@ msgstr "Client-side-decoraties voor ingebouwde GTK+-dialoogvensters"
 
 #: org.semplicelinux.vera.settings.gschema.xml:161
 msgid "If enabled, the builtin GTK+ dialogs will use client-side decorations."
-msgstr ""
+msgstr "Als dit ingeschakeld wordt zullen de ingebouwde GTK+-dialoogvensters client-side-opmaak gebruiken."
 
 #: org.semplicelinux.vera.settings.gschema.xml:166
 msgid "Animations"

@@ -1,3 +1,9 @@
+vera-desktop (1.0.6+jethro1-1) unstable; urgency=medium
+
+  * [autostart] Application: added special case for lxrandr.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Fri, 11 Sep 2015 23:31:09 +0200
+
 vera-desktop (1.0.6+jethro0-1) unstable; urgency=medium
 
   * [logout] Do not display the dialog if the ExitAction is SWITCH_USER.

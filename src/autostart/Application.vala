@@ -44,6 +44,8 @@ namespace Vera {
 			
 			this.file.set_list_separator(';');
 			
+			bool is_lxrandr = (Path.get_basename(path) == "lxrandr-autostart.desktop");
+			
 			try {
 				// load desktop file
 				this.file.load_from_file(path, KeyFileFlags.NONE);
@@ -59,7 +61,10 @@ namespace Vera {
 				this.executable = this.file.get_string("Desktop Entry", "Exec").replace(
 					"%u","").replace("%U","").replace("%f","").replace("%F","").strip();
 				
-				if (this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync") && this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
+				if (
+					is_lxrandr ||
+					(this.file.has_key("Desktop Entry", "X-Vera-Launch-Sync") && this.file.get_boolean("Desktop Entry", "X-Vera-Launch-Sync"))
+				)
 					this.mode = LaunchMode.SYNC;
 				else
 					this.mode = LaunchMode.ASYNC;
@@ -85,7 +90,10 @@ namespace Vera {
 					}
 				} else {
 					// No phase specified? Default to OTHER
-					this.phase = StartupPhase.OTHER;
+					if (is_lxrandr)
+						this.phase = StartupPhase.INIT;
+					else
+						this.phase = StartupPhase.OTHER;
 				}
 			} catch {
 				warning("Unable to properly parse desktop file %s.".printf(path));

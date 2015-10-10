@@ -1,3 +1,15 @@
+vera-desktop (1.10.2-1) unstable; urgency=medium
+
+  * [Recipe] Removed the need of the custom vapidir. Contributes to #5.
+  * [gitignore] Ignore Recipe.conf.
+  * [packaging] Build-depend on libxss-vapi.
+  * [logout] Ensure that the ExitDialog sticks on every desktop.
+  * [autostart] Application: added special case for lxrandr.
+  * [packaging] Use libgee-0.8 as libgee-1.0 is deprecated
+  * [packaging] build-depend on valac (0.30), instead of valac-0.28.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 11 Oct 2015 00:49:21 +0200
+
 vera-desktop (1.10.1-1) unstable; urgency=medium
 
   * [src] Ship XmlFile.vala again.

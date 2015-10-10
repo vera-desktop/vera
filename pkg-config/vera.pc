@@ -6,6 +6,6 @@ libdir=${exec_prefix}/lib
 Name: vera
 Description: Next-generation GTK+3 based Desktop Environment built for Semplice Linux
 Version: 0.35
-Requires: glib-2.0 gee-1.0 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11
+Requires: glib-2.0 gee-0.8 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11
 Cflags: -I${includedir}/vera
 Libs: -L${libdir} -lvera

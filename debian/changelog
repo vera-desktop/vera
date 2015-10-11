@@ -1,3 +1,11 @@
+vera-desktop (1.10.3-1) unstable; urgency=medium
+
+  * [vera] Do not require libgee on library.
+  * [packaging] Make libvera-dev depend on the required libraries's development packages.
+  * [pkg-config] Added xscrnsaver to the required headers.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 11 Oct 2015 12:20:33 +0200
+
 vera-desktop (1.10.2-1) unstable; urgency=medium
 
   * [Recipe] Removed the need of the custom vapidir. Contributes to #5.

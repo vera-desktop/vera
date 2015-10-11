@@ -22,7 +22,8 @@ Description: Next-generation GTK+3 Desktop Environment - main binaries
 Package: libvera-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libvera0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libvera0 (= ${binary:Version}),
+ libglib2.0-dev, libpeas-dev, libgtk-3-dev, libx11-dev, libxss-dev
 Description: Next-generation GTK+3 Desktop Environment - library development headers
  vera is a next generation GTK+3 desktop environment built for Semplice
  Linux.

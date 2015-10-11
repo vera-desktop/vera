@@ -36,7 +36,7 @@ libraries.vera {
 	vala-compile-flags = --vapidir=./vapis
 
 	vala-packages = gio-2.0 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11 xscrnsaver
-	packages = gee-0.8 libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11 xscrnsaver
+	packages = libpeas-1.0 gdk-3.0 gdk-x11-3.0 x11 xscrnsaver
 
 }
 
